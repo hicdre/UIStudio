@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="build">
+      <UniqueIdentifier>{f850f173-c382-4088-8f18-aba0c8617bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="delegate">
+      <UniqueIdentifier>{356fa96f-027d-457f-85d8-16ef5df8d35e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{f065d86a-b359-42f5-a4fd-33e9e4aa143c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{2a8ca82f-2a50-46d3-a7d6-3680fa36c7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\engine">
+      <UniqueIdentifier>{f49ffd34-c8a8-4343-8017-86d8930a1799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="layout">
+      <UniqueIdentifier>{4be0d5c6-6801-4ede-b8f1-a2c957b40b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\geom">
+      <UniqueIdentifier>{bd006714-d31c-403d-99a8-66f129604d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="property">
+      <UniqueIdentifier>{75a3af48-d317-42be-b3a8-f3e6820881d6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Geom\matrix.h">
+      <Filter>base\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Geom\point.h">
+      <Filter>base\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Geom\range.h">
+      <Filter>base\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Geom\rect.h">
+      <Filter>base\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Geom\size.h">
+      <Filter>base\geom</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\base_defines.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\basictypes.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\color.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\ptr.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\ref.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate\Delegate.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate\Delegate_NoParams.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate\Delegate_OneParam.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate\Delegate_TwoParams.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate\DelegateBase.h">
+      <Filter>delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\object.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\PropertyValue.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\utils.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutObject.h">
+      <Filter>layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderObject.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderObjectList.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\PropertyObject.h">
+      <Filter>property</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>build</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Geom\matrix.cpp">
+      <Filter>base\geom</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Geom\point.cpp">
+      <Filter>base\geom</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Geom\range.cpp">
+      <Filter>base\geom</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Geom\rect.cpp">
+      <Filter>base\geom</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Geom\size.cpp">
+      <Filter>base\geom</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\color.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate\DelegateBase.cpp">
+      <Filter>delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\object.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\PropertyValue.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\utils.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutObject.cpp">
+      <Filter>layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderObject.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderObjectList.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\PropertyObject.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

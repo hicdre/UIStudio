@@ -25,6 +25,9 @@
     <Filter Include="property">
       <UniqueIdentifier>{75a3af48-d317-42be-b3a8-f3e6820881d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{4f0d3477-f91a-4172-b2aa-a06eccf6e53a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -102,6 +105,22 @@
     <ClInclude Include="Property\PropertyObject.h">
       <Filter>property</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Application.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="LibUI.h" />
+    <ClInclude Include="Property\UIWindow.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\PropertySize.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderManager.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderWindow.h">
+      <Filter>render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -148,6 +167,21 @@
     </ClCompile>
     <ClCompile Include="Property\PropertyObject.cpp">
       <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Application.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\UIWindow.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\PropertySize.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderManager.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderWindow.cpp">
+      <Filter>render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

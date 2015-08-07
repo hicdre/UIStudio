@@ -118,6 +118,16 @@ public:
 		ref_->Release();
 		return ptr;
 	}
+
+// 	SPtr<T>&& get() const {
+// 		SPtr<T> ptr;
+// 		if (!ref_)
+// 			return ptr;
+// 		if (ref_->AddRef() >= 1) //add and lock
+// 			ptr.reset(ptr_);
+// 		ref_->Release();
+// 		return std::move(ptr);
+// 	}
 private:
 	SPtr<RefCount> ref_;
 	T* ptr_;

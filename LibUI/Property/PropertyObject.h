@@ -1,6 +1,8 @@
-#pragma once
+﻿#pragma once
 #include "Property/PropertyValue.h"
 #include "Delegate/Delegate.h"
+#include "Property/PropertySize.h"
+
 #include <unordered_map>
 
 class PropertyObject;
@@ -10,16 +12,16 @@ class PropertyObject : public Object
 {
 public:
 	PropertyObject();
-	~PropertyObject();
+	~PropertyObject();	
 
-	void Clear();
-
-	PropertyValue* GetProperty(const std::string& propertyName) const;
+	const PropertyValue* GetProperty(const std::string& propertyName) const;
 	void SetProperty(const std::string& propertyName, own PropertyValue* value);
-
+	
 	PropertyChangedEvent EventPropertyChanged;
-private:
-	std::unordered_map<std::string, PropertyValue*> value_maps_;
+
+protected:
+	void OnPropertyChanged(const std::string& name);
+	PropertyDictionary property_dict_;
 
 };
 

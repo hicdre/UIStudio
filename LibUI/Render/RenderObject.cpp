@@ -20,6 +20,8 @@ void RenderObject::Render()
 void RenderObject::Attatch(const SPtr<PropertyObject>& object)
 {
 	propertyObject_.reset(object);
+	object->EventPropertyChanged.AddW(GetWeak<RenderObject>(),
+		&RenderObject::OnPropertyChangedInternal);
 }
 
 void RenderObject::Detach()
@@ -30,4 +32,14 @@ void RenderObject::Detach()
 SPtr<PropertyObject> RenderObject::GetPropertyObject()
 {
 	return propertyObject_.get();
+}
+
+void RenderObject::OnPropertyChanged(const SPtr<PropertyObject>& obj, const std::string& name)
+{
+
+}
+
+void RenderObject::OnPropertyChangedInternal(const SPtr<PropertyObject>& obj, const std::string& name)
+{
+	OnPropertyChanged(obj, name);
 }

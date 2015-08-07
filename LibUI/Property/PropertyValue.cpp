@@ -90,6 +90,14 @@ void PropertyValue::SetListValue(own PropertyValue* v)
 	type_ = PropertyTypeList;
 }
 
+void PropertyValue::SetDictionaryValue()
+{
+	Clear();
+	dictValue_ = new PropertyDictionary;	
+	type_ = PropertyTypeList;
+}
+
+
 std::wstring PropertyValue::ToUTF16() const
 {
 	switch (type_) {
@@ -149,6 +157,11 @@ void PropertyValue::Clear()
 		if (listValue_)
 			delete listValue_;
 	}
+	else if (IsDictionaryValue())
+	{
+		if (dictValue_)
+			delete dictValue_;
+	}
 
 	uint64Value_ = 0;
 	type_ = PropertyTypeNull;
@@ -180,6 +193,8 @@ bool PropertyValue::IsEqual(const PropertyValue* other) const
 		return *utf16Value_ == *other->utf16Value_;
 	case PropertyTypeList:
 		return listValue_->IsEqual(other->listValue_);
+	case PropertyTypeDictionary:
+		return dictValue_->IsEqual(other->dictValue_);
 	}
 	return true;
 
@@ -239,3 +254,272 @@ PropertyValue* PropertyList::Get(int index) const
 }
 
 
+PropertyDictionary::PropertyDictionary()
+{
+
+}
+
+PropertyDictionary::~PropertyDictionary()
+{
+	Clear();
+}
+
+void PropertyDictionary::Clear()
+{
+	for (auto pair : dictionary_)
+	{
+		delete pair.second;
+	}
+	dictionary_.clear();
+}
+
+bool PropertyDictionary::HasKey(const std::string& key) const
+{
+	return dictionary_.find(key) != dictionary_.end();
+}
+
+void PropertyDictionary::Set(const std::string& path, own PropertyValue* in_value)
+{
+	assert(in_value);
+
+	std::string current_path(path);
+	PropertyDictionary* current_dictionary = this;
+	for (size_t delimiter_position = current_path.find('.');
+		delimiter_position != std::string::npos;
+		delimiter_position = current_path.find('.')) {
+		// Assume that we're indexing into a dictionary.
+		std::string key(current_path, 0, delimiter_position);
+
+		PropertyValue* val = NULL;
+		if (!current_dictionary->GetInteranl(key, &val))
+		{
+			val = new PropertyValue;
+			current_dictionary->SetInternal(key, val);
+		}		
+		if (!val->IsDictionaryValue())
+		{
+			val->SetDictionaryValue();
+		}		
+		current_dictionary = val->GetDictonaryValue();
+		
+		current_path.erase(0, delimiter_position + 1);
+	}
+
+	current_dictionary->SetInternal(current_path, in_value);
+}
+
+void PropertyDictionary::SetBoolean(const std::string& path, bool in_value)
+{
+	Set(path, new PropertyValue(in_value));
+}
+
+void PropertyDictionary::SetInteger(const std::string& path, int in_value)
+{
+	Set(path, new PropertyValue(in_value));
+}
+
+void PropertyDictionary::SetDouble(const std::string& path, double in_value)
+{
+	Set(path, new PropertyValue(in_value));
+}
+
+void PropertyDictionary::SetString(const std::string& path, const std::string& in_value)
+{
+	Set(path, new PropertyValue(in_value));
+}
+
+void PropertyDictionary::SetString(const std::string& path, const std::wstring& in_value)
+{
+	Set(path, new PropertyValue(in_value));
+}
+
+bool PropertyDictionary::Get(const std::string& path, const PropertyValue** out_value) const
+{
+	std::string current_path(path);
+	const PropertyDictionary* current_dictionary = this;
+	for (size_t delimiter_position = current_path.find('.');
+		delimiter_position != std::string::npos;
+		delimiter_position = current_path.find('.')) {
+		const PropertyDictionary* child_dictionary = NULL;
+		if (!current_dictionary->GetDictionary(
+			current_path.substr(0, delimiter_position), &child_dictionary))
+			return false;
+
+		current_dictionary = child_dictionary;
+		current_path.erase(0, delimiter_position + 1);
+	}
+
+	return current_dictionary->GetInteranl(current_path, out_value);
+}
+
+bool PropertyDictionary::Get(const std::string& path, PropertyValue** out_value)
+{
+	return static_cast<const PropertyDictionary&>(*this).Get(
+		path,
+		const_cast<const PropertyValue**>(out_value));
+}
+
+bool PropertyDictionary::GetBoolean(const std::string& path, bool* out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsBoolValue())
+		return false;
+	*out_value = value->GetBoolValue();
+	return true;
+}
+
+bool PropertyDictionary::GetInteger(const std::string& path, int* out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsInt32Value())
+		return false;
+	*out_value = value->GetInt32Value();
+	return true;
+}
+
+bool PropertyDictionary::GetDouble(const std::string& path, double* out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsDoubleValue())
+		return false;
+	*out_value = value->GetDoubleValue();
+	return true;
+}
+
+bool PropertyDictionary::GetString(const std::string& path, std::string* out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsStringValue())
+		return false;
+	*out_value = value->GetUTF8Value();
+	return true;
+}
+
+bool PropertyDictionary::GetString(const std::string& path, std::wstring* out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsStringValue())
+		return false;
+	*out_value = value->GetUTF16Value();
+	return true;
+}
+
+bool PropertyDictionary::GetDictionary(const std::string& path, PropertyDictionary** out_value)
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsDictionaryValue())
+		return false;
+	*out_value = value->GetDictonaryValue();
+	return true;
+}
+
+bool PropertyDictionary::GetDictionary(const std::string& path, const PropertyDictionary** out_value) const
+{
+	assert(out_value);
+	const PropertyValue* value;
+	if (!Get(path, &value))
+		return false;
+
+	if (!value->IsDictionaryValue())
+		return false;
+	*out_value = value->GetDictonaryValue();
+	return true;
+}
+
+bool PropertyDictionary::Remove(const std::string& path, own PropertyValue** out_value)
+{
+	std::string current_path(path);
+	PropertyDictionary* current_dictionary = this;
+	size_t delimiter_position = current_path.rfind('.');
+	if (delimiter_position != std::string::npos) {
+		if (!GetDictionary(current_path.substr(0, delimiter_position),
+			&current_dictionary))
+			return false;
+		current_path.erase(0, delimiter_position + 1);
+	}
+
+	return current_dictionary->RemoveInternal(current_path,
+		out_value);
+}
+
+bool PropertyDictionary::IsEqual(const PropertyDictionary* other) const
+{
+	if (other->size() != size())
+		return false;
+
+	auto lhs_it = dictionary_.begin();
+	auto rhs_it = other->dictionary_.begin();
+	while (rhs_it != other->dictionary_.end() && lhs_it != dictionary_.end()) {
+		if (lhs_it->first != rhs_it->first ||
+			lhs_it->second->IsEqual(rhs_it->second)) {
+			return false;
+		}
+		lhs_it++;
+		rhs_it++;
+	}	
+	return true;
+}
+
+void PropertyDictionary::SetInternal(const std::string& path, own PropertyValue* in_value)
+{
+	auto iter = dictionary_.find(path);
+	if (iter != dictionary_.end()) {
+		delete iter->second;
+	}
+	iter->second = in_value;
+}
+
+bool PropertyDictionary::GetInteranl(const std::string& path, const PropertyValue** out_value) const
+{
+	auto iter = dictionary_.find(path);
+	if (iter == dictionary_.end())
+		return false;
+	*out_value = iter->second;
+	return true;
+}
+
+bool PropertyDictionary::GetInteranl(const std::string& path, PropertyValue** out_value)
+{
+	return static_cast<const PropertyDictionary&>(*this).GetInteranl(
+		path,
+		const_cast<const PropertyValue**>(out_value));
+}
+
+bool PropertyDictionary::RemoveInternal(const std::string& key, own PropertyValue** out_value)
+{
+	auto entry_iterator = dictionary_.find(key);
+	if (entry_iterator == dictionary_.end())
+		return false;
+
+	PropertyValue* entry = entry_iterator->second;
+	if (out_value)
+		*out_value = entry;
+	else
+		delete entry;
+	dictionary_.erase(entry_iterator);
+	return true;
+}

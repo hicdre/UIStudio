@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PropertyObject.h"
 
 
@@ -8,35 +8,33 @@ PropertyObject::PropertyObject()
 }
 
 PropertyObject::~PropertyObject()
-{
-	Clear();
+{	
 }
 
-PropertyValue* PropertyObject::GetProperty(const std::string& propertyName) const
+const PropertyValue* PropertyObject::GetProperty(const std::string& propertyName) const
 {
-	auto iter = value_maps_.find(propertyName);
-	if (iter != value_maps_.end())
-		return iter->second;
-	return NULL;
+	const PropertyValue* current_value;
+	if (!property_dict_.Get(propertyName, &current_value))
+		return NULL;
+	return current_value;
 }
 
 void PropertyObject::SetProperty(const std::string& propertyName, own PropertyValue* value)
 {
-	auto iter = value_maps_.find(propertyName);
-	if (iter != value_maps_.end()
-		&& iter->second->IsEqual(value))
-	{
-			return;
+	PropertyValue* current_value;
+	if (!property_dict_.Get(propertyName, &current_value)
+		|| !current_value->IsEqual(value)) {
+
+		property_dict_.Set(propertyName, value);
+		OnPropertyChanged(propertyName);
 	}
-	value_maps_[propertyName] = value;
-	EventPropertyChanged.Execute(GetSelf<PropertyObject>(), propertyName);
+	else {
+		delete value;
+	}	
 }
 
-void PropertyObject::Clear()
+void PropertyObject::OnPropertyChanged(const std::string& name)
 {
-	for (auto iter = value_maps_.begin(); iter != value_maps_.end(); iter++)
-	{
-		delete iter->second;
-	}
-	value_maps_.clear();
+	EventPropertyChanged.Execute(GetSelf<PropertyObject>(), name);
 }
+

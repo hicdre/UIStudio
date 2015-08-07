@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7B4965FA-16B3-4E4B-8D6A-CB3ECF1F2B77}</ProjectGuid>
+    <ProjectGuid>{326734F9-944D-480A-A552-3F06EB25411A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>LibUI</RootNamespace>
+    <RootNamespace>Demon</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -40,11 +40,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)..\Build\$(Configuration)\Lib\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\Build\$(Configuration)\Bin\</OutDir>
     <IntDir>$(ProjectDir)..\Build\$(Configuration)\$(ProjectName)\Obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)..\Build\$(Configuration)\Lib\</OutDir>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)..\Build\$(Configuration)\Bin\</OutDir>
     <IntDir>$(ProjectDir)..\Build\$(Configuration)\$(ProjectName)\Obj\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -52,9 +54,9 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir).;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir).;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -68,9 +70,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir).;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir).;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,61 +85,29 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\base_defines.h" />
-    <ClInclude Include="Base\basictypes.h" />
-    <ClInclude Include="Base\color.h" />
-    <ClInclude Include="Base\Geom\matrix.h" />
-    <ClInclude Include="Base\Geom\point.h" />
-    <ClInclude Include="Base\Geom\range.h" />
-    <ClInclude Include="Base\Geom\rect.h" />
-    <ClInclude Include="Base\Geom\size.h" />
-    <ClInclude Include="Base\object.h" />
-    <ClInclude Include="Base\ptr.h" />
-    <ClInclude Include="Base\ref.h" />
-    <ClInclude Include="Base\utils.h" />
-    <ClInclude Include="Delegate\Delegate.h" />
-    <ClInclude Include="Delegate\DelegateBase.h" />
-    <ClInclude Include="Delegate\Delegate_NoParams.h" />
-    <ClInclude Include="Delegate\Delegate_OneParam.h" />
-    <ClInclude Include="Delegate\Delegate_TwoParams.h" />
-    <ClInclude Include="Framework\Application.h" />
-    <ClInclude Include="Layout\LayoutObject.h" />
-    <ClInclude Include="LibUI.h" />
-    <ClInclude Include="Property\PropertyObject.h" />
-    <ClInclude Include="Property\PropertySize.h" />
-    <ClInclude Include="Property\PropertyValue.h" />
-    <ClInclude Include="Property\UIWindow.h" />
-    <ClInclude Include="Render\RenderManager.h" />
-    <ClInclude Include="Render\RenderObject.h" />
-    <ClInclude Include="Render\RenderObjectList.h" />
-    <ClInclude Include="Render\RenderWindow.h" />
+    <ClInclude Include="Demon.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\color.cpp" />
-    <ClCompile Include="Base\Geom\matrix.cpp" />
-    <ClCompile Include="Base\Geom\point.cpp" />
-    <ClCompile Include="Base\Geom\range.cpp" />
-    <ClCompile Include="Base\Geom\rect.cpp" />
-    <ClCompile Include="Base\Geom\size.cpp" />
-    <ClCompile Include="Base\object.cpp" />
-    <ClCompile Include="Base\utils.cpp" />
-    <ClCompile Include="Delegate\DelegateBase.cpp" />
-    <ClCompile Include="Framework\Application.cpp" />
-    <ClCompile Include="Layout\LayoutObject.cpp" />
-    <ClCompile Include="Property\PropertyObject.cpp" />
-    <ClCompile Include="Property\PropertySize.cpp" />
-    <ClCompile Include="Property\PropertyValue.cpp" />
-    <ClCompile Include="Property\UIWindow.cpp" />
-    <ClCompile Include="Render\RenderManager.cpp" />
-    <ClCompile Include="Render\RenderObject.cpp" />
-    <ClCompile Include="Render\RenderObjectList.cpp" />
-    <ClCompile Include="Render\RenderWindow.cpp" />
+    <ClCompile Include="Demon.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Demon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Demon.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibUI\LibUI.vcxproj">
+      <Project>{7b4965fa-16b3-4e4b-8d6a-cb3ecf1f2b77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

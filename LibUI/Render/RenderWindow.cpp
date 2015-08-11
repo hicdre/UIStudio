@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "RenderWindow.h"
+#include "Property/UIWindow.h"
 
 const wchar_t* const kRenderWindowClassName = L"RenderWindow";
 
@@ -44,12 +45,9 @@ void RenderWindow::Render()
 	//todo
 }
 
-void RenderWindow::OnPropertyChanged(const SPtr<PropertyObject>& obj, const std::string& name)
+void RenderWindow::OnVisibleChanged()
 {
-	if (name == "visible")
-	{
-		
-	}
+	Show(visible_ ? SW_SHOWNORMAL : SW_HIDE);
 }
 
 void RenderWindow::Init(HWND parent, const Rect& bounds)

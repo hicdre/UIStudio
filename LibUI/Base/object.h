@@ -19,7 +19,7 @@ public:
 
 	template <class T>
 	WPtr<T> GetWeak() {
-		return WPtr<T>(ref_, dynamic_cast<T*>(this));
+		return WPtr<T>(object_ref_count_, dynamic_cast<T*>(this));
 	}
 
 	template <class T>
@@ -27,7 +27,7 @@ public:
 		return SPtr<T>(dynamic_cast<T*>(this));
 	}
 private:
-	SPtr<RefCount> ref_;
+	SPtr<RefCount> object_ref_count_;
 
 	DISALLOW_COPY_AND_ASSIGN(Object);
 };

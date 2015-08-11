@@ -20,6 +20,12 @@ public:
 	{
 		Clear();
 	}
+	SPtr(const SPtr& r) : p_(NULL) {
+		reset(r.get());
+	}
+	SPtr(SPtr&& r) : p_(NULL) {
+		reset(r.get());
+	}
 	template <class U>
 	SPtr(const SPtr<U>& r) : p_(NULL) {
 		reset(dynamic_cast<T*>(r.get()));
@@ -113,9 +119,9 @@ public:
 		SPtr<T> ptr;
 		if (!ref_)
 			return ptr;
-		if (ref_->AddRef() >= 1) //add and lock
+		if (ref_->Increment() >= 1) //add and lock
 			ptr.reset(ptr_);
-		ref_->Release();
+		ref_->Decrement();
 		return ptr;
 	}
 

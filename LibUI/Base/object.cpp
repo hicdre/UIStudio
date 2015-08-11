@@ -2,7 +2,7 @@
 #include "object.h"
 
 Object::Object() 
-	: ref_(new RefCount)
+	: object_ref_count_(new RefCount)
 {
 
 }
@@ -14,12 +14,12 @@ Object::~Object()
 
 void Object::AddRef()
 {
-	ref_->AddRef();
+	object_ref_count_->Increment();
 }
 
 void Object::Release()
 {
-	if (ref_->Release() <= 0) {
+	if (object_ref_count_->Decrement() <= 0) {
 		delete this;
 	}
 }

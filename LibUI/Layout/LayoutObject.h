@@ -4,6 +4,7 @@
 #include "Delegate/Delegate.h"
 
 class LayoutObject;
+class UIObject;
 
 struct ResizeEventArgs
 {
@@ -20,7 +21,10 @@ public:
 	LayoutObject();
 	~LayoutObject();
 
-	ResizeEvent EventResize;
+	//ResizeEvent EventResize;
+
+	void Attatch(const SPtr<UIObject>& object);
+	void Detach();
 
 	SPtr<LayoutObject> GetParent() const;
 	void SetParent(const SPtr<LayoutObject>& parent);
@@ -41,7 +45,12 @@ public:
 	void SetX(int x);
 	void SetY(int y);
 
+	virtual void Layout() = 0;//设置children的位置
+	virtual void CalcLayoutBounds() = 0;//设置自身的位置
 protected:
+	void OnPropertyLayoutChangedInternal(const SPtr<UIObject>&);
+	
 	WPtr<LayoutObject> parent_;
+	WPtr<UIObject> owner_;
 	base::Rect bounds_; // 实际位置
 };

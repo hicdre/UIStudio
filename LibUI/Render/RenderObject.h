@@ -2,7 +2,7 @@
 #include "Base/object.h"
 #include <string>
 
-class PropertyObject;
+class UIObject;
 class RenderObject : public Object
 {
 public:
@@ -10,16 +10,17 @@ public:
 	~RenderObject();
 
 	virtual void Render();
-
-	void Attatch(const SPtr<PropertyObject>& object);
+	
+	void Attatch(const SPtr<UIObject>& object);
 	void Detach();
 
-	SPtr<PropertyObject> GetPropertyObject();
-protected:
-	virtual void OnPropertyChanged(const SPtr<PropertyObject>& obj, const std::string& name);
+	SPtr<UIObject> GetUIObject();
+
+	virtual void OnVisibleChanged();
 private:
-	void OnPropertyChangedInternal(const SPtr<PropertyObject>& obj, const std::string& name);
+	void OnPropertyVisibleChangedInternal(const SPtr<UIObject>& obj);
 
 protected:
-	WPtr<PropertyObject> propertyObject_;
+	WPtr<UIObject> owner_;
+	bool visible_;
 };

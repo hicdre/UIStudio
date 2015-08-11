@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "RenderManager.h"
+
+#include "RenderWindow.h"
 #include "Property/UIWindow.h"
+#include "Layout/LayoutObject.h"
 
 RenderManager::RenderManager()
 	: is_running_(false)
@@ -47,5 +50,8 @@ void RenderManager::RunPendingWindow()
 
 void RenderManager::RunWindow(const SPtr<UIWindow>& window)
 {
-	//window->
+	SPtr<RenderWindow> renderObject = window->GetRenderObject();	
+	render_objects_.push_back(renderObject);
+
+	window->GetLayoutObject();
 }

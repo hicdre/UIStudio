@@ -1,17 +1,25 @@
 #pragma once
-#include "Property/PropertyObject.h"
+#include "Property/UIObject.h"
 
 class RenderWindow;
-class UIWindow : public PropertyObject
+class LayoutObject;
+class LayoutWindow;
+class UIWindow : public UIObject
 {
 public:
 	UIWindow();
 	~UIWindow();
 
-	void SetWindowSize(int w, int h);
-	void ShowWindow(bool show);
+	static SPtr<UIWindow> Create();	
 
-	SPtr<RenderWindow>&& CreateRenderWindow();
+	virtual SPtr<RenderObject> GetRenderObject() override;
+
+	virtual SPtr<LayoutObject> GetLayoutObject() override;
+public:
+	SPtr<RenderWindow> GetRenderWindow();
 private:
+	RenderWindow* renderWindow() const;
 
+	SPtr<RenderWindow> renderWindow_;
+	SPtr<LayoutWindow> layoutWindow_;
 };

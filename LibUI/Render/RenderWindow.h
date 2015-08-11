@@ -12,7 +12,7 @@ public:
 
 	virtual void Render() override;
 
-	virtual void OnPropertyChanged(const SPtr<PropertyObject>& obj, const std::string& name);
+	virtual void OnVisibleChanged();
 public:
 	void Init(HWND parent, const base::Rect& bounds);
 

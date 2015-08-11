@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "RenderObject.h"
-#include "Property/PropertyObject.h"
+#include "Property/UIObject.h"
 
 RenderObject::RenderObject()
+	: visible_(false)
 {
 
 }
@@ -17,29 +18,31 @@ void RenderObject::Render()
 	//not implment
 }
 
-void RenderObject::Attatch(const SPtr<PropertyObject>& object)
+void RenderObject::Attatch(const SPtr<UIObject>& object)
 {
-	propertyObject_.reset(object);
-	object->EventPropertyChanged.AddW(GetWeak<RenderObject>(),
-		&RenderObject::OnPropertyChangedInternal);
+	owner_.reset(object);
+	object->EventVisibleChanged.AddW(GetWeak<RenderObject>(),
+		&RenderObject::OnPropertyVisibleChangedInternal);
+	OnPropertyVisibleChangedInternal(object);
 }
 
 void RenderObject::Detach()
 {
-	propertyObject_.reset();
+	owner_.reset();
 }
 
-SPtr<PropertyObject> RenderObject::GetPropertyObject()
+SPtr<UIObject> RenderObject::GetUIObject()
 {
-	return propertyObject_.get();
+	return owner_.get();
 }
 
-void RenderObject::OnPropertyChanged(const SPtr<PropertyObject>& obj, const std::string& name)
+void RenderObject::OnVisibleChanged()
 {
 
 }
-
-void RenderObject::OnPropertyChangedInternal(const SPtr<PropertyObject>& obj, const std::string& name)
+ 
+void RenderObject::OnPropertyVisibleChangedInternal(const SPtr<UIObject>& obj)
 {
-	OnPropertyChanged(obj, name);
+	visible_ = obj->GetPropertyVisible();
+	OnVisibleChanged();
 }

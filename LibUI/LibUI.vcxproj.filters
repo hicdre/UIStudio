@@ -121,6 +121,18 @@
     <ClInclude Include="Render\RenderWindow.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="Layout\LayoutManager.h">
+      <Filter>layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutWindow.h">
+      <Filter>layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\UIObject.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutContainer.h">
+      <Filter>layout</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -182,6 +194,18 @@
     </ClCompile>
     <ClCompile Include="Render\RenderWindow.cpp">
       <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutManager.cpp">
+      <Filter>layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutWindow.cpp">
+      <Filter>layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\UIObject.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutContainer.cpp">
+      <Filter>layout</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

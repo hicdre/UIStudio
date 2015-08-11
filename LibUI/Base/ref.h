@@ -22,7 +22,7 @@ public:
 	}
 
 private:
-	mutable int32 _ref{ 0 };
+	mutable uint32 _ref{ 0 };
 
 	DISALLOW_COPY_AND_ASSIGN(Ref);
 };
@@ -36,10 +36,10 @@ public:
 		return (int32)InterlockedCompareExchange(&ref_count_, 0, 0) > 0;
 	}
 
-	int32 AddRef() const {
+	int32 Increment() const {
 		return InterlockedIncrement(&ref_count_);
 	}
-	int32 Release() const {
+	int32 Decrement() const {
 		return InterlockedDecrement(&ref_count_);
 	}
 

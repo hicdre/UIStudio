@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "LayoutObject.h"
+#include "Property/UIObject.h"
 #include <algorithm>
 
 
@@ -13,6 +14,19 @@ LayoutObject::LayoutObject()
 LayoutObject::~LayoutObject()
 {
 
+}
+
+void LayoutObject::Attatch(const SPtr<UIObject>& object)
+{
+	owner_.reset(object);
+	object->EventLayoutChanged.AddW(GetWeak<LayoutObject>(),
+		&LayoutObject::OnPropertyLayoutChangedInternal);
+	OnPropertyLayoutChangedInternal(object);
+}
+
+void LayoutObject::Detach()
+{
+	owner_.reset();
 }
 
 base::Rect LayoutObject::GetLocalBounds() const
@@ -34,8 +48,9 @@ void LayoutObject::SetBoundsRect(const base::Rect& bounds)
 	Rect prev = bounds_;
 	bounds_ = bounds;
 	if (prev.size() != size()) {
-		ResizeEventArgs args(prev.size(), size());
-		EventResize.Execute(GetSelf<LayoutObject>(), args);
+// 		ResizeEventArgs args(prev.size(), size());
+// 		EventResize.Execute(GetSelf<LayoutObject>(), args);
+		Layout();
 	}
 }
 
@@ -62,6 +77,11 @@ void LayoutObject::SetX(int x)
 void LayoutObject::SetY(int y)
 {
 	SetBounds(x(), y, width(), height());
+}
+
+void LayoutObject::OnPropertyLayoutChangedInternal(const SPtr<UIObject>&)
+{
+	CalcLayoutBounds();
 }
 
 SPtr<LayoutObject> LayoutObject::GetParent() const

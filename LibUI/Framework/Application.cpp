@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Base/utils.h"
 #include "Render/RenderManager.h"
+#include "Render/RenderWindow.h"
 #include <cassert>
 #include <gdiplus.h>
 // #include "framework/widget.h"
@@ -53,12 +54,13 @@ void Application::Run()
 {
 	if (gApplication)
 	{
-		gApplication->Run();
+		gApplication->InternalRun();
 	}
 }
 
 void Application::InternalRun()
 {
+	RenderWindow::InitClass();
 	RenderManager::Get()->RunPendingWindow();
 	for (;;) {
 		// If we do any work, we may create more messages etc., and more work may

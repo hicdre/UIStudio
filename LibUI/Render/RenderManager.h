@@ -12,8 +12,7 @@ public:
 
 	static RenderManager* Get();
 
-	void RegiserWindow(const SPtr<UIWindow>& window);
-	void UnRegiserWindow(const SPtr<UIWindow>& window);
+	void ShowWindow(const SPtr<UIWindow>& window);	
 
 	void RunPendingWindow();
 private:

@@ -2,25 +2,21 @@
 #include "UIWindow.h"
 #include "Render/RenderManager.h"
 #include "Render/RenderWindow.h"
+#include "Render/RenderEngine.h"
+#include "Render/RenderRectangle.h"
 #include "Layout/LayoutObject.h"
 #include "Layout/LayoutWindow.h"
 
+
 UIWindow::UIWindow()
+	: isAddedToScreen_(false)
 {
 	
 }
 
 UIWindow::~UIWindow()
 {
-	RenderManager::Get()->UnRegiserWindow(GetSelf<UIWindow>());
-}
-
-
-SPtr<UIWindow> UIWindow::Create()
-{
-	SPtr<UIWindow> window(new UIWindow);
-	RenderManager::Get()->RegiserWindow(window);
-	return window;
+	
 }
 
 SPtr<RenderObject> UIWindow::GetRenderObject()
@@ -42,11 +38,27 @@ SPtr<RenderWindow> UIWindow::GetRenderWindow()
 {
 	if (!renderWindow_)
 	{
-		renderWindow_.reset(new RenderWindow);
-		renderWindow_->Init(NULL, base::Rect(100, 100));
-		renderWindow_->Attatch(GetSelf<UIObject>());
+		renderWindow_ = RenderEngine::NewRenderWindow(GetPropertySize());
+		InitRenderWindow();
 	}
 	return renderWindow_;
+}
+
+void UIWindow::AddToScreen()
+{
+	if (isAddedToScreen_)
+		return;
+	RenderManager::Get()->ShowWindow(GetSelf<UIWindow>());
+	isAddedToScreen_ = true;
+}
+
+void UIWindow::InitRenderWindow()
+{
+	//test
+	base::Size sz(GetPropertySize());
+	SPtr<RenderRectangle> background = RenderEngine::NewRenderRectangle(sz.width(), sz.height()/2, base::Color_Green);
+	renderWindow_->AddChild(background);
+	background->SetY(20);
 }
 
 RenderWindow* UIWindow::renderWindow() const

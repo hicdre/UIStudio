@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "color.h"
 #include <assert.h>
-namespace ui
+namespace base
 {
 	static int ComponentValue(const char* aColorSpec, int aLen, int color, int dpc)
 	{

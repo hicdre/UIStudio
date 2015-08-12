@@ -10,7 +10,7 @@ public:
 
 	static void InitClass();
 
-	virtual void Render() override;
+	virtual void Render(const SPtr<RenderContext>& context) override;
 
 	virtual void OnVisibleChanged();
 public:
@@ -111,6 +111,8 @@ private:
 		LPARAM l_param,
 		LRESULT& result);
 
+
+	void OnPaint();
 	//MessageHandler* handler_;
 
 	// The restored bounds used for the initial show. This is only used if

@@ -3,6 +3,7 @@
 #include "Base/utils.h"
 #include "Render/RenderManager.h"
 #include "Render/RenderWindow.h"
+#include "Render/RenderEngine.h"
 #include <cassert>
 #include <gdiplus.h>
 // #include "framework/widget.h"
@@ -31,12 +32,16 @@ Application::~Application()
 void Application::InitInstance()
 {
 	gApplication = new Application;
+	gApplication->Init();
 }
 
 void Application::UninitInstance()
 {
 	if (gApplication)
+	{
+		gApplication->UnInit();
 		delete gApplication;
+	}		
 	gApplication = NULL;
 }	
 
@@ -59,8 +64,7 @@ void Application::Run()
 }
 
 void Application::InternalRun()
-{
-	RenderWindow::InitClass();
+{	
 	RenderManager::Get()->RunPendingWindow();
 	for (;;) {
 		// If we do any work, we may create more messages etc., and more work may
@@ -88,7 +92,7 @@ void Application::Init()
 	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 	GdiplusStartup(&gdiplusToken_, &gdiplusStartupInput, NULL);
 
-	//RenderEngine::InitEngine();
+	RenderEngine::InitEngine(RenderEngine::D2D);
 
 	//InitStyleProperty();
 
@@ -106,6 +110,7 @@ void Application::Init()
 void Application::UnInit()
 {
 	//Font::UnInitFont();
+	RenderEngine::UninitEngine();
 		
 	//RenderEngine::UnintEngine();
 	Gdiplus::GdiplusShutdown(gdiplusToken_);

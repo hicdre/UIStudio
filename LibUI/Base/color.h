@@ -3,7 +3,7 @@
 #include <string>
 
 
-namespace ui
+namespace base
 {
 	typedef uint32 Color;
 

@@ -111,9 +111,15 @@
     <ClInclude Include="Property\PropertyValue.h" />
     <ClInclude Include="Property\UIObject.h" />
     <ClInclude Include="Property\UIWindow.h" />
+    <ClInclude Include="Render\RenderContext.h" />
+    <ClInclude Include="Render\RenderContextD2D.h" />
+    <ClInclude Include="Render\RenderD2DUtils.h" />
+    <ClInclude Include="Render\RenderEngine.h" />
+    <ClInclude Include="Render\RenderEngineD2D.h" />
     <ClInclude Include="Render\RenderManager.h" />
     <ClInclude Include="Render\RenderObject.h" />
-    <ClInclude Include="Render\RenderObjectList.h" />
+    <ClInclude Include="Render\RenderRectangle.h" />
+    <ClInclude Include="Render\RenderRectangleD2D.h" />
     <ClInclude Include="Render\RenderWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -138,9 +144,14 @@
     <ClCompile Include="Property\PropertyValue.cpp" />
     <ClCompile Include="Property\UIObject.cpp" />
     <ClCompile Include="Property\UIWindow.cpp" />
+    <ClCompile Include="Render\RenderContext.cpp" />
+    <ClCompile Include="Render\RenderContextD2D.cpp" />
+    <ClCompile Include="Render\RenderD2DUtils.cpp" />
+    <ClCompile Include="Render\RenderEngine.cpp" />
+    <ClCompile Include="Render\RenderEngineD2D.cpp" />
     <ClCompile Include="Render\RenderManager.cpp" />
     <ClCompile Include="Render\RenderObject.cpp" />
-    <ClCompile Include="Render\RenderObjectList.cpp" />
+    <ClCompile Include="Render\RenderRectangle.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

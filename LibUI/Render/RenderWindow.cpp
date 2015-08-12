@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "RenderWindow.h"
 #include "Property/UIWindow.h"
+#include "Base/Geom/matrix.h"
+#include "Render/RenderContext.h"
+#include "Render/RenderEngine.h"
 
 const wchar_t* const kRenderWindowClassName = L"RenderWindow";
 
@@ -40,9 +43,9 @@ void RenderWindow::InitClass()
 	RegisterClassEx(&wc);
 }
 
-void RenderWindow::Render()
+void RenderWindow::Render(const SPtr<RenderContext>& context)
 {
-	//todo
+	//do nothing
 }
 
 void RenderWindow::OnVisibleChanged()
@@ -77,6 +80,8 @@ void RenderWindow::Init(HWND parent, const Rect& bounds)
 
 	DWORD dwStyle = GetWindowLong(GWL_STYLE);
 	SetWindowLong(GWL_STYLE, (dwStyle & ~WS_CAPTION));
+
+	SetBoundsRect(bounds);
 }
 
 // void RenderWindow::SetMessageHanler(MessageHandler* handler)
@@ -289,7 +294,7 @@ LRESULT CALLBACK RenderWindow::WndProc(HWND hwnd, UINT message, WPARAM w_param, 
 		return 0;
 
 	if (message == WM_PAINT)
-		window->Render();
+		window->OnPaint();
 
 	return window->OnWndProc(message, w_param, l_param);
 }
@@ -297,6 +302,12 @@ LRESULT CALLBACK RenderWindow::WndProc(HWND hwnd, UINT message, WPARAM w_param, 
 BOOL RenderWindow::ProcessWindowMessage(HWND window, UINT message, WPARAM w_param, LPARAM l_param, LRESULT& result)
 {
 	return FALSE;
+}
+
+void RenderWindow::OnPaint()
+{
+	SPtr<RenderContext> renderContext = RenderEngine::NewRenderContext(GetSelf<RenderWindow>());
+	DoRender(renderContext);
 }
 
 void RenderWindow::SetCursor(HCURSOR cursor)

@@ -13,9 +13,6 @@
     <Filter Include="render">
       <UniqueIdentifier>{2a8ca82f-2a50-46d3-a7d6-3680fa36c7b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="render\engine">
-      <UniqueIdentifier>{f49ffd34-c8a8-4343-8017-86d8930a1799}</UniqueIdentifier>
-    </Filter>
     <Filter Include="layout">
       <UniqueIdentifier>{4be0d5c6-6801-4ede-b8f1-a2c957b40b85}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="framework">
       <UniqueIdentifier>{4f0d3477-f91a-4172-b2aa-a06eccf6e53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\d2d">
+      <UniqueIdentifier>{30638bd8-2963-49ec-82bb-c3789c321460}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +99,6 @@
     <ClInclude Include="Render\RenderObject.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderObjectList.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="Property\PropertyObject.h">
       <Filter>property</Filter>
     </ClInclude>
@@ -132,6 +129,27 @@
     </ClInclude>
     <ClInclude Include="Layout\LayoutContainer.h">
       <Filter>layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderEngine.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderContext.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderEngineD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderContextD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderRectangle.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderD2DUtils.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderRectangleD2D.h">
+      <Filter>render\d2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +192,6 @@
     <ClCompile Include="Render\RenderObject.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="Render\RenderObjectList.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="Property\PropertyObject.cpp">
       <Filter>property</Filter>
     </ClCompile>
@@ -206,6 +221,24 @@
     </ClCompile>
     <ClCompile Include="Layout\LayoutContainer.cpp">
       <Filter>layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderEngine.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderEngineD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderContextD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderContext.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderRectangle.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderD2DUtils.cpp">
+      <Filter>render\d2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

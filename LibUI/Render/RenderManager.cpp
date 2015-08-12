@@ -22,7 +22,7 @@ RenderManager* RenderManager::Get()
 	return &inst;
 }
 
-void RenderManager::RegiserWindow(const SPtr<UIWindow>& window)
+void RenderManager::ShowWindow(const SPtr<UIWindow>& window)
 {
 	if (!is_running_) {
 		pending_windows_.push_back(window->GetWeak<UIWindow>());
@@ -32,10 +32,6 @@ void RenderManager::RegiserWindow(const SPtr<UIWindow>& window)
 	}
 }
 
-void RenderManager::UnRegiserWindow(const SPtr<UIWindow>& window)
-{
-
-}
 
 void RenderManager::RunPendingWindow()
 {
@@ -50,8 +46,10 @@ void RenderManager::RunPendingWindow()
 
 void RenderManager::RunWindow(const SPtr<UIWindow>& window)
 {
-	SPtr<RenderWindow> renderObject = window->GetRenderObject();	
-	render_objects_.push_back(renderObject);
-
-	window->GetLayoutObject();
+	SPtr<RenderWindow> renderWindow = window->GetRenderObject();
+	//window->BuildRenderObjects();
+	//window->GetLayoutContainer()
+	
+	renderWindow->Show(SW_SHOWNORMAL);
+	render_objects_.push_back(renderWindow);
 }

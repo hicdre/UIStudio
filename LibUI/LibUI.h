@@ -6,3 +6,4 @@
 
 #include "Framework/Application.h"
 #include "Property/UIWindow.h"
+#include "Render/RenderManager.h"

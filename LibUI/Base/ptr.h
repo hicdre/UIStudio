@@ -20,11 +20,12 @@ public:
 	{
 		Clear();
 	}
-	SPtr(const SPtr& r) : p_(NULL) {
-		reset(r.get());
+	SPtr(const SPtr& r) : p_(r.p_) {
+		if (p_)
+			p_->AddRef();
 	}
 	SPtr(SPtr&& r) : p_(NULL) {
-		reset(r.get());
+		r.swap(*this);
 	}
 	template <class U>
 	SPtr(const SPtr<U>& r) : p_(NULL) {
@@ -33,6 +34,14 @@ public:
 	template <class U>
 	SPtr<T>& operator=(const SPtr<U>& r) {
 		reset(dynamic_cast<T*>(r.get()));
+		return (*this);
+	}
+	SPtr<T>& operator=(const SPtr& r) {
+		reset(r.get());
+		return (*this);
+	}
+	SPtr<T>& operator=(SPtr&& r) {
+		r.swap(*this);
 		return (*this);
 	}
 
@@ -79,6 +88,12 @@ public:
 
 	bool operator!=(const SPtr<T>& other) const {
 		return p_ != other.p_;
+	}
+	void swap(SPtr& r)
+	{
+		T* p = p_;
+		p_ = r.p_;
+		r.p_ = p;
 	}
 private:
 	T* p_;

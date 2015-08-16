@@ -12,6 +12,7 @@ class RenderContext;
 
 D2D1::Matrix3x2F D2DMatrix(const base::Matrix& m);
 D2D1_RECT_F D2DRect(const base::Rect& rc);
+D2D1_ROUNDED_RECT D2DRoundRect(const base::Rect& rc, float rx, float ry);
 D2D1::ColorF D2DColor(base::Color color);
 
 CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context);

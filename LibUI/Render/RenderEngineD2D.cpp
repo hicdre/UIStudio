@@ -4,6 +4,33 @@
 #include "RenderContextD2D.h"
 #include "RenderRectangleD2D.h"
 
+static RenderD2DEngine* d2dEngineInstance = NULL;
+
+void RenderD2DEngine::Init()
+{
+	d2dEngineInstance = new RenderD2DEngine;
+}
+
+void RenderD2DEngine::Uninit()
+{
+	if (d2dEngineInstance)
+	{
+		delete d2dEngineInstance;
+		d2dEngineInstance = NULL;
+	}
+}
+
+RenderD2DEngine* RenderD2DEngine::Get()
+{
+	assert(d2dEngineInstance);
+	return d2dEngineInstance;
+}
+
+CComPtr<ID2D1Factory> RenderD2DEngine::GetD2DFactory()
+{
+	return d2dEngineInstance->factory_;
+}
+
 RenderD2DEngine::RenderD2DEngine()
 {
 	::CoInitialize(NULL);
@@ -46,3 +73,8 @@ SPtr<RenderRectangle> RenderD2DEngine::CreateRenderRectangle(int width, int heig
 	rect->SetFilledColor(color);
 	return rect;
 }
+
+
+
+
+

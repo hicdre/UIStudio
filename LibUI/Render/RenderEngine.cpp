@@ -12,22 +12,17 @@ static RenderEngine* engineInstance = NULL;
 void RenderEngine::InitEngine(Type type)
 {
 	RenderWindow::InitClass();
-	assert(!engineInstance);
-	engineInstance = new RenderD2DEngine();
+	RenderD2DEngine::Init();
 }
 
 RenderEngine* RenderEngine::Get()
 {
-	return engineInstance;
+	return RenderD2DEngine::Get();
 }
 
 void RenderEngine::UninitEngine()
 {
-	if (engineInstance)
-	{
-		delete engineInstance;
-		engineInstance = NULL;
-	}
+	RenderD2DEngine::Uninit();
 }
 
 SPtr<RenderWindow> RenderEngine::NewRenderWindow(const base::Size& sz)

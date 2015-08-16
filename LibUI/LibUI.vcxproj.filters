@@ -151,6 +151,12 @@
     <ClInclude Include="Render\RenderRectangleD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
+    <ClInclude Include="Render\RenderObjectD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderPath.h">
+      <Filter>render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -239,6 +245,15 @@
     </ClCompile>
     <ClCompile Include="Render\RenderD2DUtils.cpp">
       <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderObjectD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderRectangleD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPath.cpp">
+      <Filter>render</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

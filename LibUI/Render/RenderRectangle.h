@@ -7,9 +7,15 @@ class RenderRectangle : public RenderObject
 public:
 	RenderRectangle();
 	~RenderRectangle();
+
+	float GetRadiusX() const { return cornerRadiusX_; }
+	float GetRadiusY() const { return cornerRadiusY_; }
 	
-	void SetFilledColor(base::Color color);
+	void SetRadiusX(float rx);
+	void SetRadiusY(float ry);
 
 protected:
-	base::Color color_;
+	virtual void OnRadiusChanged();
+	int cornerRadiusX_;
+	int cornerRadiusY_;
 };

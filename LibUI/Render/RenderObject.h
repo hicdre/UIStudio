@@ -1,6 +1,7 @@
 #pragma once
 #include "Base/object.h"
 #include "Base/Geom/rect.h"
+#include "Base/color.h"
 #include <string>
 #include <vector>
 
@@ -53,7 +54,10 @@ public:
 
 	base::Rect ConvertRectFromChild(RenderObject* child, const base::Rect& r);
 	
+	//set filled image
+	void SetFilledColor(base::Color color);
 private:
+	virtual void OnSizeChanged();
 	//virtual void OnVisibleChanged();
 	//void OnPropertyVisibleChangedInternal(const SPtr<UIObject>& obj);
 
@@ -65,4 +69,6 @@ protected:
 
 	WPtr<RenderObject> parent_;
 	std::vector<SPtr<RenderObject>> childs_;
+
+	base::Color color_;
 };

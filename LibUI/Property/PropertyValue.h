@@ -12,12 +12,12 @@ enum PropertyValueType
 	PropertyTypeNull = 0,
 	PropertyTypeBool,
 	PropertyTypeInt32,
-	PropertyTypeUInt32,	
+	PropertyTypeUInt32,
 	PropertyTypeInt64,
 	PropertyTypeUInt64,
 	PropertyTypeFloat,
-	PropertyTypeDouble,	
-	PropertyTypeObject,	
+	PropertyTypeDouble,
+	PropertyTypeObject,
 	PropertyTypeString,
 	PropertyTypeList,
 	PropertyTypeDictionary,
@@ -51,6 +51,7 @@ public:
 	inline bool IsStringValue() const { return type_ == PropertyTypeString; }
 	inline bool IsListValue() const { return type_ == PropertyTypeList; }
 	inline bool IsDictionaryValue() const { return type_ == PropertyTypeDictionary; }
+	inline bool IsLengthValue() const { return type_ == PropertyTypeLength; }
 
 	inline bool GetBoolValue() const {assert(IsBoolValue());	return boolValue_;}
 	inline int32_t GetInt32Value() const { assert(IsInt32Value());	return int32Value_; }
@@ -61,10 +62,10 @@ public:
 	inline double GetDoubleValue() const { assert(IsDoubleValue());	return doubleValue_; }
 	inline SPtr<Object> GetObjectValue() const { assert(IsObjectValue());	return objectValue_; }
 	inline std::wstring GetUTF16Value() const { assert(IsStringValue());	return *utf16Value_; }
+	std::string GetUTF8Value() const;
 	inline PropertyList* GetListValue() const { assert(IsListValue());	return listValue_; }
 	inline PropertyDictionary* GetDictonaryValue() const { assert(IsListValue());	return dictValue_; }
-	std::string GetUTF8Value() const;
-
+	
 
 	void SetBoolValue(bool v);
 	void SetInt32Value(int32_t v);

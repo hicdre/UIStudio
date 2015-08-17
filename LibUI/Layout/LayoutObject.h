@@ -15,6 +15,7 @@ struct ResizeEventArgs
 };
 typedef Event<void(const SPtr<LayoutObject>&, const ResizeEventArgs&)> ResizeEvent;
 
+class LayoutContainer;
 class LayoutObject : public Object
 {
 public:
@@ -24,10 +25,7 @@ public:
 	//ResizeEvent EventResize;
 
 	void Attatch(const SPtr<UIObject>& object);
-	void Detach();
-
-	SPtr<LayoutObject> GetParent() const;
-	void SetParent(const SPtr<LayoutObject>& parent);
+	void Detach();	
 
 	const base::Rect& bounds() const { return bounds_; }
 	int x() const { return bounds_.x(); }
@@ -46,11 +44,9 @@ public:
 	void SetY(int y);
 
 	virtual void Layout() = 0;//设置children的位置
-	virtual void CalcLayoutBounds() = 0;//设置自身的位置
-protected:
-	void OnPropertyLayoutChangedInternal(const SPtr<UIObject>&);
-	
-	WPtr<LayoutObject> parent_;
+
+	virtual base::Size CalcLayoutSize();//重新计算自身大小
+protected:	
 	WPtr<UIObject> owner_;
 	base::Rect bounds_; // 实际位置
 };

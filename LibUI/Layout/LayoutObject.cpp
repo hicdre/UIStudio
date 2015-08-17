@@ -19,9 +19,6 @@ LayoutObject::~LayoutObject()
 void LayoutObject::Attatch(const SPtr<UIObject>& object)
 {
 	owner_.reset(object);
-	object->EventLayoutChanged.AddW(GetWeak<LayoutObject>(),
-		&LayoutObject::OnPropertyLayoutChangedInternal);
-	OnPropertyLayoutChangedInternal(object);
 }
 
 void LayoutObject::Detach()
@@ -47,10 +44,13 @@ void LayoutObject::SetBoundsRect(const base::Rect& bounds)
 
 	Rect prev = bounds_;
 	bounds_ = bounds;
-	if (prev.size() != size()) {
-// 		ResizeEventArgs args(prev.size(), size());
-// 		EventResize.Execute(GetSelf<LayoutObject>(), args);
-		Layout();
+	if (prev.size() != size()) 
+	{
+		if (SPtr<UIObject> owner = owner_.get())
+		{
+			owner->OnLayoutSizeChanged();
+		}
+		Layout();		
 	}
 }
 
@@ -79,17 +79,11 @@ void LayoutObject::SetY(int y)
 	SetBounds(x(), y, width(), height());
 }
 
-void LayoutObject::OnPropertyLayoutChangedInternal(const SPtr<UIObject>&)
+base::Size LayoutObject::CalcLayoutSize()
 {
-	CalcLayoutBounds();
-}
-
-SPtr<LayoutObject> LayoutObject::GetParent() const
-{
-	return parent_.get();
-}
-
-void LayoutObject::SetParent(const SPtr<LayoutObject>& parent)
-{
-	parent_.reset(parent);
+	SPtr<UIObject> obj = owner_.get();
+	if (!obj)
+		return base::Size();
+	//todo
+	return obj->GetPropertySize();
 }

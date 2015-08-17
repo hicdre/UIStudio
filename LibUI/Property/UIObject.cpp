@@ -2,9 +2,10 @@
 #include "UIObject.h"
 #include "Layout/LayoutObject.h"
 #include "Layout/LayoutContainer.h"
+#include "Render/RenderObject.h"
 
 UIObject::UIObject()
-	: propertyVisible_(true)
+	: propertyVisible_(true)	
 {
 
 }
@@ -24,7 +25,7 @@ void UIObject::SetPropertyVisible(bool show)
 	if (propertyVisible_ == show)
 		return;
 	propertyVisible_ = show;
-	EventVisibleChanged.Execute(GetSelf<UIObject>());
+	EventPropertyVisibleChanged.Execute(GetSelf<UIObject>());
 }
 
 const base::Size& UIObject::GetPropertySize() const
@@ -37,7 +38,7 @@ void UIObject::SetPropertySize(int w, int h)
 	if (propertySize_.width() == w && propertySize_.height() == h)
 		return;
 	propertySize_.SetSize(w, h);
-	EventLayoutChanged.Execute(GetSelf<UIObject>());
+	EventPropertySizeChanged.Execute(GetSelf<UIObject>());
 }
 
 void UIObject::SetLayoutContainer(const SPtr<LayoutContainer>& obj)
@@ -52,5 +53,9 @@ const SPtr<LayoutContainer>& UIObject::GetLayoutContainer() const
 	return layoutContainer_;
 }
 
+void UIObject::OnLayoutSizeChanged()
+{
+	GetRenderObject()->SetSize(GetLayoutObject()->size());
+}
 
 

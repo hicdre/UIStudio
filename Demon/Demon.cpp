@@ -17,12 +17,10 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	Application::InitInstance();
 
-	SPtr<UIWindow> window(new UIWindow);
+	SPtr<UIWindow> window = UIWindow::Create();
 
 	window->SetPropertySize(200, 300);
-	window->SetPropertyVisible(true);
-
-	window->AddToScreen();
+	window->SetPropertyVisible(true);	
 
 	Application::Run();
 	Application::UninitInstance();

@@ -6,7 +6,7 @@
 #include "Layout/LayoutObject.h"
 
 RenderManager::RenderManager()
-	: is_running_(false)
+	//: is_running_(false)
 {
 
 }
@@ -22,34 +22,38 @@ RenderManager* RenderManager::Get()
 	return &inst;
 }
 
-void RenderManager::ShowWindow(const SPtr<UIWindow>& window)
-{
-	if (!is_running_) {
-		pending_windows_.push_back(window->GetWeak<UIWindow>());
-	}
-	else {
-		RunWindow(window);
-	}
-}
+// void RenderManager::ShowWindow(const SPtr<UIWindow>& window)
+// {
+// 	if (!is_running_) {
+// 		pending_windows_.push_back(window->GetWeak<UIWindow>());
+// 	}
+// 	else {
+// 		RunWindow(window);
+// 	}
+// }
+// 
+// 
+// void RenderManager::RunPendingWindow()
+// {
+// 	is_running_ = true;
+// 	for (const WPtr<UIWindow>& window : pending_windows_)
+// 	{
+// 		SPtr<UIWindow> w = window.get();
+// 		RunWindow(w);
+// 	}
+// 	pending_windows_.clear();
+// }
 
-
-void RenderManager::RunPendingWindow()
+void RenderManager::OnWindowVisibleChanged(const SPtr<UIObject>& obj)
 {
-	is_running_ = true;
-	for (const WPtr<UIWindow>& window : pending_windows_)
+	SPtr<UIWindow> window = obj;
+	assert(window);
+	if (window->GetPropertyVisible())
 	{
-		SPtr<UIWindow> w = window.get();
-		RunWindow(w);
+		window->GetRenderWindow()->Show(SW_SHOWNORMAL);
 	}
-	pending_windows_.clear();
-}
-
-void RenderManager::RunWindow(const SPtr<UIWindow>& window)
-{
-	SPtr<RenderWindow> renderWindow = window->GetRenderObject();
-	//window->BuildRenderObjects();
-	//window->GetLayoutContainer()
-	
-	renderWindow->Show(SW_SHOWNORMAL);
-	render_objects_.push_back(renderWindow);
+	else
+	{
+		window->GetRenderWindow()->Show(SW_HIDE);
+	}
 }

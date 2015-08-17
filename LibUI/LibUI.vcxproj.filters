@@ -121,9 +121,6 @@
     <ClInclude Include="Layout\LayoutManager.h">
       <Filter>layout</Filter>
     </ClInclude>
-    <ClInclude Include="Layout\LayoutWindow.h">
-      <Filter>layout</Filter>
-    </ClInclude>
     <ClInclude Include="Property\UIObject.h">
       <Filter>property</Filter>
     </ClInclude>
@@ -150,6 +147,12 @@
     </ClInclude>
     <ClInclude Include="Render\RenderRectangleD2D.h">
       <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\RelativeLayoutChild.h">
+      <Filter>layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\RelativeLayoutContainer.h">
+      <Filter>layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +216,6 @@
     <ClCompile Include="Layout\LayoutManager.cpp">
       <Filter>layout</Filter>
     </ClCompile>
-    <ClCompile Include="Layout\LayoutWindow.cpp">
-      <Filter>layout</Filter>
-    </ClCompile>
     <ClCompile Include="Property\UIObject.cpp">
       <Filter>property</Filter>
     </ClCompile>
@@ -239,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="Render\RenderD2DUtils.cpp">
       <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\RelativeLayoutChild.cpp">
+      <Filter>layout</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\RelativeLayoutContainer.cpp">
+      <Filter>layout</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

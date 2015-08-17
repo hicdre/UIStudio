@@ -1,6 +1,7 @@
 #pragma once
 #include "Property/PropertyObject.h"
 #include "Delegate/Delegate.h"
+#include "Property/PropertyLengthValue.h"
 
 class RenderObject;
 class LayoutObject;
@@ -11,11 +12,11 @@ public:
 	UIObject();
 	~UIObject();
 
-	Event<void(const SPtr<UIObject>&)> EventVisibleChanged;
+	Event<void(const SPtr<UIObject>&)> EventPropertyVisibleChanged;
 	bool GetPropertyVisible() const;
 	void SetPropertyVisible(bool show);	
 
-	Event<void(const SPtr<UIObject>&)> EventLayoutChanged;	
+	Event<void(const SPtr<UIObject>&)> EventPropertySizeChanged;	
 	const base::Size& GetPropertySize() const;
 	void SetPropertySize(int w, int h);
 	virtual SPtr<LayoutObject> GetLayoutObject() = 0;	
@@ -24,9 +25,16 @@ public:
 	const SPtr<LayoutContainer>& GetLayoutContainer() const;	
 
 	
-	virtual SPtr<RenderObject> GetRenderObject() = 0;
+	virtual SPtr<RenderObject> GetRenderObject() = 0;	
+
+	void OnLayoutSizeChanged();
 protected:
 	SPtr<LayoutContainer> layoutContainer_;
 	bool propertyVisible_;
-	base::Size propertySize_;
+	
+
+	SPtr<PropertyLengthValue> propertyX_;
+	SPtr<PropertyLengthValue> propertyY_;
+	SPtr<PropertyLengthValue> propertyWidth_;
+	SPtr<PropertyLengthValue> propertyHeight_;
 };

@@ -20,6 +20,7 @@ public:
 	PropertyChangedEvent EventPropertyChanged;
 
 protected:
+	friend class UIPrototype;
 	void OnPropertyChanged(const std::string& name);
 	PropertyDictionary property_dict_;
 

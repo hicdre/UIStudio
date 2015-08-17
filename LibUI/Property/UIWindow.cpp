@@ -5,17 +5,28 @@
 #include "Render/RenderEngine.h"
 #include "Render/RenderRectangle.h"
 #include "Layout/LayoutObject.h"
-#include "Layout/LayoutWindow.h"
+#include "Layout/LayoutManager.h"
+#include <functional>
 
 
 UIWindow::UIWindow()
-	: isAddedToScreen_(false)
+	
 {
 	
 }
 
 UIWindow::~UIWindow()
 {
+	
+}
+
+SPtr<UIWindow> UIWindow::Create()
+{
+	SPtr<UIWindow> window(new UIWindow);
+	window->EventPropertyVisibleChanged.AddF(
+		std::bind(&RenderManager::OnWindowVisibleChanged, RenderManager::Get()));
+	window->EventPropertySizeChanged.AddF(
+		std::bind(&LayoutManager::OnWindowSizeChanged, LayoutManager::Get()));
 	
 }
 
@@ -44,13 +55,6 @@ SPtr<RenderWindow> UIWindow::GetRenderWindow()
 	return renderWindow_;
 }
 
-void UIWindow::AddToScreen()
-{
-	if (isAddedToScreen_)
-		return;
-	RenderManager::Get()->ShowWindow(GetSelf<UIWindow>());
-	isAddedToScreen_ = true;
-}
 
 void UIWindow::InitRenderWindow()
 {

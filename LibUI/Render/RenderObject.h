@@ -65,4 +65,5 @@ protected:
 
 	WPtr<RenderObject> parent_;
 	std::vector<SPtr<RenderObject>> childs_;
+	
 };

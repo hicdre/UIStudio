@@ -3,7 +3,6 @@
 
 class RenderWindow;
 class LayoutObject;
-class LayoutWindow;
 class UIWindow : public UIObject
 {
 public:
@@ -23,7 +22,7 @@ private:
 	RenderWindow* renderWindow() const;
 
 	SPtr<RenderWindow> renderWindow_;
-	SPtr<LayoutWindow> layoutWindow_;
+	//SPtr<LayoutWindow> layoutWindow_;
 
 	
 };

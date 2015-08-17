@@ -154,12 +154,20 @@
     <ClInclude Include="Layout\RelativeLayoutContainer.h">
       <Filter>layout</Filter>
     </ClInclude>
-    </ClInclude>
     <ClInclude Include="Render\RenderObjectD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
     <ClInclude Include="Render\RenderPath.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\UIPrototype.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Property\PropertyLengthValue.h">
+      <Filter>property</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout\LayoutChild.h">
+      <Filter>layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +269,15 @@
     </ClCompile>
     <ClCompile Include="Render\RenderPath.cpp">
       <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\UIPrototype.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Property\PropertyLengthValue.cpp">
+      <Filter>property</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout\LayoutChild.cpp">
+      <Filter>layout</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

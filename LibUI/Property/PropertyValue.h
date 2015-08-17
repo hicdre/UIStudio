@@ -21,6 +21,8 @@ enum PropertyValueType
 	PropertyTypeString,
 	PropertyTypeList,
 	PropertyTypeDictionary,
+
+	PropertyTypeLength,
 };
 
 class PropertyList;

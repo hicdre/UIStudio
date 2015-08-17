@@ -1,5 +1,6 @@
 #pragma once
 #include "Property/PropertyLengthValue.h"
+#include "Delegate/Delegate.h"
 
 class PropertyObject;
 

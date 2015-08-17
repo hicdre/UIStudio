@@ -65,7 +65,7 @@ void Application::Run()
 
 void Application::InternalRun()
 {	
-	RenderManager::Get()->RunPendingWindow();
+	//RenderManager::Get()->RunPendingWindow();
 	for (;;) {
 		// If we do any work, we may create more messages etc., and more work may
 		// possibly be waiting in another task group.  When we (for example)

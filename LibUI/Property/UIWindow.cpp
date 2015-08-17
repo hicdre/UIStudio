@@ -23,11 +23,14 @@ UIWindow::~UIWindow()
 SPtr<UIWindow> UIWindow::Create()
 {
 	SPtr<UIWindow> window(new UIWindow);
-	window->EventPropertyVisibleChanged.AddF(
-		std::bind(&RenderManager::OnWindowVisibleChanged, RenderManager::Get()));
-	window->EventPropertySizeChanged.AddF(
-		std::bind(&LayoutManager::OnWindowSizeChanged, LayoutManager::Get()));
-	
+	window->EventPropertyVisibleChanged.AddF([](const SPtr<UIObject>& obj)
+	{
+		RenderManager::Get()->OnWindowVisibleChanged(obj);
+	});		
+	window->EventPropertySizeChanged.AddF([](const SPtr<UIObject>& obj)
+	{
+		LayoutManager::Get()->OnWindowSizeChanged(obj);
+	});	
 }
 
 SPtr<RenderObject> UIWindow::GetRenderObject()
@@ -37,12 +40,13 @@ SPtr<RenderObject> UIWindow::GetRenderObject()
 
 SPtr<LayoutObject> UIWindow::GetLayoutObject()
 {
-	if (!layoutWindow_)
-	{
-		layoutWindow_.reset(new LayoutWindow);
-		layoutWindow_->Attatch(GetSelf<UIObject>());
-	}
-	return layoutWindow_;
+// 	if (!layoutWindow_)
+// 	{
+// 		layoutWindow_.reset(new LayoutWindow);
+// 		layoutWindow_->Attatch(GetSelf<UIObject>());
+// 	}
+// 	return layoutWindow_;
+	return NULL;
 }
 
 SPtr<RenderWindow> UIWindow::GetRenderWindow()

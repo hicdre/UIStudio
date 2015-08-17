@@ -48,7 +48,7 @@ void LayoutObject::SetBoundsRect(const base::Rect& bounds)
 	{
 		if (SPtr<UIObject> owner = owner_.get())
 		{
-			owner->OnLayoutSizeChanged();
+			owner->OnLayoutObjectSizeChanged();
 		}
 		Layout();		
 	}
@@ -79,11 +79,7 @@ void LayoutObject::SetY(int y)
 	SetBounds(x(), y, width(), height());
 }
 
-base::Size LayoutObject::CalcLayoutSize()
-{
-	SPtr<UIObject> obj = owner_.get();
-	if (!obj)
-		return base::Size();
-	//todo
-	return obj->GetPropertySize();
+base::Size LayoutObject::GetPerferedSize()
+{	
+	return base::Size();	
 }

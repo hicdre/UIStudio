@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "UIWindow.h"
+#include "UIObjectCollection.h"
 #include "Render/RenderManager.h"
 #include "Render/RenderWindow.h"
 #include "Render/RenderEngine.h"
 #include "Render/RenderRectangle.h"
 #include "Layout/LayoutObject.h"
 #include "Layout/LayoutManager.h"
+#include "Layout/RelativeLayoutContainer.h"
 #include <functional>
 
 
@@ -23,14 +25,8 @@ UIWindow::~UIWindow()
 SPtr<UIWindow> UIWindow::Create()
 {
 	SPtr<UIWindow> window(new UIWindow);
-	window->EventPropertyVisibleChanged.AddF([](const SPtr<UIObject>& obj)
-	{
-		RenderManager::Get()->OnWindowVisibleChanged(obj);
-	});		
-	window->EventPropertySizeChanged.AddF([](const SPtr<UIObject>& obj)
-	{
-		LayoutManager::Get()->OnWindowSizeChanged(obj);
-	});	
+	RenderManager::Get()->AddWindow(window);
+	return window;
 }
 
 SPtr<RenderObject> UIWindow::GetRenderObject()
@@ -39,22 +35,18 @@ SPtr<RenderObject> UIWindow::GetRenderObject()
 }
 
 SPtr<LayoutObject> UIWindow::GetLayoutObject()
-{
-// 	if (!layoutWindow_)
-// 	{
-// 		layoutWindow_.reset(new LayoutWindow);
-// 		layoutWindow_->Attatch(GetSelf<UIObject>());
-// 	}
-// 	return layoutWindow_;
+{	
 	return NULL;
 }
 
 SPtr<RenderWindow> UIWindow::GetRenderWindow()
 {
-	if (!renderWindow_)
-	{
-		renderWindow_ = RenderEngine::NewRenderWindow(GetPropertySize());
+	if (!renderWindow_ || IsRenderObjectNeedsUpdate())
+	{		
+		renderWindow_ = RenderEngine::NewRenderWindow(CalcWindowSize());
 		InitRenderWindow();
+
+		SetRenderObjectNeedsUpdate();
 	}
 	return renderWindow_;
 }
@@ -63,13 +55,30 @@ SPtr<RenderWindow> UIWindow::GetRenderWindow()
 void UIWindow::InitRenderWindow()
 {
 	//test
-	base::Size sz(GetPropertySize());
-	SPtr<RenderRectangle> background = RenderEngine::NewRenderRectangle(sz.width(), sz.height()/2, base::Color_Green);
-	renderWindow_->AddChild(background);
-	background->SetY(20);
+	//base::Size sz(GetPropertySize());
+// 	SPtr<RenderRectangle> background = RenderEngine::NewRenderRectangle(sz.width(), sz.height()/2, base::Color_Green);
+// 	renderWindow_->AddChild(background);
+// 	background->SetY(20);
 }
 
 RenderWindow* UIWindow::renderWindow() const
 {
 	return renderWindow_.get();
+}
+
+SPtr<LayoutContainer> UIWindow::GetLayoutContainer()
+{
+	if (!layoutContainer_ || isLayoutContainerChanged_)
+	{
+		if (layoutContainerType_ == RelativeLayout)
+		{
+			layoutContainer_ = new RelativeLayoutContainer;			
+		}			
+	}
+	return layoutContainer_;
+}
+
+base::Size UIWindow::CalcWindowSize()
+{
+	return base::Size(GetWidth()->GetPixel(), GetHeight()->GetPixel());
 }

@@ -2,6 +2,7 @@
 #include "Base/object.h"
 
 class UIObject;
+class UIWindow;
 class LayoutManager
 {
 public:
@@ -10,5 +11,5 @@ public:
 
 	static LayoutManager* Get();
 
-	void OnWindowSizeChanged(const SPtr<UIObject>& obj);
+	void Layout(const SPtr<UIWindow>& window);
 };

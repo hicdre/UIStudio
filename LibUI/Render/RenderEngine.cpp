@@ -7,8 +7,6 @@
 
 
 
-static RenderEngine* engineInstance = NULL;
-
 void RenderEngine::InitEngine(Type type)
 {
 	RenderWindow::InitClass();
@@ -34,12 +32,11 @@ SPtr<RenderWindow> RenderEngine::NewRenderWindow(const base::Size& sz)
 
 SPtr<RenderContext> RenderEngine::NewRenderContext(const SPtr<RenderWindow>& window)
 {
-	assert(engineInstance);
-	return engineInstance->CreateRenderContext(window);
+	return RenderEngine::Get()->CreateRenderContext(window);
 }
 
 SPtr<RenderRectangle> RenderEngine::NewRenderRectangle(int width, int height, base::Color color)
 {
-	assert(engineInstance);
-	return engineInstance->CreateRenderRectangle(width, height, color);
+
+	return RenderEngine::Get()->CreateRenderRectangle(width, height, color);
 }

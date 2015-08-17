@@ -15,6 +15,20 @@ struct ResizeEventArgs
 };
 typedef Event<void(const SPtr<LayoutObject>&, const ResizeEventArgs&)> ResizeEvent;
 
+enum LayoutContainerType
+{
+	RelativeLayout,
+	AnchorLayout,
+	HBoxLayout,
+	VBoxLayout,
+};
+
+enum LayoutChildType
+{
+	RelativeLayoutChildType,
+	AnchorLayoutChildType,
+};
+
 class LayoutContainer;
 class LayoutObject : public Object
 {
@@ -45,7 +59,7 @@ public:
 
 	virtual void Layout() = 0;//设置children的位置
 
-	virtual base::Size CalcLayoutSize();//重新计算自身大小
+	virtual base::Size GetPerferedSize();//重新计算自身大小
 protected:	
 	WPtr<UIObject> owner_;
 	base::Rect bounds_; // 实际位置

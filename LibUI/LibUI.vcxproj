@@ -101,8 +101,6 @@
     <ClInclude Include="Delegate\Delegate_OneParam.h" />
     <ClInclude Include="Delegate\Delegate_TwoParams.h" />
     <ClInclude Include="Framework\Application.h" />
-    <ClInclude Include="Layout\LayoutChild.h" />
-    <ClInclude Include="Layout\RelativeLayoutChild.h" />
     <ClInclude Include="Layout\LayoutContainer.h" />
     <ClInclude Include="Layout\LayoutManager.h" />
     <ClInclude Include="Layout\LayoutObject.h" />
@@ -113,7 +111,7 @@
     <ClInclude Include="Property\PropertySize.h" />
     <ClInclude Include="Property\PropertyValue.h" />
     <ClInclude Include="Property\UIObject.h" />
-    <ClInclude Include="Property\UIPrototype.h" />
+    <ClInclude Include="Property\UIObjectCollection.h" />
     <ClInclude Include="Property\UIWindow.h" />
     <ClInclude Include="Render\RenderContext.h" />
     <ClInclude Include="Render\RenderContextD2D.h" />
@@ -141,18 +139,16 @@
     <ClCompile Include="Base\utils.cpp" />
     <ClCompile Include="Delegate\DelegateBase.cpp" />
     <ClCompile Include="Framework\Application.cpp" />
-    <ClCompile Include="Layout\LayoutChild.cpp" />
     <ClCompile Include="Layout\LayoutContainer.cpp" />
     <ClCompile Include="Layout\LayoutManager.cpp" />
     <ClCompile Include="Layout\LayoutObject.cpp" />
-    <ClCompile Include="Layout\RelativeLayoutChild.cpp" />
     <ClCompile Include="Layout\RelativeLayoutContainer.cpp" />
     <ClCompile Include="Property\PropertyLengthValue.cpp" />
     <ClCompile Include="Property\PropertyObject.cpp" />
     <ClCompile Include="Property\PropertySize.cpp" />
     <ClCompile Include="Property\PropertyValue.cpp" />
     <ClCompile Include="Property\UIObject.cpp" />
-    <ClCompile Include="Property\UIPrototype.cpp" />
+    <ClCompile Include="Property\UIObjectCollection.cpp" />
     <ClCompile Include="Property\UIWindow.cpp" />
     <ClCompile Include="Render\RenderContext.cpp" />
     <ClCompile Include="Render\RenderContextD2D.cpp" />

@@ -5,6 +5,7 @@
 UIPrototype::UIPrototype()
 	: propertyWidth_(new PropertyLengthValue)
 	, propertyHeight_(new PropertyLengthValue)
+	, propertyVisible_(true)
 {
 
 }
@@ -81,5 +82,30 @@ void UIPrototype::PropertyLengthSetPercent(const std::string& name, PropertyLeng
 		return;
 	val->SetPercent(percent);
 	OnPropertyChanged(name);
+}
+
+bool UIPrototype::IsVisible() const
+{
+	return propertyVisible_;
+}
+
+void UIPrototype::SetVisible(bool visible)
+{
+	if (propertyVisible_ == visible)
+		return;
+	propertyVisible_ = visible;
+	OnPropertyChanged("visible");
+}
+
+void UIPrototype::SetLayoutContainerType(LayoutContainerType type)
+{
+	if (layoutContainerType_ == type)
+		return;
+
+}
+
+LayoutContainerType UIPrototype::GetLayoutContainerType()
+{
+	return layoutContainerType_;
 }
 

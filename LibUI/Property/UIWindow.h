@@ -14,15 +14,15 @@ public:
 	virtual SPtr<RenderObject> GetRenderObject() override;
 
 	virtual SPtr<LayoutObject> GetLayoutObject() override;
+	virtual SPtr<LayoutContainer> GetLayoutContainer() override;
 public:
 	SPtr<RenderWindow> GetRenderWindow();
 		
 private:
+	base::Size CalcWindowSize();
 	void InitRenderWindow();
 	RenderWindow* renderWindow() const;
 
 	SPtr<RenderWindow> renderWindow_;
-	//SPtr<LayoutWindow> layoutWindow_;
-
-	
+	SPtr<LayoutContainer> layoutContainer_;	
 };

@@ -122,6 +122,8 @@
     <ClInclude Include="Render\RenderEngineD2D.h" />
     <ClInclude Include="Render\RenderManager.h" />
     <ClInclude Include="Render\RenderObject.h" />
+    <ClInclude Include="Render\RenderObjectD2D.h" />
+    <ClInclude Include="Render\RenderPath.h" />
     <ClInclude Include="Render\RenderRectangle.h" />
     <ClInclude Include="Render\RenderRectangleD2D.h" />
     <ClInclude Include="Render\RenderWindow.h" />
@@ -159,7 +161,10 @@
     <ClCompile Include="Render\RenderEngineD2D.cpp" />
     <ClCompile Include="Render\RenderManager.cpp" />
     <ClCompile Include="Render\RenderObject.cpp" />
+    <ClCompile Include="Render\RenderObjectD2D.cpp" />
+    <ClCompile Include="Render\RenderPath.cpp" />
     <ClCompile Include="Render\RenderRectangle.cpp" />
+    <ClCompile Include="Render\RenderRectangleD2D.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

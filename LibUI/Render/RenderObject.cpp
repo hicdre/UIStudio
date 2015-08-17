@@ -139,6 +139,7 @@ void RenderObject::SetBoundsRect(const base::Rect& bounds)
 		// 		ResizeEventArgs args(prev.size(), size());
 		// 		EventResize.Execute(GetSelf<LayoutObject>(), args);
 		//Layout();
+		OnSizeChanged();
 	}
 }
 
@@ -170,6 +171,16 @@ void RenderObject::SetY(int y)
 base::Rect RenderObject::ConvertRectFromChild(RenderObject* child, const base::Rect& r)
 {
 	return Rect(r.x() + child->x(), r.y() + child->y(), r.width(), r.height());
+}
+
+void RenderObject::SetFilledColor(base::Color color)
+{
+	color_ = color;
+}
+
+void RenderObject::OnSizeChanged()
+{
+
 }
 
 

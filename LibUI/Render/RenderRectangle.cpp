@@ -2,6 +2,8 @@
 #include "RenderRectangle.h"
 
 RenderRectangle::RenderRectangle()
+	: cornerRadiusX_(0)
+	, cornerRadiusY_(0)
 {
 
 }
@@ -11,8 +13,26 @@ RenderRectangle::~RenderRectangle()
 
 }
 
-void RenderRectangle::SetFilledColor(base::Color color)
+void RenderRectangle::SetRadiusX(float rx)
 {
-	color_ = color;
+	if (cornerRadiusX_ == rx)
+		return;
+	cornerRadiusX_ = rx;
+	OnRadiusChanged();
 }
+
+void RenderRectangle::SetRadiusY(float ry)
+{
+	if (cornerRadiusY_ == ry)
+		return;
+	cornerRadiusY_ = ry;
+	OnRadiusChanged();
+}
+
+void RenderRectangle::OnRadiusChanged()
+{
+
+}
+
+
 

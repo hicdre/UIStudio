@@ -12,6 +12,12 @@ D2D1_RECT_F D2DRect(const base::Rect& rc)
 	return D2D1::RectF(rc.x(), rc.y(), rc.right(), rc.bottom());
 }
 
+
+D2D1_ROUNDED_RECT D2DRoundRect(const base::Rect& rc, float rx, float ry)
+{
+	return D2D1::RoundedRect(D2DRect(rc), rx, ry);
+}
+
 D2D1::ColorF D2DColor(base::Color color)
 {
 	return D2D1::ColorF(color, ColorGetA(color) / 255.f);

@@ -1,24 +1,26 @@
 #pragma once
 #include "Render/RenderRectangle.h"
-#include "Render/RenderContextD2D.h"
-#include "RenderD2DUtils.h"
+#include "Render/RenderObjectD2D.h"
 
-class RenderRectangleD2D : public RenderRectangle
+
+class RenderRectangleD2D : public RenderObjectD2D<RenderRectangle>
 {
 public:
-	virtual void Render(const SPtr<RenderContext>& context) override
-	{
-		CComPtr<ID2D1HwndRenderTarget> renderTarget = D2DGetTargetFromContext(context);
-		if (!renderTarget)
-			return;
+	RenderRectangleD2D();
+	~RenderRectangleD2D();
 
-		CComPtr<ID2D1SolidColorBrush> brush;
-		if (SUCCEEDED(renderTarget->CreateSolidColorBrush(D2DColor(color_), &brush)))
-		{
-			renderTarget->FillRectangle(D2D1::RectF(0, 0, width(), height()), brush);
-		}
-		
-	}
+	virtual CComPtr<ID2D1Geometry> GetPath() override;
+
+
+protected:
+	virtual void OnSizeChanged() override;
+	virtual void OnRadiusChanged() override;
+
+	CComPtr<ID2D1Geometry> path_;
+
+	
+
+	bool isPathDirty_;
 };
 
 

@@ -40,3 +40,8 @@ SPtr<RenderRectangle> RenderEngine::NewRenderRectangle(int width, int height, ba
 
 	return RenderEngine::Get()->CreateRenderRectangle(width, height, color);
 }
+
+SPtr<RenderBrush> RenderEngine::NewRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color)
+{
+	return RenderEngine::Get()->CreateRenderSolidBrush(context, color);
+}

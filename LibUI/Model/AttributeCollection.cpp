@@ -88,6 +88,14 @@ int32 AttributeCollection::GetAttributeInt(const std::string& attributeName) con
 	return 0;
 }
 
+uint32 AttributeCollection::GetAttributeUInt(const std::string& attributeName) const
+{
+	SPtr<AttributeValue> v = GetAttribute(attributeName);
+	if (v->IsUInt32Value())
+		return v->GetUInt32Value();
+	return 0;
+}
+
 float AttributeCollection::GetAttributeFloat(const std::string& attributeName) const
 {
 	SPtr<AttributeValue> v = GetAttribute(attributeName);
@@ -104,6 +112,22 @@ double AttributeCollection::GetAttributeDouble(const std::string& attributeName)
 	return 0;
 }
 
+std::wstring AttributeCollection::GetAttributeUTF16(const std::string& attributeName) const
+{
+	SPtr<AttributeValue> v = GetAttribute(attributeName);
+	if (v->IsStringValue())
+		return v->GetUTF16Value();
+	return std::wstring();
+}
+
+std::string AttributeCollection::GetAttributeUTF8(const std::string& attributeName) const
+{
+	SPtr<AttributeValue> v = GetAttribute(attributeName);
+	if (v->IsStringValue())
+		return v->GetUTF8Value();
+	return std::string();
+}
+
 SPtr<AttributeLength> AttributeCollection::GetAttributeLength(const std::string& attributeName) const
 {
 	SPtr<AttributeValue> v = GetAttribute(attributeName);
@@ -112,12 +136,25 @@ SPtr<AttributeLength> AttributeCollection::GetAttributeLength(const std::string&
 	return AttributeLength::Auto();
 }
 
+SPtr<AttributePaint> AttributeCollection::GetAttributePaint(const std::string& attributeName) const
+{
+	SPtr<AttributeValue> v = GetAttribute(attributeName);
+	if (v->type() == AttributeTypePaint)
+		return v->GetObjectValue();
+	return AttributeColorPaint::NotSet();
+}
+
 void AttributeCollection::SetAttributeBool(const std::string& attributeName, bool value)
 {
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
 void AttributeCollection::SetAttributeInt(const std::string& attributeName, int value)
+{
+	SetAttribute(attributeName, new AttributeValue(value));
+}
+
+void AttributeCollection::SetAttributeUInt(const std::string& attributeName, uint32 value)
 {
 	SetAttribute(attributeName, new AttributeValue(value));
 }
@@ -132,9 +169,24 @@ void AttributeCollection::SetAttributeDouble(const std::string& attributeName, d
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
+void AttributeCollection::SetAttributeString(const std::string& attributeName, const std::string& value)
+{
+	SetAttribute(attributeName, new AttributeValue(value));
+}
+
+void AttributeCollection::SetAttributeString(const std::string& attributeName, const std::wstring& value)
+{
+	SetAttribute(attributeName, new AttributeValue(value));
+}
+
 void AttributeCollection::SetAttributeLength(const std::string& attributeName, const SPtr<AttributeLength>& value)
 {	
 	SetAttribute(attributeName, new AttributeValue(value, AttributeTypeLength));
+}
+
+void AttributeCollection::SetAttributePaint(const std::string& attributeName, const SPtr<AttributePaint>& value)
+{
+	SetAttribute(attributeName, new AttributeValue(value, AttributeTypePaint));
 }
 
 void AttributeCollection::RemoveAttribute(const std::string& attributeName)

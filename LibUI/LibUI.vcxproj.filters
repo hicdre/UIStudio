@@ -166,6 +166,24 @@
     <ClInclude Include="Render\RenderPaintServer.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="Model\UIRectangle.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\UIVisualObject.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributePaint.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderPathD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderBrush.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderBrushD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -269,6 +287,24 @@
     </ClCompile>
     <ClCompile Include="Render\RenderPaintServer.cpp">
       <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\UIRectangle.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\UIVisualObject.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributePaint.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPathD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderBrush.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderBrushD2D.cpp">
+      <Filter>render\d2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

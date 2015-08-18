@@ -1,6 +1,7 @@
 #pragma once
 #include "Model/AttributeValue.h"
 #include "Model/AttributeLength.h"
+#include "Model/AttributePaint.h"
 #include "Delegate/Delegate.h"
 #include <unordered_map>
 
@@ -27,19 +28,28 @@ public:
 
 	bool HasAttribute(const std::string& attributeName) const;
 	SPtr<AttributeValue> GetAttribute(const std::string& attributeName) const;
+	
 	void SetAttribute(const std::string& attributeName, const SPtr<AttributeValue>& value);
 
 	bool GetAttributeBool(const std::string& attributeName) const;
 	int32 GetAttributeInt(const std::string& attributeName) const;
+	uint32 GetAttributeUInt(const std::string& attributeName) const;
 	float GetAttributeFloat(const std::string& attributeName) const;
 	double GetAttributeDouble(const std::string& attributeName) const;
+	std::wstring GetAttributeUTF16(const std::string& attributeName) const;
+	std::string GetAttributeUTF8(const std::string& attributeName) const;
 	SPtr<AttributeLength> GetAttributeLength(const std::string& attributeName) const;
+	SPtr<AttributePaint> GetAttributePaint(const std::string& attributeName) const;
 
 	void SetAttributeBool(const std::string& attributeName, bool value);
 	void SetAttributeInt(const std::string& attributeName, int value);
+	void SetAttributeUInt(const std::string& attributeName, uint32 value);
 	void SetAttributeFloat(const std::string& attributeName, float value);
 	void SetAttributeDouble(const std::string& attributeName, double value);
+	void SetAttributeString(const std::string& attributeName, const std::string& value);
+	void SetAttributeString(const std::string& attributeName, const std::wstring& value);
 	void SetAttributeLength(const std::string& attributeName, const SPtr<AttributeLength>& value);
+	void SetAttributePaint(const std::string& attributeName, const SPtr<AttributePaint>& value);
 
 	void RemoveAttribute(const std::string& attributeName);
 

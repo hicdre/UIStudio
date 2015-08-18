@@ -14,6 +14,9 @@ public:
 	virtual SPtr<RenderRectangle>
 		CreateRenderRectangle(int width, int height, base::Color color) override;
 
+	virtual SPtr<RenderBrush>
+		CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color) override;
+
 	static void Init();
 	static void Uninit();
 	static RenderD2DEngine* Get();

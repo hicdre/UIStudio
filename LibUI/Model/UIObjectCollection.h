@@ -13,6 +13,7 @@ public:
 	uint32 GetIndexOf(const SPtr<UIObject>& obj);
 
 	uint32 GetCount() const { return objects_.size(); }
+	bool IsEmpty() const { return objects_.empty(); }
 
 	typedef std::vector<SPtr<UIObject>>::iterator iterator;
 	typedef std::vector<SPtr<UIObject>>::const_iterator const_iterator;

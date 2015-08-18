@@ -1,7 +1,7 @@
 #pragma once
-#include "Render/RenderObject.h"
+#include "Base/object.h"
 
-class RenderPath : public RenderObject
+class RenderPath : public Object
 {
 public:
 	RenderPath();

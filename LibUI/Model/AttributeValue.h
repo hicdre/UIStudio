@@ -23,6 +23,7 @@ enum AttributeValueType
 	AttributeTypeDictionary,
 
 	AttributeTypeLength,
+	AttributeTypePaint,
 };
 
 class AttributeValueList;
@@ -42,6 +43,8 @@ public:
 	AttributeValue(const SPtr<Object>& v, AttributeValueType type) { SetObjectValue(v, type); }
 	AttributeValue(const std::wstring& v) { SetStringValue(v); }
 	AttributeValue(const std::string& v);
+
+	inline AttributeValueType type() const { return type_; }
 
 	inline bool IsBoolValue() const { return type_ == AttributeTypeBool; }
 	inline bool IsInt32Value() const { return type_ == AttributeTypeInt32; }

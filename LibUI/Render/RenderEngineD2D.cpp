@@ -3,6 +3,7 @@
 #include "RenderWindow.h"
 #include "RenderContextD2D.h"
 #include "RenderRectangleD2D.h"
+#include "RenderBrushD2D.h"
 
 static RenderD2DEngine* d2dEngineInstance = NULL;
 
@@ -75,6 +76,17 @@ SPtr<RenderRectangle> RenderD2DEngine::CreateRenderRectangle(int width, int heig
 	return rect;
 }
 
+SPtr<RenderBrush> RenderD2DEngine::CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color)
+{
+	CComPtr<ID2D1RenderTarget> renderTarget = D2DGetTargetFromContext(context);
+	if (!renderTarget)
+		return NULL;
+
+	CComPtr<ID2D1SolidColorBrush> brush;
+	if (SUCCEEDED(renderTarget->CreateSolidColorBrush(D2DColor(color), &brush)))
+		return new RenderBrushD2D(brush);
+	return NULL;
+}
 
 
 

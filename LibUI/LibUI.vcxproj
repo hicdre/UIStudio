@@ -111,7 +111,12 @@
     <ClInclude Include="Model\AttributeValue.h" />
     <ClInclude Include="Model\UIObject.h" />
     <ClInclude Include="Model\UIObjectCollection.h" />
+    <ClInclude Include="Model\AttributePaint.h" />
+    <ClInclude Include="Model\UIRectangle.h" />
+    <ClInclude Include="Model\UIVisualObject.h" />
     <ClInclude Include="Model\UIWindow.h" />
+    <ClInclude Include="Render\RenderBrush.h" />
+    <ClInclude Include="Render\RenderBrushD2D.h" />
     <ClInclude Include="Render\RenderContext.h" />
     <ClInclude Include="Render\RenderContextD2D.h" />
     <ClInclude Include="Render\RenderD2DUtils.h" />
@@ -122,6 +127,7 @@
     <ClInclude Include="Render\RenderObjectD2D.h" />
     <ClInclude Include="Render\RenderPaintServer.h" />
     <ClInclude Include="Render\RenderPath.h" />
+    <ClInclude Include="Render\RenderPathD2D.h" />
     <ClInclude Include="Render\RenderRectangle.h" />
     <ClInclude Include="Render\RenderRectangleD2D.h" />
     <ClInclude Include="Render\RenderWindow.h" />
@@ -148,7 +154,12 @@
     <ClCompile Include="Model\AttributeValue.cpp" />
     <ClCompile Include="Model\UIObject.cpp" />
     <ClCompile Include="Model\UIObjectCollection.cpp" />
+    <ClCompile Include="Model\AttributePaint.cpp" />
+    <ClCompile Include="Model\UIRectangle.cpp" />
+    <ClCompile Include="Model\UIVisualObject.cpp" />
     <ClCompile Include="Model\UIWindow.cpp" />
+    <ClCompile Include="Render\RenderBrush.cpp" />
+    <ClCompile Include="Render\RenderBrushD2D.cpp" />
     <ClCompile Include="Render\RenderContext.cpp" />
     <ClCompile Include="Render\RenderContextD2D.cpp" />
     <ClCompile Include="Render\RenderD2DUtils.cpp" />
@@ -159,6 +170,7 @@
     <ClCompile Include="Render\RenderObjectD2D.cpp" />
     <ClCompile Include="Render\RenderPaintServer.cpp" />
     <ClCompile Include="Render\RenderPath.cpp" />
+    <ClCompile Include="Render\RenderPathD2D.cpp" />
     <ClCompile Include="Render\RenderRectangle.cpp" />
     <ClCompile Include="Render\RenderRectangleD2D.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />

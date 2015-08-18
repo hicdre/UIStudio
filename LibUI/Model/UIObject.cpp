@@ -4,10 +4,11 @@
 #include "Layout/LayoutObject.h"
 #include "Layout/LayoutContainer.h"
 #include "Render/RenderObject.h"
+#include "AttributePaint.h"
 
 UIObject::UIObject()
-	: isRenderObjectNeedsUpdate_(true)
-	, isLayoutObjectNeedsUpdate_(true)
+// 	: isRenderObjectNeedsUpdate_(true)
+// 	, isLayoutObjectNeedsUpdate_(true)
 	//, attributes_(new PropertyObject)
 {
 	
@@ -27,6 +28,16 @@ SPtr<UIObjectCollection> UIObject::GetChildren()
 	return children_;
 }
 
+bool UIObject::HasChildren()
+{
+	return !GetChildren()->IsEmpty();
+}
+
+SPtr<UIObject> UIObject::GetParent()
+{
+	return parent_.get();
+}
+
 SPtr<AttributeCollection> UIObject::GetAttributes()
 {
 	if (!attributes_)
@@ -37,92 +48,230 @@ SPtr<AttributeCollection> UIObject::GetAttributes()
 	return attributes_;
 }
 
-SPtr<AttributeLength> UIObject::GetX()
+void UIObject::Render(const SPtr<RenderContext>& context)
 {
-	return GetAttributes()->GetAttributeLength("x");
+	RenderChildren(context);
 }
 
-SPtr<AttributeLength> UIObject::GetY()
+void UIObject::SetPathDirty(bool dirty)
 {
-	return GetAttributes()->GetAttributeLength("y");
+	isPathDirty_ = dirty;
 }
 
-SPtr<AttributeLength> UIObject::GetWidth()
+SPtr<AttributePaint> UIObject::GetColor()
 {
-	return GetAttributes()->GetAttributeLength("width");
+	return !GetAttributes()->HasAttribute("color")
+		? AttributeColorPaint::NotSet()
+		: GetAttributes()->GetAttributePaint("color");
 }
 
-SPtr<AttributeLength> UIObject::GetHeight()
+void UIObject::SetColor(const SPtr<AttributePaint>& p)
 {
-	return GetAttributes()->GetAttributeLength("height");
+	GetAttributes()->SetAttributePaint("color", p);
 }
 
-void UIObject::SetX(const SPtr<AttributeLength>& v)
+SPtr<AttributePaint> UIObject::GetFill()
 {
-	GetAttributes()->SetAttributeLength("x", v);
+	return !GetAttributes()->HasAttribute("fill")
+		? AttributeColorPaint::NotSet()
+		: GetAttributes()->GetAttributePaint("fill");
 }
 
-void UIObject::SetY(const SPtr<AttributeLength>& v)
+void UIObject::SetFill(const SPtr<AttributePaint>& v)
 {
-	GetAttributes()->SetAttributeLength("y", v);
+	GetAttributes()->SetAttributePaint("fill", v);
 }
 
-void UIObject::SetWidth(const SPtr<AttributeLength>& v)
+SPtr<AttributePaint> UIObject::GetStroke()
 {
-	GetAttributes()->SetAttributeLength("width", v);
+	return !GetAttributes()->HasAttribute("stroke")
+		? AttributeColorPaint::NotSet()
+		: GetAttributes()->GetAttributePaint("stroke");
 }
 
-void UIObject::SetHeight(const SPtr<AttributeLength>& v)
+void UIObject::SetStroke(const SPtr<AttributePaint>& v)
 {
-	GetAttributes()->SetAttributeLength("height", v);
+	GetAttributes()->SetAttributePaint("stroke", v);
 }
 
-bool UIObject::IsVisible()
+float UIObject::GetFillOpacity()
 {
-	return GetAttributes()->GetAttributeBool("visible");
+	return !GetAttributes()->HasAttribute("fill-opacity")
+		? GetOpacity()
+		: GetAttributes()->GetAttributeFloat("fill-opacity");
 }
 
-void UIObject::SetVisible(bool visible)
+void UIObject::SetFillOpacity(float v)
 {
-	GetAttributes()->SetAttributeBool("visible", visible);
+	GetAttributes()->SetAttributeFloat("fill-opacity", FixOpacityValue(v));
 }
 
-void UIObject::SetLayoutContainerType(LayoutContainerType type)
+float UIObject::GetStrokeWidth()
 {
-	GetAttributes()->SetAttributeInt("layout", type);
+	return !GetAttributes()->HasAttribute("stroke-width")
+		? 1.0f
+		: GetAttributes()->GetAttributeFloat("stroke-width");
 }
 
-LayoutContainerType UIObject::GetLayoutContainerType()
+void UIObject::SetStrokeWidth(float v)
 {
-	return (LayoutContainerType)GetAttributes()->GetAttributeInt("layout");
+	GetAttributes()->SetAttributeFloat("stroke-width", v);
 }
 
-void UIObject::SetRenderObjectNeedsUpdate(bool v)
+float UIObject::GetStrokeOpacity()
 {
-	isRenderObjectNeedsUpdate_ = v;
+	return !GetAttributes()->HasAttribute("stroke-opacity")
+		? GetOpacity()
+		: GetAttributes()->GetAttributeFloat("stroke-opacity");
 }
 
-bool UIObject::IsRenderObjectNeedsUpdate() const
+void UIObject::SetStrokeOpacity(float v)
 {
-	return isRenderObjectNeedsUpdate_;
+	GetAttributes()->SetAttributeFloat("stroke-opacity", FixOpacityValue(v));
 }
 
-void UIObject::OnParentLayoutContainerTypeChanged(LayoutContainerType type)
+SPtr<AttributePaint> UIObject::GetStopColor()
 {
-	//根据自身的属性和type共同判断
-	//if (type == RelativeLayout)
-	isLayoutObjectNeedsUpdate_ = false;
+	return !GetAttributes()->HasAttribute("stop-color")
+		? AttributeColorPaint::NotSet()
+		: GetAttributes()->GetAttributePaint("stop-color");
 }
 
-void UIObject::OnChildRemoved(const SPtr<UIObject>& obj)
+void UIObject::SetStopColor(const SPtr<AttributePaint>& v)
 {
-	GetLayoutContainer()->SetNeedsLayout();
+	GetAttributes()->SetAttributePaint("stop-color", v);
 }
 
-void UIObject::OnLayoutObjectSizeChanged()
+float UIObject::GetOpacity()
 {
-
+	return !GetAttributes()->HasAttribute("opacity")
+		? GetOpacity()
+		: GetAttributes()->GetAttributeFloat("opacity");
 }
+
+void UIObject::SetOpacity(float v)
+{
+	GetAttributes()->SetAttributeFloat("opacity", FixOpacityValue(v));
+}
+
+std::wstring UIObject::GetFontFamily()
+{
+	return GetAttributes()->GetAttributeUTF16("font-family");
+}
+
+void UIObject::SetFontFamily(const std::wstring& v)
+{
+	GetAttributes()->SetAttributeString("font-family",v);
+	SetPathDirty(true);
+}
+
+uint32 UIObject::GetFontSize()
+{
+	return GetAttributes()->HasAttribute("font-size")
+		? GetAttributes()->GetAttributeUInt("font-size")
+		: GetOpacity();
+}
+
+void UIObject::SetFontSize(uint32 v)
+{
+	GetAttributes()->SetAttributeUInt("font-size", v);
+	SetPathDirty(true);
+}
+
+void UIObject::RenderChildren(const SPtr<RenderContext>& context)
+{
+	for (auto obj : *children_.get())
+	{
+		obj->Render(context);
+	}
+}
+
+// SPtr<AttributeLength> UIObject::GetX()
+// {
+// 	return GetAttributes()->GetAttributeLength("x");
+// }
+// 
+// SPtr<AttributeLength> UIObject::GetY()
+// {
+// 	return GetAttributes()->GetAttributeLength("y");
+// }
+// 
+// SPtr<AttributeLength> UIObject::GetWidth()
+// {
+// 	return GetAttributes()->GetAttributeLength("width");
+// }
+// 
+// SPtr<AttributeLength> UIObject::GetHeight()
+// {
+// 	return GetAttributes()->GetAttributeLength("height");
+// }
+// 
+// void UIObject::SetX(const SPtr<AttributeLength>& v)
+// {
+// 	GetAttributes()->SetAttributeLength("x", v);
+// }
+// 
+// void UIObject::SetY(const SPtr<AttributeLength>& v)
+// {
+// 	GetAttributes()->SetAttributeLength("y", v);
+// }
+// 
+// void UIObject::SetWidth(const SPtr<AttributeLength>& v)
+// {
+// 	GetAttributes()->SetAttributeLength("width", v);
+// }
+// 
+// void UIObject::SetHeight(const SPtr<AttributeLength>& v)
+// {
+// 	GetAttributes()->SetAttributeLength("height", v);
+// }
+// 
+// bool UIObject::IsVisible()
+// {
+// 	return GetAttributes()->GetAttributeBool("visible");
+// }
+// 
+// void UIObject::SetVisible(bool visible)
+// {
+// 	GetAttributes()->SetAttributeBool("visible", visible);
+// }
+// 
+// void UIObject::SetLayoutContainerType(LayoutContainerType type)
+// {
+// 	GetAttributes()->SetAttributeInt("layout", type);
+// }
+// 
+// LayoutContainerType UIObject::GetLayoutContainerType()
+// {
+// 	return (LayoutContainerType)GetAttributes()->GetAttributeInt("layout");
+// }
+// 
+// void UIObject::SetRenderObjectNeedsUpdate(bool v)
+// {
+// 	isRenderObjectNeedsUpdate_ = v;
+// }
+// 
+// bool UIObject::IsRenderObjectNeedsUpdate() const
+// {
+// 	return isRenderObjectNeedsUpdate_;
+// }
+// 
+// void UIObject::OnParentLayoutContainerTypeChanged(LayoutContainerType type)
+// {
+// 	//根据自身的属性和type共同判断
+// 	//if (type == RelativeLayout)
+// 	isLayoutObjectNeedsUpdate_ = false;
+// }
+// 
+// void UIObject::OnChildRemoved(const SPtr<UIObject>& obj)
+// {
+// 	GetLayoutContainer()->SetNeedsLayout();
+// }
+// 
+// void UIObject::OnLayoutObjectSizeChanged()
+// {
+// 
+// }
 
 void UIObject::OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const SPtr<AttributeEventArgs>& args)
 {
@@ -132,5 +281,14 @@ void UIObject::OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const S
 void UIObject::OnAttributeChanged(const SPtr<AttributeEventArgs>& args)
 {
 	EventAttributechanged.Execute(GetSelf<UIObject>(), args);
+}
+
+float UIObject::FixOpacityValue(float v)
+{
+	if (v < 0.0f)
+		return 0.0f;
+	if (v > 1.0f)
+		return 1.0f;
+	return v;
 }
 

@@ -3,7 +3,7 @@
 #include "UIObjectCollection.h"
 #include "Layout/LayoutObject.h"
 #include "Layout/LayoutContainer.h"
-#include "Render/RenderObject.h"
+#include "UIVisualObject.h"
 #include "AttributePaint.h"
 
 UIObject::UIObject()
@@ -50,12 +50,38 @@ SPtr<AttributeCollection> UIObject::GetAttributes()
 
 void UIObject::Render(const SPtr<RenderContext>& context)
 {
+	PushTranslate(context);
 	RenderChildren(context);
+	PopTranslate(context);
 }
 
 void UIObject::SetPathDirty(bool dirty)
 {
 	isPathDirty_ = dirty;
+}
+
+SPtr<AttributeLength> UIObject::GetTranslateX()
+{
+	return !GetAttributes()->HasAttribute("tx")
+		? AttributeLength::Pixel(0)
+		: GetAttributes()->GetAttributeLength("tx");
+}
+
+void UIObject::SetTranslateX(const SPtr<AttributeLength>& v)
+{
+	GetAttributes()->SetAttributeLength("tx", v);
+}
+
+SPtr<AttributeLength> UIObject::GetTranslateY()
+{
+	return !GetAttributes()->HasAttribute("ty")
+		? AttributeLength::Pixel(0)
+		: GetAttributes()->GetAttributeLength("ty");
+}
+
+void UIObject::SetTranslateY(const SPtr<AttributeLength>& v)
+{
+	GetAttributes()->SetAttributeLength("ty", v);
 }
 
 SPtr<AttributePaint> UIObject::GetColor()
@@ -186,6 +212,49 @@ void UIObject::RenderChildren(const SPtr<RenderContext>& context)
 	}
 }
 
+bool UIObject::PushTranslate(const SPtr<RenderContext>& context)
+{
+	m_ = context->GetTransform();
+	base::PointF pt = CalcTranslateTransform();
+	if (pt.x() == 0 && pt.y() == 0)
+		return false;
+	base::Matrix t = m_;
+	t.ConcatTransform(base::Matrix(1.0, 0, 0, 1.0, pt.x(), pt.y()));
+	context->SetTransform(t);
+	return true;
+}
+
+void UIObject::PopTranslate(const SPtr<RenderContext>& context)
+{
+	context->SetTransform(m_);
+}
+
+SPtr<UIVisualObject> UIObject::GetVisualParent()
+{
+	SPtr<UIVisualObject> visualParent;
+	auto curr = GetSelf<UIObject>();
+	while (SPtr<UIObject> parent = curr->GetParent())
+	{
+		visualParent = parent;
+		if (visualParent)
+			return visualParent;
+		curr = parent;
+	}
+	return visualParent;
+}
+
+base::PointF UIObject::CalcTranslateTransform()
+{
+	SPtr<UIVisualObject> obj = GetVisualParent();
+	base::Rect bounds(obj->GetLocalBounds());
+	if (!obj)
+		return base::PointF();
+	float x, y;
+	x = AttributeLength::CalcFromBounds(GetTranslateX(), bounds.width());
+	y = AttributeLength::CalcFromBounds(GetTranslateY(), bounds.height());
+	return base::PointF(x, y);
+}
+
 // SPtr<AttributeLength> UIObject::GetX()
 // {
 // 	return GetAttributes()->GetAttributeLength("x");
@@ -281,6 +350,11 @@ void UIObject::OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const S
 void UIObject::OnAttributeChanged(const SPtr<AttributeEventArgs>& args)
 {
 	EventAttributechanged.Execute(GetSelf<UIObject>(), args);
+}
+
+void UIObject::OnChildRemoved(const SPtr<UIObject>& obj)
+{
+
 }
 
 float UIObject::FixOpacityValue(float v)

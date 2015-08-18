@@ -17,6 +17,17 @@ RenderContextD2D::~RenderContextD2D()
 	target_->EndDraw();
 }
 
+base::Matrix RenderContextD2D::GetTransform()
+{
+	return currentTransform_;
+}
+
+void RenderContextD2D::SetTransform(const base::Matrix& m)
+{
+	currentTransform_ = m;
+	target_->SetTransform(D2DMatrix(currentTransform_));
+}
+
 // void RenderContextD2D::StorkeRect(const base::Rect& rect, base::Color color, uint32 size)
 // {
 // 	CComPtr<ID2D1SolidColorBrush> brush;

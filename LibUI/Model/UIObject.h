@@ -8,7 +8,7 @@ class RenderObject;
 class LayoutObject;
 class LayoutContainer;
 class UIObjectCollection;
-
+class UIVisualObject;
 class UIObject : public Object
 {
 public:
@@ -28,6 +28,15 @@ public:
 public:
 	bool IsPathDirty() const { return isPathDirty_; }
 	void SetPathDirty(bool dirty);
+
+	virtual SPtr<AttributeLength> GetTranslateX();
+	virtual void SetTranslateX(const SPtr<AttributeLength>& v);
+
+	virtual SPtr<AttributeLength> GetTranslateY();
+	virtual void SetTranslateY(const SPtr<AttributeLength>& v);
+
+// 	virtual SPtr<AttributePaint> GetColor();
+// 	virtual void SetColor(const SPtr<AttributePaint>& p);
 
 	virtual SPtr<AttributePaint> GetColor();
 	virtual void SetColor(const SPtr<AttributePaint>& p);
@@ -89,11 +98,19 @@ public:
 // 	void OnChildRemoved(const SPtr<UIObject>& obj);
 // 
 // 	virtual void OnLayoutObjectSizeChanged();
-protected:	
+protected:
+	friend class UIObjectCollection;
 	virtual void RenderChildren(const SPtr<RenderContext>& context);
+	virtual bool PushTranslate(const SPtr<RenderContext>& context);
+	virtual void PopTranslate(const SPtr<RenderContext>& context);
+
+	SPtr<UIVisualObject> GetVisualParent();
+	base::PointF CalcTranslateTransform();
 
 	void OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const SPtr<AttributeEventArgs>& args);
 	void OnAttributeChanged(const SPtr<AttributeEventArgs>& args);
+
+	virtual void OnChildRemoved(const SPtr<UIObject>& obj);
 
 	static float FixOpacityValue(float v);
 	
@@ -103,6 +120,8 @@ protected:
 
 
  	bool isPathDirty_;
+private:
+	base::Matrix m_;
 // 	bool isLayoutObjectNeedsUpdate_;
 // 	bool isLayoutContainerChanged_;
 	//SPtr<PropertyObject> attributes_;

@@ -2,7 +2,6 @@
 #include "RenderEngine.h"
 #include "RenderWindow.h"
 #include "RenderContext.h"
-#include "RenderRectangle.h"
 #include "RenderEngineD2D.h"
 
 
@@ -35,13 +34,18 @@ SPtr<RenderContext> RenderEngine::NewRenderContext(const SPtr<RenderWindow>& win
 	return RenderEngine::Get()->CreateRenderContext(window);
 }
 
-SPtr<RenderRectangle> RenderEngine::NewRenderRectangle(int width, int height, base::Color color)
-{
-
-	return RenderEngine::Get()->CreateRenderRectangle(width, height, color);
-}
 
 SPtr<RenderBrush> RenderEngine::NewRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color)
 {
 	return RenderEngine::Get()->CreateRenderSolidBrush(context, color);
+}
+
+SPtr<RenderPath> RenderEngine::NewRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect)
+{
+	return RenderEngine::Get()->CreateRenderRectanglePath(context, rect);
+}
+
+SPtr<RenderPath> RenderEngine::NewRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry)
+{
+	return RenderEngine::Get()->CreateRenderRoundRectanglePath(context, rect, rx, ry);
 }

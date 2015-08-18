@@ -32,6 +32,16 @@ SPtr<AttributeLength> AttributeLength::Percent(float percent)
 	return length;
 }
 
+float AttributeLength::CalcFromBounds(const SPtr<AttributeLength>& l, float v)
+{
+	if (l->IsPercent())
+		return l->GetPercent() * v;
+	else if (l->IsPixel())
+		return l->GetPixel();
+	else
+		return 0.0f;
+}
+
 void AttributeLength::SetAuto()
 {
 	type_ = TypeAuto;

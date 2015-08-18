@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AttributePaint.h"
+#include "UIObject.h"
 #include "Render/RenderEngine.h"
 
 AttributePaint::AttributePaint()

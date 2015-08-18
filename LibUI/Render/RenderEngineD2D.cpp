@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "RenderEngineD2D.h"
-#include "RenderWindow.h"
 #include "RenderContextD2D.h"
-#include "RenderRectangleD2D.h"
 #include "RenderBrushD2D.h"
+#include "RenderPathD2D.h"
+
+#include "RenderWindow.h"
 
 static RenderD2DEngine* d2dEngineInstance = NULL;
 
@@ -67,14 +68,6 @@ SPtr<RenderContext> RenderD2DEngine::CreateRenderContext(const SPtr<RenderWindow
 	return nullptr;
 }
 
-SPtr<RenderRectangle> RenderD2DEngine::CreateRenderRectangle(int width, int height, base::Color color)
-{
-	SPtr<RenderRectangle> rect(new RenderRectangleD2D());
-	rect->SetWidth(width);
-	rect->SetHeight(height);
-	rect->SetFilledColor(color);
-	return rect;
-}
 
 SPtr<RenderBrush> RenderD2DEngine::CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color)
 {
@@ -88,6 +81,20 @@ SPtr<RenderBrush> RenderD2DEngine::CreateRenderSolidBrush(const SPtr<RenderConte
 	return NULL;
 }
 
+SPtr<RenderPath> RenderD2DEngine::CreateRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect)
+{
+	CComPtr<ID2D1RectangleGeometry> geometry;
+	if (SUCCEEDED(factory_->CreateRectangleGeometry(D2DRect(rect), &geometry)))
+		return new RenderPathD2D(geometry);
+	return NULL;
+}
 
+SPtr<RenderPath> RenderD2DEngine::CreateRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry)
+{
+	CComPtr<ID2D1RoundedRectangleGeometry> geometry;
+	if (SUCCEEDED(factory_->CreateRoundedRectangleGeometry(D2DRoundRect(rect, rx, ry), &geometry)))
+		return new RenderPathD2D(geometry);
+	return NULL;
+}
 
 

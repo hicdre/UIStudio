@@ -96,9 +96,6 @@
     <ClInclude Include="Layout\LayoutObject.h">
       <Filter>layout</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderObject.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Application.h">
       <Filter>framework</Filter>
     </ClInclude>
@@ -127,20 +124,11 @@
     <ClInclude Include="Render\RenderContextD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
-    <ClInclude Include="Render\RenderRectangle.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="Render\RenderD2DUtils.h">
-      <Filter>render\d2d</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\RenderRectangleD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
     <ClInclude Include="Layout\RelativeLayoutContainer.h">
       <Filter>layout</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\RenderObjectD2D.h">
-      <Filter>render\d2d</Filter>
     </ClInclude>
     <ClInclude Include="Render\RenderPath.h">
       <Filter>render</Filter>
@@ -162,9 +150,6 @@
     </ClInclude>
     <ClInclude Include="Model\AttributeCollection.h">
       <Filter>model</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\RenderPaintServer.h">
-      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="Model\UIRectangle.h">
       <Filter>model</Filter>
@@ -219,9 +204,6 @@
     <ClCompile Include="Layout\LayoutObject.cpp">
       <Filter>layout</Filter>
     </ClCompile>
-    <ClCompile Include="Render\RenderObject.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Application.cpp">
       <Filter>framework</Filter>
     </ClCompile>
@@ -249,20 +231,11 @@
     <ClCompile Include="Render\RenderContext.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="Render\RenderRectangle.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="Render\RenderD2DUtils.cpp">
       <Filter>render\d2d</Filter>
     </ClCompile>
     <ClCompile Include="Layout\RelativeLayoutContainer.cpp">
       <Filter>layout</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\RenderObjectD2D.cpp">
-      <Filter>render\d2d</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\RenderRectangleD2D.cpp">
-      <Filter>render\d2d</Filter>
     </ClCompile>
     <ClCompile Include="Render\RenderPath.cpp">
       <Filter>render</Filter>
@@ -284,9 +257,6 @@
     </ClCompile>
     <ClCompile Include="Model\AttributeCollection.cpp">
       <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\RenderPaintServer.cpp">
-      <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="Model\UIRectangle.cpp">
       <Filter>model</Filter>

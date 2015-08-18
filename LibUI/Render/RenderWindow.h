@@ -1,8 +1,9 @@
 #pragma once
-#include "Render/RenderObject.h"
+#include "Base/object.h"
 #include "Base/Geom/rect.h"
 
-class RenderWindow : public RenderObject
+class UIWindow;
+class RenderWindow : public Object
 {
 public:
 	RenderWindow();
@@ -10,11 +11,10 @@ public:
 
 	static void InitClass();
 
-	virtual void Render(const SPtr<RenderContext>& context) override;
+	static SPtr<RenderWindow> Create(const SPtr<UIWindow>& window);
+	
+	SPtr<UIWindow> GetOwnerWindow();
 
-	virtual void OnVisibleChanged();
-
-	virtual base::Rect GetLocalBounds() override;
 public:
 	void Init(HWND parent, const base::Rect& bounds);
 
@@ -134,6 +134,6 @@ private:
 
 	HCURSOR previous_cursor_;
 
-
+	WPtr<UIWindow> window_;
 	DISALLOW_COPY_AND_ASSIGN(RenderWindow);
 };

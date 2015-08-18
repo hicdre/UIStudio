@@ -1,9 +1,10 @@
 #pragma once
-#include "Model/UIObject.h"
+#include "Model/UIVisualObject.h"
 
 class RenderWindow;
 class LayoutObject;
-class UIWindow : public UIObject
+//UIContainer or UIGroup
+class UIWindow : public UIVisualObject
 {
 public:
 	UIWindow();
@@ -11,18 +12,36 @@ public:
 
 	static SPtr<UIWindow> Create();
 
-	virtual SPtr<RenderObject> GetRenderObject() override;
+	virtual SPtr<RenderPath> GetPath(const SPtr<RenderContext>& context) override;
 
-	virtual SPtr<LayoutObject> GetLayoutObject() override;
-	virtual SPtr<LayoutContainer> GetLayoutContainer() override;
+	virtual base::Rect GetBounds() override;
+
+	virtual void Render(const SPtr<RenderContext>& context) override;
 public:
 	SPtr<RenderWindow> GetRenderWindow();
+
+	SPtr<AttributeLength> GetX() const;
+	void SetX(const SPtr<AttributeLength>& v);
+
+	SPtr<AttributeLength> GetY() const;
+	void SetY(const SPtr<AttributeLength>& v);
+
+	SPtr<AttributeLength> GetWidth() const;
+	void SetWidth(const SPtr<AttributeLength>& v);
+
+	SPtr<AttributeLength> GetHeight() const;
+	void SetHeight(const SPtr<AttributeLength>& v);
 		
 private:
-	base::Size CalcWindowSize();
+	base::Rect CalcWindowBounds();
 	void InitRenderWindow();
 	RenderWindow* renderWindow() const;
 
 	SPtr<RenderWindow> renderWindow_;
 	SPtr<LayoutContainer> layoutContainer_;	
+
+	SPtr<AttributeLength> x_;
+	SPtr<AttributeLength> y_;
+	SPtr<AttributeLength> width_;
+	SPtr<AttributeLength> height_;
 };

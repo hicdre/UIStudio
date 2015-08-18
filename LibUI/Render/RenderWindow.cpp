@@ -43,22 +43,24 @@ void RenderWindow::InitClass()
 	RegisterClassEx(&wc);
 }
 
-void RenderWindow::Render(const SPtr<RenderContext>& context)
+SPtr<RenderWindow> RenderWindow::Create(const SPtr<UIWindow>& window)
 {
-	//do nothing
+	Rect rc = window->GetBounds();
+	SPtr<RenderWindow> renderWindow(new RenderWindow);
+	renderWindow->Init(NULL, rc);
+	renderWindow->window_ = window->GetWeak<UIWindow>();
+	return renderWindow;
 }
 
-void RenderWindow::OnVisibleChanged()
+SPtr<UIWindow> RenderWindow::GetOwnerWindow()
 {
-	Show(visible_ ? SW_SHOWNORMAL : SW_HIDE);
+	return window_.get();
 }
 
-base::Rect RenderWindow::GetLocalBounds()
-{
-	RECT rc;
-	GetWindowRect(&rc);
-	return base::Rect(0, 0, rc.right - rc.left, rc.bottom - rc.top);
-}
+// void RenderWindow::OnVisibleChanged()
+// {
+// 	Show(visible_ ? SW_SHOWNORMAL : SW_HIDE);
+// }
 
 void RenderWindow::Init(HWND parent, const Rect& bounds)
 {
@@ -314,7 +316,10 @@ BOOL RenderWindow::ProcessWindowMessage(HWND window, UINT message, WPARAM w_para
 void RenderWindow::OnPaint()
 {
 	SPtr<RenderContext> renderContext = RenderEngine::NewRenderContext(GetSelf<RenderWindow>());
-	DoRender(renderContext);
+	if (SPtr<UIWindow> window = window_.get())
+	{
+		window->Render(renderContext);
+	}	
 }
 
 void RenderWindow::SetCursor(HCURSOR cursor)

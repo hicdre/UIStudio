@@ -11,12 +11,15 @@ public:
 
 	virtual SPtr<RenderContext> CreateRenderContext(const SPtr<RenderWindow>& window) override;
 
-	virtual SPtr<RenderRectangle>
-		CreateRenderRectangle(int width, int height, base::Color color) override;
-
 	virtual SPtr<RenderBrush>
 		CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color) override;
 
+	virtual SPtr<RenderPath>
+		CreateRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect) override;
+
+	virtual SPtr<RenderPath>
+		CreateRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry) override;
+	
 	static void Init();
 	static void Uninit();
 	static RenderD2DEngine* Get();

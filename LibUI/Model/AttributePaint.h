@@ -1,8 +1,10 @@
 #pragma once
-#include "Model/UIObject.h"
+#include "Base/object.h"
 #include "Base/color.h"
 #include "Render/RenderBrush.h"
+#include "Render/RenderContext.h"
 
+class UIObject;
 class AttributePaint : public Object
 {
 public:

@@ -15,6 +15,7 @@ public:
 	static SPtr<AttributeLength> Auto();
 	static SPtr<AttributeLength> Pixel(uint32 pixel);
 	static SPtr<AttributeLength> Percent(float percent);
+	static float CalcFromBounds(const SPtr<AttributeLength>& l, float v);
 
 	void SetAuto();
 	void SetPixel(uint32 pixel);

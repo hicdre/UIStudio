@@ -1,49 +1,54 @@
 #pragma once
-
-typedef struct tagPOINT POINT;
+#include "base/base_defines.h"
 
 namespace base
 {
 	//
 	// A point has an x and y coordinate.
 	//
-	class Point {
+	template <class T>
+	class PointT {
 	public:
-		Point();
-		Point(int x, int y);
-		explicit Point(const POINT& point);
-		Point& operator=(const POINT& point);
+		PointT() : x_(0), y_(0) {}
+		PointT(T x, T y) : x_(x), y_(y) {}
+		PointT(const PointT& point) : x_(point.x_), y_(point.y_) {}
+		PointT& operator=(const PointT& point) {
+			x_ = point.x_;
+			y_ = point.y_;
+			return *this;
+		}
 
-		~Point() {}
+		~PointT() {}
 
-		int x() const { return x_; }
-		int y() const { return y_; }
+		T x() const { return x_; }
+		T y() const { return y_; }
 
-		void SetPoint(int x, int y) {
+		void SetPoint(T x, T y) {
 			x_ = x;
 			y_ = y;
 		}
 
-		void set_x(int x) { x_ = x; }
-		void set_y(int y) { y_ = y; }
+		void set_x(T x) { x_ = x; }
+		void set_y(T y) { y_ = y; }
 
-		void Offset(int delta_x, int delta_y) {
+		void Offset(T delta_x, T delta_y) {
 			x_ += delta_x;
 			y_ += delta_y;
 		}
 
-		bool operator==(const Point& rhs) const {
+		bool operator==(const PointT& rhs) const {
 			return x_ == rhs.x_ && y_ == rhs.y_;
 		}
 
-		bool operator!=(const Point& rhs) const {
+		bool operator!=(const PointT& rhs) const {
 			return !(*this == rhs);
-		}
-
-		POINT ToPOINT() const;
+		}	
 
 	private:
-		int x_;
-		int y_;
+		T x_;
+		T y_;
 	};
+
+	typedef PointT<int> Point;
+	typedef PointT<float> PointF;
 }

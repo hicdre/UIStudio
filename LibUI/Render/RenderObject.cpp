@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RenderObject.h"
-#include "Property/UIObject.h"
+#include "Model/UIObject.h"
 #include "Base/Geom/matrix.h"
 #include "Render/RenderContext.h"
 
@@ -8,6 +8,7 @@ using namespace base;
 
 RenderObject::RenderObject()
 	: visible_(false)
+	, isRenderObjectDirty_(true)
 {
 
 }
@@ -117,55 +118,55 @@ void RenderObject::RemoveAllChilds()
 	childs_.clear();
 }
 
-base::Rect RenderObject::GetLocalBounds() const
+// base::Rect RenderObject::GetLocalBounds() const
+// {
+// 	return Rect(width(), height());
+// }
+// 
+// void RenderObject::SetBounds(int x, int y, int width, int height)
+// {
+// 	SetBoundsRect(Rect(x, y, (std::max)(0, width), (std::max)(0, height)));
+// }
+// 
+// void RenderObject::SetBoundsRect(const base::Rect& bounds)
+// {
+// 	if (bounds == bounds_) {
+// 		return;
+// 	}
+// 
+// 	Rect prev = bounds_;
+// 	bounds_ = bounds;
+// 	if (prev.size() != size()) {
+// 		// 		ResizeEventArgs args(prev.size(), size());
+// 		// 		EventResize.Execute(GetSelf<LayoutObject>(), args);
+// 		//Layout();
+// 		OnSizeChanged();
+// 	}
+// }
+// 
+// void RenderObject::SetSize(const base::Size& size)
+// {
+// 	SetBounds(x(), y(), size.width(), size.height());
+// }
+
+void RenderObject::SetAnchorPosition(const base::Point& position)
 {
-	return Rect(width(), height());
+	SetAnchorPosition(position.x(), position.y());
 }
 
-void RenderObject::SetBounds(int x, int y, int width, int height)
+void RenderObject::SetAnchorPosition(int x, int y)
 {
-	SetBoundsRect(Rect(x, y, (std::max)(0, width), (std::max)(0, height)));
+	anchor_.SetPoint(x,y);	
 }
 
-void RenderObject::SetBoundsRect(const base::Rect& bounds)
+void RenderObject::SetAnchorX(int x)
 {
-	if (bounds == bounds_) {
-		return;
-	}
-
-	Rect prev = bounds_;
-	bounds_ = bounds;
-	if (prev.size() != size()) {
-		// 		ResizeEventArgs args(prev.size(), size());
-		// 		EventResize.Execute(GetSelf<LayoutObject>(), args);
-		//Layout();
-		OnSizeChanged();
-	}
+	SetAnchorPosition(x, y());
 }
 
-void RenderObject::SetSize(const base::Size& size)
+void RenderObject::SetAnchorY(int y)
 {
-	SetBounds(x(), y(), size.width(), size.height());
-}
-
-void RenderObject::SetPosition(const base::Point& position)
-{
-	SetBounds(position.x(), position.y(), width(), height());
-}
-
-void RenderObject::SetPosition(int x, int y)
-{
-	SetBounds(x, y, width(), height());
-}
-
-void RenderObject::SetX(int x)
-{
-	SetBounds(x, y(), width(), height());
-}
-
-void RenderObject::SetY(int y)
-{
-	SetBounds(x(), y, width(), height());
+	SetAnchorPosition(x(), y);
 }
 
 base::Rect RenderObject::ConvertRectFromChild(RenderObject* child, const base::Rect& r)
@@ -175,13 +176,41 @@ base::Rect RenderObject::ConvertRectFromChild(RenderObject* child, const base::R
 
 void RenderObject::SetFilledColor(base::Color color)
 {
-	color_ = color;
+	SPtr<RenderPaintServer> s = GetFillServer();
+	if (!s->IsNone() && s->GetColor() == color)
+		return;
+	s->SetColor(color);
+	//redraw;
 }
 
-void RenderObject::OnSizeChanged()
+void RenderObject::SetFilledNone()
 {
-
+	SPtr<RenderPaintServer> s = GetFillServer();
+	if (s->IsNone())
+		return;
+	s->SetNone();
+	//redraw
 }
+
+SPtr<RenderPaintServer> RenderObject::GetFillServer()
+{
+	if (!fillServer_)
+	{
+		fillServer_.reset(new RenderPaintServer);
+	}
+	return fillServer_;
+}
+
+void RenderObject::SetRenderObjectDirty(bool dirty)
+{
+	isRenderObjectDirty_ = dirty;
+}
+
+bool RenderObject::IsRenderObjectDirty() const
+{
+	return isRenderObjectDirty_;
+}
+
 
 
 // void RenderObject::OnPropertyVisibleChangedInternal(const SPtr<UIObject>& obj)

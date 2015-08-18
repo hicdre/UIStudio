@@ -4,6 +4,7 @@
 #include "Render/RenderManager.h"
 #include "Render/RenderWindow.h"
 #include "Render/RenderEngine.h"
+#include "Model/AttributeCollection.h"
 #include <cassert>
 #include <gdiplus.h>
 // #include "framework/widget.h"
@@ -93,7 +94,7 @@ void Application::Init()
 	GdiplusStartup(&gdiplusToken_, &gdiplusStartupInput, NULL);
 
 	RenderEngine::InitEngine(RenderEngine::D2D);
-
+	AttributeCollection::InitDefaultMap();
 	//InitStyleProperty();
 
 	InitMessageWndClass();

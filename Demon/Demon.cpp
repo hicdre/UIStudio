@@ -19,8 +19,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	SPtr<UIWindow> window = UIWindow::Create();
 
-	window->SetWidthPixel(200);
-	window->SetHeightPixel(300);
+	window->SetWidth(AttributeLength::Pixel(200));
+	window->SetHeight(AttributeLength::Pixel(300));
 	window->SetVisible(true);
 
 	Application::Run();

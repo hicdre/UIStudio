@@ -5,5 +5,5 @@
 #pragma comment(lib, "Shlwapi.lib")
 
 #include "Framework/Application.h"
-#include "Property/UIWindow.h"
+#include "Model/UIWindow.h"
 #include "Render/RenderManager.h"

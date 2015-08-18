@@ -26,6 +26,8 @@ SPtr<UIWindow> UIWindow::Create()
 {
 	SPtr<UIWindow> window(new UIWindow);
 	RenderManager::Get()->AddWindow(window);
+
+	
 	return window;
 }
 
@@ -42,12 +44,17 @@ SPtr<LayoutObject> UIWindow::GetLayoutObject()
 SPtr<RenderWindow> UIWindow::GetRenderWindow()
 {
 	if (!renderWindow_ || IsRenderObjectNeedsUpdate())
-	{		
-		renderWindow_ = RenderEngine::NewRenderWindow(CalcWindowSize());
+	{	
+		if (!renderWindow_)
+		{
+			renderWindow_ = RenderEngine::NewRenderWindow(CalcWindowSize());			
+		}
+		renderWindow_->RemoveAllChilds();
 		InitRenderWindow();
 
-		SetRenderObjectNeedsUpdate();
+		SetRenderObjectNeedsUpdate(false);
 	}
+	
 	return renderWindow_;
 }
 
@@ -55,10 +62,10 @@ SPtr<RenderWindow> UIWindow::GetRenderWindow()
 void UIWindow::InitRenderWindow()
 {
 	//test
-	//base::Size sz(GetPropertySize());
-// 	SPtr<RenderRectangle> background = RenderEngine::NewRenderRectangle(sz.width(), sz.height()/2, base::Color_Green);
-// 	renderWindow_->AddChild(background);
-// 	background->SetY(20);
+	base::Size sz(CalcWindowSize());
+	SPtr<RenderRectangle> background = RenderEngine::NewRenderRectangle(sz.width()/2, sz.height()/2, base::Color_Green);
+	renderWindow_->AddChild(background);
+	background->SetAnchorPosition(20,20);
 }
 
 RenderWindow* UIWindow::renderWindow() const
@@ -70,7 +77,7 @@ SPtr<LayoutContainer> UIWindow::GetLayoutContainer()
 {
 	if (!layoutContainer_ || isLayoutContainerChanged_)
 	{
-		if (layoutContainerType_ == RelativeLayout)
+		if (GetLayoutContainerType() == RelativeLayout)
 		{
 			layoutContainer_ = new RelativeLayoutContainer;			
 		}			

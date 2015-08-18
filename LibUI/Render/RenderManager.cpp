@@ -2,7 +2,7 @@
 #include "RenderManager.h"
 
 #include "RenderWindow.h"
-#include "Property/UIWindow.h"
+#include "Model/UIWindow.h"
 #include "Layout/LayoutObject.h"
 
 RenderManager::RenderManager()
@@ -24,9 +24,9 @@ RenderManager* RenderManager::Get()
 
 void RenderManager::AddWindow(const SPtr<UIWindow>& window)
 {
-	window->EventPropertyChanged.AddF([](const SPtr<UIObject>& obj, const std::string& name)
+	window->EventAttributechanged.AddF([](const SPtr<UIObject>& obj, const SPtr<AttributeEventArgs>& args)
 	{
-		if (name == "visible")
+		if (args->name == "visible")
 		{
 			RenderManager::Get()->OnWindowVisibleChanged(obj);
 		}

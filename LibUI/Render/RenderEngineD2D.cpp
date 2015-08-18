@@ -69,7 +69,8 @@ SPtr<RenderContext> RenderD2DEngine::CreateRenderContext(const SPtr<RenderWindow
 SPtr<RenderRectangle> RenderD2DEngine::CreateRenderRectangle(int width, int height, base::Color color)
 {
 	SPtr<RenderRectangle> rect(new RenderRectangleD2D());
-	rect->SetSize(base::Size(width, height));
+	rect->SetWidth(width);
+	rect->SetHeight(height);
 	rect->SetFilledColor(color);
 	return rect;
 }

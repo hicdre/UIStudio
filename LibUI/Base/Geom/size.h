@@ -1,36 +1,38 @@
 #pragma once
 #include "base/base_defines.h"
 
-typedef struct tagSIZE SIZE;
-
 namespace base
 {
 	//
 	// A size has width and height values.
 	//
-	class Size {
+	template <class T>
+	class SizeT {
 	public:
-		Size() : width_(0), height_(0) {}
-		Size(int width, int height);
-
-		~Size() {}
-
-		int width() const { return width_; }
-		int height() const { return height_; }
-
-		int GetArea() const { return width_ * height_; }
-
-		void SetSize(int width, int height) {
+		SizeT() : width_(0), height_(0) {}
+		SizeT(T width, T height) {
 			set_width(width);
 			set_height(height);
 		}
 
-		void Enlarge(int width, int height) {
+		~SizeT() {}
+
+		T width() const { return width_; }
+		T height() const { return height_; }
+
+		T GetArea() const { return width_ * height_; }
+
+		void SetSize(T width, T height) {
+			set_width(width);
+			set_height(height);
+		}
+
+		void Enlarge(T width, T height) {
 			set_width(width_ + width);
 			set_height(height_ + height);
 		}
 
-		void Reduce(uint32 width, uint32 height) {
+		void Reduce(T width, T height) {
 			if (width_ - width > 0)
 				set_width(width_ - width);
 			else
@@ -42,14 +44,24 @@ namespace base
 				set_height(0);
 		}
 
-		void set_width(int width);
-		void set_height(int height);
+		void set_width(T width) {
+			if (width < 0) {				
+				width = 0;
+			}
+			width_ = width;
+		}
+		void set_height(T height) {
+			if (height < 0) {				
+				height = 0;
+			}
+			height_ = height;
+		}
 
-		bool operator==(const Size& s) const {
+		bool operator==(const SizeT& s) const {
 			return width_ == s.width_ && height_ == s.height_;
 		}
 
-		bool operator!=(const Size& s) const {
+		bool operator!=(const SizeT& s) const {
 			return !(*this == s);
 		}
 
@@ -57,11 +69,12 @@ namespace base
 			// Size doesn't allow negative dimensions, so testing for 0 is enough.
 			return (width_ == 0) || (height_ == 0);
 		}
-
-		SIZE ToSIZE() const;
-
+				
 	private:
-		int width_;
-		int height_;
+		T width_;
+		T height_;
 	};
+
+	typedef SizeT<int> Size;
+	typedef SizeT<float> SizeF;
 }

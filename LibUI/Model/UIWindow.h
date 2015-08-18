@@ -1,5 +1,5 @@
 #pragma once
-#include "Property/UIObject.h"
+#include "Model/UIObject.h"
 
 class RenderWindow;
 class LayoutObject;

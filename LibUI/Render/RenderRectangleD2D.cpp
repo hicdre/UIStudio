@@ -2,8 +2,7 @@
 #include "RenderRectangleD2D.h"
 #include "RenderEngineD2D.h"
 
-RenderRectangleD2D::RenderRectangleD2D()
-	: isPathDirty_(true)
+RenderRectangleD2D::RenderRectangleD2D()	
 {
 
 }
@@ -15,30 +14,28 @@ RenderRectangleD2D::~RenderRectangleD2D()
 
 CComPtr<ID2D1Geometry> RenderRectangleD2D::GetPath()
 {
-	if (!path_ || isPathDirty_)
+	if (!path_ || IsRenderObjectDirty())
 	{
 		CComPtr<ID2D1Factory> factory = RenderD2DEngine::GetD2DFactory();
+		base::Rect rect(GetWidth(), GetHeight());
 		if (cornerRadiusX_ == 0 && cornerRadiusY_ == 0)
 		{
-			factory->CreateRectangleGeometry(D2DRect(GetLocalBounds()), (ID2D1RectangleGeometry**)&path_);			
+			factory->CreateRectangleGeometry(D2DRect(rect), (ID2D1RectangleGeometry**)&path_);
 		}			
 		else
 		{
-			factory->CreateRoundedRectangleGeometry(D2DRoundRect(GetLocalBounds(), cornerRadiusX_, cornerRadiusY_), (ID2D1RoundedRectangleGeometry**)&path_);
+			factory->CreateRoundedRectangleGeometry(D2DRoundRect(rect, cornerRadiusX_, cornerRadiusY_), (ID2D1RoundedRectangleGeometry**)&path_);
 		}
-		isPathDirty_ = false;
+		SetRenderObjectDirty(false);
 	}
 	return path_;
 }
 
-void RenderRectangleD2D::OnSizeChanged()
+base::Rect RenderRectangleD2D::GetLocalBounds()
 {
-	isPathDirty_ = true;
-}
-
-void RenderRectangleD2D::OnRadiusChanged()
-{
-	isPathDirty_ = true;
+	D2D1_RECT_F bounds;
+	GetPath()->GetBounds(D2D1::Matrix3x2F::Identity(), &bounds);
+	return base::Rect(0, 0, bounds.right - bounds.left, bounds.bottom - bounds.top);
 }
 
 

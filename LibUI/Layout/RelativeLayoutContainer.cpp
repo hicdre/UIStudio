@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "RelativeLayoutContainer.h"
-#include "Property/UIObjectCollection.h"
-#include "Property/UIObject.h"
+#include "Model/UIObjectCollection.h"
+#include "Model/UIObject.h"
 
 RelativeLayoutContainer::RelativeLayoutContainer()
 	: LayoutContainer(RelativeLayout)	
@@ -26,7 +26,7 @@ void RelativeLayoutContainer::Layout()
 	{
 		int x= 0;
 		{
-			SPtr<PropertyLengthValue> v = child->GetWidth();
+			SPtr<AttributeLength> v = child->GetWidth();
 			if (v->IsPixel())
 			{
 				x = v->GetPixel();
@@ -42,7 +42,7 @@ void RelativeLayoutContainer::Layout()
 		}
 		int y = 0;
 		{
-			SPtr<PropertyLengthValue> v = child->GetHeight();
+			SPtr<AttributeLength> v = child->GetHeight();
 			if (v->IsPixel())
 			{
 				y = v->GetPixel();
@@ -58,7 +58,7 @@ void RelativeLayoutContainer::Layout()
 		}
 		int w = 0;
 		{
-			SPtr<PropertyLengthValue> v = child->GetWidth();
+			SPtr<AttributeLength> v = child->GetWidth();
 			if (v->IsPixel())
 			{
 				w = v->GetPixel();
@@ -74,7 +74,7 @@ void RelativeLayoutContainer::Layout()
 		}
 		int h = 0;
 		{
-			SPtr<PropertyLengthValue> v = child->GetHeight();
+			SPtr<AttributeLength> v = child->GetHeight();
 			if (v->IsPixel())
 			{
 				h = v->GetPixel();

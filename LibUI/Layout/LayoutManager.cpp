@@ -2,8 +2,8 @@
 #include "LayoutManager.h"
 #include "LayoutObject.h"
 #include "RelativeLayoutContainer.h"
-#include "Property/UIWindow.h"
-#include "Property/UIObjectCollection.h"
+#include "Model/UIWindow.h"
+#include "Model/UIObjectCollection.h"
 
 LayoutManager::LayoutManager()
 {

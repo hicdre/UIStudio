@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LayoutContainer.h"
-#include "Property/UIObject.h"
-#include "Property/UIObjectCollection.h"
+#include "Model/UIObject.h"
+#include "Model/UIObjectCollection.h"
 
 
 LayoutContainer::LayoutContainer(LayoutContainerType type)

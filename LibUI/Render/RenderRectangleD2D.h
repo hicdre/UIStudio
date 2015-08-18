@@ -11,16 +11,11 @@ public:
 
 	virtual CComPtr<ID2D1Geometry> GetPath() override;
 
-
-protected:
-	virtual void OnSizeChanged() override;
-	virtual void OnRadiusChanged() override;
+	virtual base::Rect GetLocalBounds() override;
+protected:	
 
 	CComPtr<ID2D1Geometry> path_;
-
 	
-
-	bool isPathDirty_;
 };
 
 

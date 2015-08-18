@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RenderWindow.h"
-#include "Property/UIWindow.h"
+#include "Model/UIWindow.h"
 #include "Base/Geom/matrix.h"
 #include "Render/RenderContext.h"
 #include "Render/RenderEngine.h"
@@ -53,6 +53,13 @@ void RenderWindow::OnVisibleChanged()
 	Show(visible_ ? SW_SHOWNORMAL : SW_HIDE);
 }
 
+base::Rect RenderWindow::GetLocalBounds()
+{
+	RECT rc;
+	GetWindowRect(&rc);
+	return base::Rect(0, 0, rc.right - rc.left, rc.bottom - rc.top);
+}
+
 void RenderWindow::Init(HWND parent, const Rect& bounds)
 {
 	if (window_style_ == 0)
@@ -81,7 +88,7 @@ void RenderWindow::Init(HWND parent, const Rect& bounds)
 	DWORD dwStyle = GetWindowLong(GWL_STYLE);
 	SetWindowLong(GWL_STYLE, (dwStyle & ~WS_CAPTION));
 
-	SetBoundsRect(bounds);
+	//SetBoundsRect(bounds);
 }
 
 // void RenderWindow::SetMessageHanler(MessageHandler* handler)

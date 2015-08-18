@@ -2,6 +2,7 @@
 #include "Base/object.h"
 #include "Base/Geom/rect.h"
 #include "Base/color.h"
+#include "Render/RenderPaintServer.h"
 #include <string>
 #include <vector>
 
@@ -36,38 +37,43 @@ public:
 	
 
 	//geometry
-	const base::Rect& bounds() const { return bounds_; }
-	int x() const { return bounds_.x(); }
-	int y() const { return bounds_.y(); }
-	int width() const { return bounds_.width(); }
-	int height() const { return bounds_.height(); }
-	const base::Size& size() const { return bounds_.size(); }
-	base::Rect GetLocalBounds() const;
+	virtual base::Rect GetLocalBounds() = 0;
 
-	void SetBounds(int x, int y, int width, int height);
-	void SetBoundsRect(const base::Rect& bounds);
-	void SetSize(const base::Size& size);
-	void SetPosition(const base::Point& position);
-	void SetPosition(int x, int y);
-	void SetX(int x);
-	void SetY(int y);
+	base::Rect GetBounds() { return base::Rect(x(), y(), width(), height()); }
+	float x() const { return anchor_.x(); }
+	float y() const { return anchor_.y(); }
+	float width() { return  GetLocalBounds().width(); }
+	float height() { return GetLocalBounds().height(); }
+	base::Size size() { return GetLocalBounds().size(); }
+
+// 	void SetBounds(int x, int y, int width, int height);
+// 	void SetBoundsRect(const base::Rect& bounds);
+// 	void SetSize(const base::Size& size);
+	void SetAnchorPosition(const base::Point& position);
+	void SetAnchorPosition(int x, int y);
+	void SetAnchorX(int x);
+	void SetAnchorY(int y);
 
 	base::Rect ConvertRectFromChild(RenderObject* child, const base::Rect& r);
 	
-	//set filled image
+	//set filled image	
 	void SetFilledColor(base::Color color);
-private:
-	virtual void OnSizeChanged();
-	//virtual void OnVisibleChanged();
-	//void OnPropertyVisibleChangedInternal(const SPtr<UIObject>& obj);
+	void SetFilledNone();
+	SPtr<RenderPaintServer> GetFillServer();
 
+	void SetRenderObjectDirty(bool dirty);
+	bool IsRenderObjectDirty() const;
+	
 protected:
 	WPtr<UIObject> owner_;
 	bool visible_;
-
-	base::Rect bounds_; // 实际位置
+	
+	base::PointF anchor_;	
 
 	WPtr<RenderObject> parent_;
 	std::vector<SPtr<RenderObject>> childs_;
 	base::Color color_;
+	bool isRenderObjectDirty_;
+
+	SPtr<RenderPaintServer> fillServer_;
 };

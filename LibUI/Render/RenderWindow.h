@@ -13,6 +13,8 @@ public:
 	virtual void Render(const SPtr<RenderContext>& context) override;
 
 	virtual void OnVisibleChanged();
+
+	virtual base::Rect GetLocalBounds() override;
 public:
 	void Init(HWND parent, const base::Rect& bounds);
 

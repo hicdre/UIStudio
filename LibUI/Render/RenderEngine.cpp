@@ -22,12 +22,6 @@ void RenderEngine::UninitEngine()
 	RenderD2DEngine::Uninit();
 }
 
-SPtr<RenderWindow> RenderEngine::NewRenderWindow(const base::Size& sz)
-{
-	SPtr<RenderWindow> window(new RenderWindow);
-	window->Init(NULL, base::Rect(sz.width(),sz.height()));
-	return window;
-}
 
 SPtr<RenderContext> RenderEngine::NewRenderContext(const SPtr<RenderWindow>& window)
 {
@@ -48,4 +42,9 @@ SPtr<RenderPath> RenderEngine::NewRenderRectanglePath(const SPtr<RenderContext>&
 SPtr<RenderPath> RenderEngine::NewRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry)
 {
 	return RenderEngine::Get()->CreateRenderRoundRectanglePath(context, rect, rx, ry);
+}
+
+SPtr<RenderPathBuilder> RenderEngine::NewRenderPathBuilder(const SPtr<RenderContext>& context)
+{
+	return RenderEngine::Get()->CreateRenderPathBuilder(context);
 }

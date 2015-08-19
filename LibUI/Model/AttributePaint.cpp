@@ -14,6 +14,13 @@ AttributePaint::~AttributePaint()
 }
 
 
+SPtr<AttributePaint> AttributePaint::Color(base::Color color)
+{
+	SPtr<AttributeColorPaint> paint(new AttributeColorPaint);
+	paint->SetColor(color);
+	return paint;
+}
+
 SPtr<AttributeColorPaint> AttributeColorPaint::NotSet()
 {
 	static SPtr<AttributeColorPaint> notSetColor(new AttributeColorPaint);

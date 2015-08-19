@@ -24,7 +24,7 @@ void UIVisualObject::Render(const SPtr<RenderContext>& context)
 		return;
 
 	
-	//push transform
+	PushTranslate(context);
 	SetClip(context);
 
 	if (!IsContainer())
@@ -38,7 +38,7 @@ void UIVisualObject::Render(const SPtr<RenderContext>& context)
 	}
 
 	ResetClip(context);
-	//pop transform
+	PopTranslate(context);
 }
 
 bool UIVisualObject::IsVisible()
@@ -84,7 +84,7 @@ void UIVisualObject::ResetClip(const SPtr<RenderContext>& context)
 
 bool UIVisualObject::IsContainer()
 {
-	return true;
+	return false;
 }
 
 

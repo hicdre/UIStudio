@@ -31,6 +31,9 @@
     <Filter Include="render\text">
       <UniqueIdentifier>{5bf521cb-ca67-479a-b928-26eeb7a86bed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model\attribute">
+      <UniqueIdentifier>{1563853b-43fe-4fa1-b783-6c303ba7f926}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -133,12 +136,6 @@
     <ClInclude Include="Render\RenderPath.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="Model\AttributeLength.h">
-      <Filter>model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\AttributeValue.h">
-      <Filter>model</Filter>
-    </ClInclude>
     <ClInclude Include="Model\UIObject.h">
       <Filter>model</Filter>
     </ClInclude>
@@ -148,16 +145,10 @@
     <ClInclude Include="Model\UIWindow.h">
       <Filter>model</Filter>
     </ClInclude>
-    <ClInclude Include="Model\AttributeCollection.h">
-      <Filter>model</Filter>
-    </ClInclude>
     <ClInclude Include="Model\UIRectangle.h">
       <Filter>model</Filter>
     </ClInclude>
     <ClInclude Include="Model\UIVisualObject.h">
-      <Filter>model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\AttributePaint.h">
       <Filter>model</Filter>
     </ClInclude>
     <ClInclude Include="Render\RenderPathD2D.h">
@@ -167,6 +158,27 @@
       <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="Render\RenderBrushD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\UILine.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributeValue.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributeCollection.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributeLength.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributePaint.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderPathBuilder.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderPathBuilderD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
   </ItemGroup>
@@ -240,12 +252,6 @@
     <ClCompile Include="Render\RenderPath.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="Model\AttributeLength.cpp">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\AttributeValue.cpp">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="Model\UIObject.cpp">
       <Filter>model</Filter>
     </ClCompile>
@@ -255,16 +261,10 @@
     <ClCompile Include="Model\UIWindow.cpp">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="Model\AttributeCollection.cpp">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="Model\UIRectangle.cpp">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="Model\UIVisualObject.cpp">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\AttributePaint.cpp">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="Render\RenderPathD2D.cpp">
@@ -274,6 +274,27 @@
       <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="Render\RenderBrushD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\UILine.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributeCollection.cpp">
+      <Filter>model\attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributeLength.cpp">
+      <Filter>model\attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributePaint.cpp">
+      <Filter>model\attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributeValue.cpp">
+      <Filter>model\attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPathBuilder.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPathBuilderD2D.cpp">
       <Filter>render\d2d</Filter>
     </ClCompile>
   </ItemGroup>

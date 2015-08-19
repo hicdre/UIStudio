@@ -20,6 +20,8 @@ public:
 	virtual SPtr<RenderPath>
 		CreateRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry) override;
 	
+	virtual SPtr<RenderPathBuilder>
+		CreateRenderPathBuilder(const SPtr<RenderContext>& context) override;
 	static void Init();
 	static void Uninit();
 	static RenderD2DEngine* Get();

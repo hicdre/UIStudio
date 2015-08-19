@@ -14,7 +14,23 @@ UIObjectCollection::~UIObjectCollection()
 
 uint32 UIObjectCollection::GetIndexOf(const SPtr<UIObject>& obj)
 {
-	return 0;
+	uint32 index = 0;
+	for (auto object : objects_)
+	{
+		if (object == obj)
+			return index;
+		index++;
+	}
+	return -1;
+}
+
+void UIObjectCollection::Add(const SPtr<UIObject>& obj)
+{
+	obj->parent_.reset(owner_);
+	objects_.push_back(obj);
+
+	if (auto p = owner_.get())
+		p->OnChildAdded(obj, objects_.size() -1);
 }
 
 void UIObjectCollection::Remove(const SPtr<UIObject>& obj)

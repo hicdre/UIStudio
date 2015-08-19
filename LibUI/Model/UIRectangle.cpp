@@ -29,6 +29,7 @@ void UIRectangle::SetX(const SPtr<AttributeLength>& v)
 		return;
 	x_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("x", x_));
 }
 
 SPtr<AttributeLength> UIRectangle::GetY() const
@@ -42,6 +43,7 @@ void UIRectangle::SetY(const SPtr<AttributeLength>& v)
 		return;
 	y_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("y", y_));
 }
 
 SPtr<AttributeLength> UIRectangle::GetWidth() const
@@ -55,6 +57,7 @@ void UIRectangle::SetWidth(const SPtr<AttributeLength>& v)
 		return;
 	width_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("width", width_));
 }
 
 SPtr<AttributeLength> UIRectangle::GetHeight() const
@@ -68,6 +71,7 @@ void UIRectangle::SetHeight(const SPtr<AttributeLength>& v)
 		return;
 	height_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("height", height_));
 }
 
 SPtr<AttributeLength> UIRectangle::GetRadiusX() const
@@ -81,6 +85,7 @@ void UIRectangle::SetRadiusX(const SPtr<AttributeLength>& v)
 		return;
 	rx_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("rx", rx_));
 }
 
 SPtr<AttributeLength> UIRectangle::GetRadiusY() const
@@ -94,6 +99,7 @@ void UIRectangle::SetRadiusY(const SPtr<AttributeLength>& v)
 		return;
 	ry_ = v;
 	SetPathDirty(true);
+	OnAttributeChanged(new AttributeEventArgs("ry", ry_));
 }
 
 SPtr<RenderPath> UIRectangle::GetPath(const SPtr<RenderContext>& context)
@@ -110,7 +116,7 @@ SPtr<RenderPath> UIRectangle::GetPath(const SPtr<RenderContext>& context)
 		{
 			renderPath_ = RenderEngine::NewRenderRoundRectanglePath(context, rect, rx, ry);
 		}
-		SetPathDirty(true);
+		SetPathDirty(false);
 	}
 	return renderPath_;
 }

@@ -22,7 +22,7 @@ public:
 	iterator end() { return objects_.end(); }
 	const_iterator cend() const { return objects_.cend(); }
 	
-
+	void Add(const SPtr<UIObject>& obj);
 	void Remove(const SPtr<UIObject>& obj);
 private:
 	SPtr<UIObject> InternalRemove(const SPtr<UIObject>& obj);

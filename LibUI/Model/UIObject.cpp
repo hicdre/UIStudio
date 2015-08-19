@@ -171,7 +171,7 @@ void UIObject::SetStopColor(const SPtr<AttributePaint>& v)
 float UIObject::GetOpacity()
 {
 	return !GetAttributes()->HasAttribute("opacity")
-		? GetOpacity()
+		? 1.0f
 		: GetAttributes()->GetAttributeFloat("opacity");
 }
 
@@ -206,7 +206,7 @@ void UIObject::SetFontSize(uint32 v)
 
 void UIObject::RenderChildren(const SPtr<RenderContext>& context)
 {
-	for (auto obj : *children_.get())
+	for (auto obj : *GetChildren())
 	{
 		obj->Render(context);
 	}
@@ -350,6 +350,11 @@ void UIObject::OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const S
 void UIObject::OnAttributeChanged(const SPtr<AttributeEventArgs>& args)
 {
 	EventAttributechanged.Execute(GetSelf<UIObject>(), args);
+}
+
+void UIObject::OnChildAdded(const SPtr<UIObject>& obj, uint32 index)
+{
+
 }
 
 void UIObject::OnChildRemoved(const SPtr<UIObject>& obj)

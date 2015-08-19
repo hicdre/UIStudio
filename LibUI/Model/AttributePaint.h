@@ -11,6 +11,8 @@ public:
 	AttributePaint();
 	~AttributePaint();
 
+	static SPtr<AttributePaint> Color(base::Color color);
+
 	virtual SPtr<RenderBrush> GetBrush(const SPtr<UIObject>& object, const SPtr<RenderContext>& context, float opacity, bool forStroke = false) = 0;
 };
 
@@ -18,7 +20,7 @@ class AttributeColorPaint : public AttributePaint
 {
 public:
 	static SPtr<AttributeColorPaint> NotSet();
-
+	
 	AttributeColorPaint();
 	~AttributeColorPaint();
 

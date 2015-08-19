@@ -59,7 +59,10 @@ public:
 	inline bool IsDictionaryValue() const { return type_ == AttributeTypeDictionary; }
 	inline bool IsLengthValue() const { return type_ == AttributeTypeLength; }
 
-	inline bool IsObjectDerivedValue(AttributeValueType type) const { return type == AttributeTypeLength; }
+	inline bool IsObjectDerivedValue(AttributeValueType type) const { 
+		return type == AttributeTypeLength
+			|| type == AttributeTypePaint;
+	}
 
 	inline bool GetBoolValue() const {assert(IsBoolValue());	return boolValue_;}
 	inline int32_t GetInt32Value() const { assert(IsInt32Value());	return int32Value_; }

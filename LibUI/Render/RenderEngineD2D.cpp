@@ -3,6 +3,7 @@
 #include "RenderContextD2D.h"
 #include "RenderBrushD2D.h"
 #include "RenderPathD2D.h"
+#include "RenderPathBuilderD2D.h"
 
 #include "RenderWindow.h"
 
@@ -97,4 +98,8 @@ SPtr<RenderPath> RenderD2DEngine::CreateRenderRoundRectanglePath(const SPtr<Rend
 	return NULL;
 }
 
+SPtr<RenderPathBuilder> RenderD2DEngine::CreateRenderPathBuilder(const SPtr<RenderContext>& context)
+{
+	return new RenderPathBuilderD2D(factory_);
+}
 

@@ -21,8 +21,17 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	window->SetWidth(AttributeLength::Pixel(200));
 	window->SetHeight(AttributeLength::Pixel(300));
+	{
+		SPtr<UIRectangle> rc(new UIRectangle);
+		rc->SetTranslateX(AttributeLength::Pixel(50));
+		rc->SetTranslateY(AttributeLength::Percent(0.3f));
+		rc->SetWidth(AttributeLength::Pixel(100));
+		rc->SetHeight(AttributeLength::Pixel(200));
+		rc->SetFill(AttributePaint::Color(base::Color_Green));
+		window->GetChildren()->Add(rc);
+	}
 	window->SetVisible(true);
-
+	
 	Application::Run();
 	Application::UninitInstance();
 

@@ -55,7 +55,7 @@ SPtr<RenderWindow> UIWindow::GetRenderWindow()
 	{
 		base::Rect bounds = CalcWindowBounds();
 		if (!renderWindow_)
-			renderWindow_ = RenderEngine::NewRenderWindow(bounds.size());
+			renderWindow_ = RenderWindow::Create(GetSelf<UIWindow>());
 		renderWindow_->SetBounds(bounds);
 		SetPathDirty(false);
 	}	

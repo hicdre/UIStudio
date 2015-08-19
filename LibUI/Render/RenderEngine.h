@@ -4,10 +4,10 @@
 #include "Base/color.h"
 #include "Render/RenderBrush.h"
 #include "Render/RenderPath.h"
+#include "Render/RenderPathBuilder.h"
 
 class RenderContext;
 class RenderWindow;
-class RenderRectangle;
 
 class RenderEngine
 {
@@ -18,9 +18,7 @@ public:
 	};
 	static void InitEngine(Type type);
 	static void UninitEngine();
-	static RenderEngine* Get();
-
-	static SPtr<RenderWindow> NewRenderWindow(const base::Size& sz);
+	static RenderEngine* Get();	
 
 	static SPtr<RenderContext>
 		NewRenderContext(const SPtr<RenderWindow>& window);
@@ -33,6 +31,9 @@ public:
 
 	static SPtr<RenderPath>
 		NewRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry);
+
+	static SPtr<RenderPathBuilder>
+		NewRenderPathBuilder(const SPtr<RenderContext>& context);
 public:
 	virtual SPtr<RenderContext>
 		CreateRenderContext(const SPtr<RenderWindow>& window) = 0;
@@ -46,4 +47,6 @@ public:
 	virtual SPtr<RenderPath>
 		CreateRenderRoundRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect, float rx, float ry) = 0;
 
+	virtual SPtr<RenderPathBuilder>
+		CreateRenderPathBuilder(const SPtr<RenderContext>& context) = 0;
 };

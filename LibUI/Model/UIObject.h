@@ -110,6 +110,7 @@ protected:
 	void OnAttributesAttributeChanged(const SPtr<UIObject>& owner, const SPtr<AttributeEventArgs>& args);
 	void OnAttributeChanged(const SPtr<AttributeEventArgs>& args);
 
+	virtual void OnChildAdded(const SPtr<UIObject>& obj, uint32 index);
 	virtual void OnChildRemoved(const SPtr<UIObject>& obj);
 
 	static float FixOpacityValue(float v);

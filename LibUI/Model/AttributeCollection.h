@@ -4,6 +4,7 @@
 #include "Model/AttributePaint.h"
 #include "Delegate/Delegate.h"
 #include <unordered_map>
+#include <functional>
 
 struct AttributeEventArgs : public Object
 {
@@ -30,6 +31,8 @@ public:
 	SPtr<AttributeValue> GetAttribute(const std::string& attributeName) const;
 	
 	void SetAttribute(const std::string& attributeName, const SPtr<AttributeValue>& value);
+	void SetAttributeIfDifferent(const std::string& attributeName, const SPtr<AttributeValue>& value,
+		const std::function<void(void)>& setCallback);
 
 	bool GetAttributeBool(const std::string& attributeName) const;
 	int32 GetAttributeInt(const std::string& attributeName) const;
@@ -42,14 +45,32 @@ public:
 	SPtr<AttributePaint> GetAttributePaint(const std::string& attributeName) const;
 
 	void SetAttributeBool(const std::string& attributeName, bool value);
+	void SetAttributeBoolIfDifferent(const std::string& attributeName, bool value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeInt(const std::string& attributeName, int value);
+	void SetAttributeIntIfDifferent(const std::string& attributeName, int value, 
+		const std::function<void(void)>& setCallback);
 	void SetAttributeUInt(const std::string& attributeName, uint32 value);
+	void SetAttributeUIntIfDifferent(const std::string& attributeName, uint32 value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeFloat(const std::string& attributeName, float value);
+	void SetAttributeFloatIfDifferent(const std::string& attributeName, float value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeDouble(const std::string& attributeName, double value);
+	void SetAttributeDoubleIfDifferent(const std::string& attributeName, double value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeString(const std::string& attributeName, const std::string& value);
+	void SetAttributeStringIfDifferent(const std::string& attributeName, const std::string& value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeString(const std::string& attributeName, const std::wstring& value);
+	void SetAttributeStringIfDifferent(const std::string& attributeName, const std::wstring& value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributeLength(const std::string& attributeName, const SPtr<AttributeLength>& value);
+	void SetAttributeLengthIfDifferent(const std::string& attributeName, const SPtr<AttributeLength>& value,
+		const std::function<void(void)>& setCallback);
 	void SetAttributePaint(const std::string& attributeName, const SPtr<AttributePaint>& value);
+	void SetAttributePaintIfDifferent(const std::string& attributeName, const SPtr<AttributePaint>& value,
+		const std::function<void(void)>& setCallback);
 
 	void RemoveAttribute(const std::string& attributeName);
 

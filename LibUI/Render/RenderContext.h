@@ -5,6 +5,7 @@
 #include "Base/color.h"
 
 class RenderBrush;
+class RenderPen;
 class RenderPath;
 class RenderContext : public Object
 {
@@ -15,6 +16,8 @@ public:
 	virtual void Transform(const base::Matrix& m) = 0;
 
 	virtual void FillPath(const SPtr<RenderBrush>& brush, const SPtr<RenderPath>& path) = 0;
+
+	virtual void DrawPath(const SPtr<RenderPen>& brush, const SPtr<RenderPath>& path) = 0;
 };
 
 class ScopedRenderTransform

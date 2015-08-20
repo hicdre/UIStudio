@@ -3,7 +3,9 @@
 #include "RenderWindow.h"
 #include "RenderD2DUtils.h"
 #include "RenderBrushD2D.h"
+#include "RenderPenD2D.h"
 #include "RenderPathD2D.h"
+#include "RenderEngineD2D.h"
 
 
 RenderContextD2D::RenderContextD2D(const CComPtr<ID2D1HwndRenderTarget>& target)
@@ -72,5 +74,19 @@ void RenderContextD2D::FillPath(const SPtr<RenderBrush>& brush, const SPtr<Rende
 		return;
 
 	target_->FillGeometry(d2dPath->GetRealPath(), d2dBrush->GetRealBrush());
+}
+
+void RenderContextD2D::DrawPath(const SPtr<RenderPen>& pen, const SPtr<RenderPath>& path)
+{
+	SPtr<RenderPenD2D> d2dPen = pen;
+	SPtr<RenderPathD2D> d2dPath = path;
+	if (!d2dPen || !d2dPath)
+		return;
+
+	CComPtr<ID2D1StrokeStyle> style;
+	if (FAILED(RenderD2DEngine::GetD2DFactory()->CreateStrokeStyle(d2dPen->GetStrokeStyle(), NULL, 0, &style)))
+		return;
+
+	target_->DrawGeometry(d2dPath->GetRealPath(), d2dPen->GetRealBrush(), d2dPen->GetStrokeWidth(), style);
 }
 

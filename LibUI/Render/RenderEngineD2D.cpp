@@ -2,6 +2,7 @@
 #include "RenderEngineD2D.h"
 #include "RenderContextD2D.h"
 #include "RenderBrushD2D.h"
+#include "RenderPenD2D.h"
 #include "RenderPathD2D.h"
 #include "RenderPathBuilderD2D.h"
 
@@ -80,6 +81,14 @@ SPtr<RenderBrush> RenderD2DEngine::CreateRenderSolidBrush(const SPtr<RenderConte
 	if (SUCCEEDED(renderTarget->CreateSolidColorBrush(D2DColor(color), &brush)))
 		return new RenderBrushD2D(brush);
 	return NULL;
+}
+
+SPtr<RenderPen> RenderD2DEngine::CreateRenderPen(const SPtr<RenderBrush>& brush, float width)
+{
+	SPtr<RenderBrushD2D> d2dBrush = brush;
+	if (!d2dBrush)
+		return NULL;
+	return new RenderPenD2D(d2dBrush->GetRealBrush(), width);
 }
 
 SPtr<RenderPath> RenderD2DEngine::CreateRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect)

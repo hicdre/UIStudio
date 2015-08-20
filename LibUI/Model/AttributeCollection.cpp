@@ -72,6 +72,32 @@ void AttributeCollection::SetAttribute(const std::string& attributeName, const S
 	}
 }
 
+void AttributeCollection::SetAttributeIfDifferent(const std::string& attributeName, const SPtr<AttributeValue>& value, const std::function<void(void)>& OnChanged)
+{
+	auto iter = attribute_map_.find(attributeName);
+	if (iter == attribute_map_.end())
+	{
+		attribute_map_[attributeName] = value;
+		OnChanged();
+		OnAttributeChanged(attributeName, value);
+	}
+	else
+	{
+		SPtr<AttributeValue> oldValue = iter->second;
+		if (!oldValue->IsEqual(value.get()))
+		{
+			attribute_map_[attributeName] = value;
+			OnChanged();
+			OnAttributeChanged(attributeName, value);
+		}
+	}
+}
+
+void AttributeCollection::SetAttributeIfDifferent(const std::string& attributeName, const SPtr<AttributeValue>& value, const std::function<void(void)>& setCallback)
+{
+
+}
+
 bool AttributeCollection::GetAttributeBool(const std::string& attributeName) const
 {
 	SPtr<AttributeValue> v = GetAttribute(attributeName);
@@ -149,9 +175,20 @@ void AttributeCollection::SetAttributeBool(const std::string& attributeName, boo
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
+void AttributeCollection::SetAttributeBoolIfDifferent(const std::string& attributeName, bool value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
+}
+
 void AttributeCollection::SetAttributeInt(const std::string& attributeName, int value)
 {
 	SetAttribute(attributeName, new AttributeValue(value));
+}
+
+void AttributeCollection::SetAttributeIntIfDifferent(const std::string& attributeName, int value, 
+	const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
 }
 
 void AttributeCollection::SetAttributeUInt(const std::string& attributeName, uint32 value)
@@ -159,14 +196,29 @@ void AttributeCollection::SetAttributeUInt(const std::string& attributeName, uin
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
+void AttributeCollection::SetAttributeUIntIfDifferent(const std::string& attributeName, uint32 value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
+}
+
 void AttributeCollection::SetAttributeFloat(const std::string& attributeName, float value)
 {
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
+void AttributeCollection::SetAttributeFloatIfDifferent(const std::string& attributeName, float value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
+}
+
 void AttributeCollection::SetAttributeDouble(const std::string& attributeName, double value)
 {
 	SetAttribute(attributeName, new AttributeValue(value));
+}
+
+void AttributeCollection::SetAttributeDoubleIfDifferent(const std::string& attributeName, double value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
 }
 
 void AttributeCollection::SetAttributeString(const std::string& attributeName, const std::string& value)
@@ -179,14 +231,34 @@ void AttributeCollection::SetAttributeString(const std::string& attributeName, c
 	SetAttribute(attributeName, new AttributeValue(value));
 }
 
+void AttributeCollection::SetAttributeStringIfDifferent(const std::string& attributeName, const std::string& value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
+}
+
+void AttributeCollection::SetAttributeStringIfDifferent(const std::string& attributeName, const std::wstring& value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value), setCallback);
+}
+
 void AttributeCollection::SetAttributeLength(const std::string& attributeName, const SPtr<AttributeLength>& value)
 {	
 	SetAttribute(attributeName, new AttributeValue(value, AttributeTypeLength));
 }
 
+void AttributeCollection::SetAttributeLengthIfDifferent(const std::string& attributeName, const SPtr<AttributeLength>& value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value, AttributeTypeLength), setCallback);
+}
+
 void AttributeCollection::SetAttributePaint(const std::string& attributeName, const SPtr<AttributePaint>& value)
 {
 	SetAttribute(attributeName, new AttributeValue(value, AttributeTypePaint));
+}
+
+void AttributeCollection::SetAttributePaintIfDifferent(const std::string& attributeName, const SPtr<AttributePaint>& value, const std::function<void(void)>& setCallback)
+{
+	SetAttributeIfDifferent(attributeName, new AttributeValue(value, AttributeTypePaint), setCallback);
 }
 
 void AttributeCollection::RemoveAttribute(const std::string& attributeName)

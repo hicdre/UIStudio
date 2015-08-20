@@ -34,6 +34,11 @@ SPtr<RenderBrush> RenderEngine::NewRenderSolidBrush(const SPtr<RenderContext>& c
 	return RenderEngine::Get()->CreateRenderSolidBrush(context, color);
 }
 
+SPtr<RenderPen> RenderEngine::NewRenderPen(const SPtr<RenderBrush>& brush, float width)
+{
+	return RenderEngine::Get()->CreateRenderPen(brush, width);
+}
+
 SPtr<RenderPath> RenderEngine::NewRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect)
 {
 	return RenderEngine::Get()->CreateRenderRectanglePath(context, rect);

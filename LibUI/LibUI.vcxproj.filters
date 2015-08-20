@@ -34,6 +34,9 @@
     <Filter Include="model\attribute">
       <UniqueIdentifier>{1563853b-43fe-4fa1-b783-6c303ba7f926}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model\text">
+      <UniqueIdentifier>{2e91ec0a-43b8-4335-a5b9-dec08a3cf366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -181,6 +184,21 @@
     <ClInclude Include="Render\RenderPathBuilderD2D.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
+    <ClInclude Include="Render\RenderPen.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderPenD2D.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributeConst.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\UITextBase.h">
+      <Filter>model\text</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\AttributeUnitCollection.h">
+      <Filter>model\attribute</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -296,6 +314,18 @@
     </ClCompile>
     <ClCompile Include="Render\RenderPathBuilderD2D.cpp">
       <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPen.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderPenD2D.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\UITextBase.cpp">
+      <Filter>model\text</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\AttributeUnitCollection.cpp">
+      <Filter>model\attribute</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

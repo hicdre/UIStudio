@@ -19,6 +19,8 @@ public:
 
 	virtual void FillPath(const SPtr<RenderBrush>& brush, const SPtr<RenderPath>& path) override;
 
+	virtual void DrawPath(const SPtr<RenderPen>& pen, const SPtr<RenderPath>& path) override;
+
 	const CComPtr<ID2D1HwndRenderTarget> GetD2DTarget() const { return target_; }
 private:
 	CComPtr<ID2D1HwndRenderTarget> target_;

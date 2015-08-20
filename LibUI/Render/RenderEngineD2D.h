@@ -14,6 +14,9 @@ public:
 	virtual SPtr<RenderBrush>
 		CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color) override;
 
+	virtual SPtr<RenderPen>
+		CreateRenderPen(const SPtr<RenderBrush>& brush, float width) override;
+
 	virtual SPtr<RenderPath>
 		CreateRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect) override;
 

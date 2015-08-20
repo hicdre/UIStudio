@@ -115,13 +115,16 @@
     </ClInclude>
     <ClInclude Include="LibUI.h" />
     <ClInclude Include="Model\AttributeCollection.h" />
+    <ClInclude Include="Model\AttributeConst.h" />
     <ClInclude Include="Model\AttributeLength.h" />
+    <ClInclude Include="Model\AttributeUnitCollection.h" />
     <ClInclude Include="Model\AttributeValue.h" />
     <ClInclude Include="Model\UILine.h" />
     <ClInclude Include="Model\UIObject.h" />
     <ClInclude Include="Model\UIObjectCollection.h" />
     <ClInclude Include="Model\AttributePaint.h" />
     <ClInclude Include="Model\UIRectangle.h" />
+    <ClInclude Include="Model\UITextBase.h" />
     <ClInclude Include="Model\UIVisualObject.h" />
     <ClInclude Include="Model\UIWindow.h" />
     <ClInclude Include="Render\RenderBrush.h" />
@@ -136,6 +139,8 @@
     <ClInclude Include="Render\RenderPathBuilder.h" />
     <ClInclude Include="Render\RenderPathBuilderD2D.h" />
     <ClInclude Include="Render\RenderPathD2D.h" />
+    <ClInclude Include="Render\RenderPen.h" />
+    <ClInclude Include="Render\RenderPenD2D.h" />
     <ClInclude Include="Render\RenderWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -165,12 +170,14 @@
     </ClCompile>
     <ClCompile Include="Model\AttributeCollection.cpp" />
     <ClCompile Include="Model\AttributeLength.cpp" />
+    <ClCompile Include="Model\AttributeUnitCollection.cpp" />
     <ClCompile Include="Model\AttributeValue.cpp" />
     <ClCompile Include="Model\UILine.cpp" />
     <ClCompile Include="Model\UIObject.cpp" />
     <ClCompile Include="Model\UIObjectCollection.cpp" />
     <ClCompile Include="Model\AttributePaint.cpp" />
     <ClCompile Include="Model\UIRectangle.cpp" />
+    <ClCompile Include="Model\UITextBase.cpp" />
     <ClCompile Include="Model\UIVisualObject.cpp" />
     <ClCompile Include="Model\UIWindow.cpp" />
     <ClCompile Include="Render\RenderBrush.cpp" />
@@ -185,6 +192,8 @@
     <ClCompile Include="Render\RenderPathBuilder.cpp" />
     <ClCompile Include="Render\RenderPathBuilderD2D.cpp" />
     <ClCompile Include="Render\RenderPathD2D.cpp" />
+    <ClCompile Include="Render\RenderPen.cpp" />
+    <ClCompile Include="Render\RenderPenD2D.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

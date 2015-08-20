@@ -1,6 +1,7 @@
 #pragma once
 #include "Delegate/Delegate.h"
 #include "Model/AttributeCollection.h"
+#include "Model/AttributeConst.h"
 #include "Layout/LayoutObject.h"
 #include "Render/RenderContext.h"
 
@@ -51,10 +52,19 @@ public:
 	virtual void SetFillOpacity(float v);
 
 	virtual float GetStrokeWidth();
-	virtual void SetStrokeWidth(float v);
+	virtual void SetStrokeWidth(float v);	
 
 	virtual float GetStrokeOpacity();
 	virtual void SetStrokeOpacity(float v);
+
+	virtual AttributeStrokeLineCap GetStrokeLineCap();
+	virtual void SetStrokeLineCap(AttributeStrokeLineCap v);
+
+	virtual AttributeStrokeLineJoin GetStrokeLineJoin();
+	virtual void SetStrokeLineJoin(AttributeStrokeLineJoin v);
+
+	virtual float GetStrokeMiterLimit();
+	virtual void SetStrokeMiterLimit(float v);
 
 	virtual SPtr<AttributePaint> GetStopColor();
 	virtual void SetStopColor(const SPtr<AttributePaint>& v);
@@ -67,23 +77,7 @@ public:
 
 	virtual uint32 GetFontSize();
 	virtual void SetFontSize(uint32 v);
-// 	SPtr<AttributeLength> GetX();
-// 	SPtr<AttributeLength> GetY();
-// 	SPtr<AttributeLength> GetWidth();
-// 	SPtr<AttributeLength> GetHeight();
-// 
-// 	void SetX(const SPtr<AttributeLength>& v);
-// 	void SetY(const SPtr<AttributeLength>& v);
-// 	void SetWidth(const SPtr<AttributeLength>& v);
-// 	void SetHeight(const SPtr<AttributeLength>& v);
-// 
-// 	//visible
-// 	bool IsVisible();
-// 	void SetVisible(bool visible);
-// 
-// 	//layout
-// 	void SetLayoutContainerType(LayoutContainerType type);
-// 	LayoutContainerType GetLayoutContainerType();
+
 public:
 // 	void SetRenderObjectNeedsUpdate(bool v);
 // 	bool IsRenderObjectNeedsUpdate() const;
@@ -118,8 +112,7 @@ protected:
 	SPtr<UIObjectCollection> children_;
 	SPtr<AttributeCollection> attributes_;
 	WPtr<UIObject> parent_;
-
-
+	
  	bool isPathDirty_;
 private:
 	base::Matrix m_;

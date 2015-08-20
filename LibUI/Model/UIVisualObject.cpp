@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UIVisualObject.h"
+#include "Render/RenderEngine.h"
 
 UIVisualObject::UIVisualObject()
 {
@@ -69,6 +70,31 @@ void UIVisualObject::RenderFill(const SPtr<RenderContext>& context)
 
 bool UIVisualObject::RenderStroke(const SPtr<RenderContext>& context)
 {
+	SPtr<AttributePaint> stroke = GetStroke();
+	if (stroke && stroke != AttributeColorPaint::NotSet())
+	{
+		float strokeWidth = GetStrokeWidth();
+		float opicaty = FixOpacityValue(GetStrokeOpacity() * GetOpacity());
+		SPtr<RenderBrush> brush = stroke->GetBrush(GetSelf<UIObject>(), context, opicaty, true);
+		if (brush)
+		{
+			SPtr<RenderPath> path = GetPath(context);
+			base::Rect bounds = path->GetBounds();
+			if (!bounds.IsEmpty())
+			{
+				SPtr<RenderPen> pen = RenderEngine::NewRenderPen(brush, strokeWidth);
+				if (pen)
+				{
+					pen->SetLineJoin(GetStrokeLineJoin());
+					pen->SetLineCap(GetStrokeLineCap());
+					pen->SetLineMiterLimit(GetStrokeMiterLimit());
+					
+					context->DrawPath(pen, path);
+				}
+			}			
+		}
+
+	}
 	return true;
 }
 

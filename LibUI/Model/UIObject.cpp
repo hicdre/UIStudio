@@ -156,6 +156,42 @@ void UIObject::SetStrokeOpacity(float v)
 	GetAttributes()->SetAttributeFloat("stroke-opacity", FixOpacityValue(v));
 }
 
+AttributeStrokeLineCap UIObject::GetStrokeLineCap()
+{
+	return !GetAttributes()->HasAttribute("stroke-linecap")
+		? StrokeLineCapFlat
+		: (AttributeStrokeLineCap)GetAttributes()->GetAttributeInt("stroke-linecap");
+}
+
+void UIObject::SetStrokeLineCap(AttributeStrokeLineCap v)
+{
+	GetAttributes()->SetAttributeInt("stroke-linecap", (int)v);
+}
+
+AttributeStrokeLineJoin UIObject::GetStrokeLineJoin()
+{
+	return !GetAttributes()->HasAttribute("stroke-linejoin")
+		? StrokeLineJoinMilter
+		: (AttributeStrokeLineJoin)GetAttributes()->GetAttributeInt("stroke-linejoin");
+}
+
+void UIObject::SetStrokeLineJoin(AttributeStrokeLineJoin v)
+{
+	GetAttributes()->SetAttributeInt("stroke-linejoin", (int)v);
+}
+
+float UIObject::GetStrokeMiterLimit()
+{
+	return !GetAttributes()->HasAttribute("stroke-milterlimit")
+		? 4.f
+		: GetAttributes()->GetAttributeFloat("stroke-milterlimit");
+}
+
+void UIObject::SetStrokeMiterLimit(float v)
+{
+	GetAttributes()->SetAttributeFloat("stroke-milterlimit", v);
+}
+
 SPtr<AttributePaint> UIObject::GetStopColor()
 {
 	return !GetAttributes()->HasAttribute("stop-color")

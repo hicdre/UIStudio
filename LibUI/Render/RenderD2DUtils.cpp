@@ -33,6 +33,36 @@ D2D1_QUADRATIC_BEZIER_SEGMENT D2DQuadBezier(const base::PointF& p0, const base::
 	return D2D1::QuadraticBezierSegment(D2DPoint(p0), D2DPoint(p1));
 }
 
+D2D1_CAP_STYLE D2DLineCap(AttributeStrokeLineCap v)
+{
+	switch (v)
+	{
+	case StrokeLineCapFlat:
+		return D2D1_CAP_STYLE_FLAT;
+	case StrokeLineCapRound:
+		return D2D1_CAP_STYLE_ROUND;
+	case StrokeLineCapSquare:
+		return D2D1_CAP_STYLE_SQUARE;
+	default:
+		return D2D1_CAP_STYLE_FLAT;
+	}
+}
+
+D2D1_LINE_JOIN D2DLineJoin(AttributeStrokeLineJoin v)
+{
+	switch (v)
+	{
+	case StrokeLineJoinMilter:
+		return D2D1_LINE_JOIN_MITER;
+	case StrokeLineJoinRound:
+		return D2D1_LINE_JOIN_ROUND;
+	case StrokeLineJoinBevel:
+		return D2D1_LINE_JOIN_BEVEL;
+	default:
+		return D2D1_LINE_JOIN_MITER;
+	}
+}
+
 CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context)
 {
 	SPtr<RenderContextD2D> contextD2D = context;

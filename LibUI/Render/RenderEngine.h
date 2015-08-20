@@ -3,6 +3,7 @@
 #include "Base/Geom/size.h"
 #include "Base/color.h"
 #include "Render/RenderBrush.h"
+#include "Render/RenderPen.h"
 #include "Render/RenderPath.h"
 #include "Render/RenderPathBuilder.h"
 
@@ -26,6 +27,9 @@ public:
 	static SPtr<RenderBrush>
 		NewRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color);
 
+	static SPtr<RenderPen>
+		NewRenderPen(const SPtr<RenderBrush>& brush, float width);
+
 	static SPtr<RenderPath>
 		NewRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect);
 
@@ -40,6 +44,9 @@ public:
 
 	virtual SPtr<RenderBrush>
 		CreateRenderSolidBrush(const SPtr<RenderContext>& context, base::Color color) = 0;
+
+	virtual SPtr<RenderPen>
+		CreateRenderPen(const SPtr<RenderBrush>& brush, float width) = 0;
 
 	virtual SPtr<RenderPath>
 		CreateRenderRectanglePath(const SPtr<RenderContext>& context, const base::Rect& rect) = 0;

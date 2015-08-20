@@ -28,6 +28,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		rc->SetWidth(AttributeLength::Pixel(100));
 		rc->SetHeight(AttributeLength::Pixel(200));
 		rc->SetFill(AttributePaint::Color(base::Color_Green));
+		rc->SetStroke(AttributePaint::Color(base::Color_Red));
+		rc->SetStrokeWidth(4.0f);
 		window->GetChildren()->Add(rc);
 	}
 	window->SetVisible(true);

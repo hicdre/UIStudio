@@ -1,6 +1,7 @@
 #pragma once
 #include "Base/Object.h"
 
+class UIElement;
 class AttributeLength : public Object
 {
 public:
@@ -33,6 +34,10 @@ public:
 	bool IsEqualPercent(float percent) const;
 
 	bool IsEqual(const AttributeLength* other) const;
+
+	float CalcPixel(const SPtr<UIElement>& element) const {
+		return 0.f;
+	}
 private:
 	Type type_;
 	union {

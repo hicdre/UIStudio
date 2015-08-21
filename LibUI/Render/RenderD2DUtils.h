@@ -1,5 +1,6 @@
 #pragma once
 #include <d2d1.h>
+#include <dwrite.h>
 #include <atlbase.h>
 #include "Base/Geom/matrix.h"
 #include "Base/Geom/rect.h"
@@ -8,6 +9,7 @@
 #include "Model/AttributeConst.h"
 
 #pragma comment(lib, "D2d1.lib")
+#pragma comment(lib, "dwrite.lib")
 
 class RenderContext;
 

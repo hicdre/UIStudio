@@ -38,15 +38,25 @@ CComPtr<ID2D1Factory> RenderD2DEngine::GetD2DFactory()
 RenderD2DEngine::RenderD2DEngine()
 {
 	::CoInitialize(NULL);
-	HRESULT hr = D2D1CreateFactory(
+	HRESULT hr = ::D2D1CreateFactory(
 		D2D1_FACTORY_TYPE_SINGLE_THREADED,
 		&factory_
 		);
 	assert(SUCCEEDED(hr));
+
+	hr = ::DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(&dwrite_factory_)
+		);
+	assert(SUCCEEDED(hr));
+
 }
 
 RenderD2DEngine::~RenderD2DEngine()
 {
+	factory_ = NULL;
+	dwrite_factory_ = NULL;
 	::CoUninitialize();
 }
 

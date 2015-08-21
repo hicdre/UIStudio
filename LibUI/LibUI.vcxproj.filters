@@ -199,6 +199,12 @@
     <ClInclude Include="Model\AttributeUnitCollection.h">
       <Filter>model\attribute</Filter>
     </ClInclude>
+    <ClInclude Include="Render\RenderFont.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderFontDW.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -326,6 +332,12 @@
     </ClCompile>
     <ClCompile Include="Model\AttributeUnitCollection.cpp">
       <Filter>model\attribute</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderFont.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderFontDW.cpp">
+      <Filter>render\d2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -24,3 +24,5 @@ D2D1_CAP_STYLE D2DLineCap(AttributeStrokeLineCap v);
 D2D1_LINE_JOIN D2DLineJoin(AttributeStrokeLineJoin v);
 
 CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context);
+
+CComPtr<ID2D1Geometry> D2DCombineGeometry(const CComPtr<ID2D1Geometry>& a, const CComPtr<ID2D1Geometry>& b);

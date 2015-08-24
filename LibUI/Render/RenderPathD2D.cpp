@@ -37,3 +37,8 @@ base::Rect RenderPathD2D::GetBounds()
 	return base::Rect(bounds.left, bounds.top,
 		bounds.right - bounds.left, bounds.bottom - bounds.top);
 }
+
+void RenderPathD2D::AddGeometry(const CComPtr<ID2D1Geometry>& other)
+{
+	d2dGeometry_ = D2DCombineGeometry(d2dGeometry_, other);
+}

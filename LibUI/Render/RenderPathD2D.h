@@ -14,6 +14,8 @@ public:
 	virtual base::Rect GetBounds() override;
 
 	CComPtr<ID2D1Geometry> GetRealPath() const { return d2dGeometry_; }
+
+	void AddGeometry(const CComPtr<ID2D1Geometry>& other);
 private:
 	CComPtr<ID2D1Geometry> d2dGeometry_;
 };

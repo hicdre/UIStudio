@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RenderD2DUtils.h"
 #include "RenderContextD2D.h"
+#include "RenderEngineD2D.h"
 
 D2D1::Matrix3x2F D2DMatrix(const base::Matrix& m)
 {
@@ -68,5 +69,14 @@ CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>
 	SPtr<RenderContextD2D> contextD2D = context;
 	if (contextD2D)
 		return contextD2D->GetD2DTarget();
+	return NULL;
+}
+
+CComPtr<ID2D1Geometry> D2DCombineGeometry(const CComPtr<ID2D1Geometry>& a, const CComPtr<ID2D1Geometry>& b)
+{
+	ID2D1Geometry* arr[] = { a, b };
+	CComPtr<ID2D1GeometryGroup> group;
+	if (SUCCEEDED(RenderD2DEngine::GetD2DFactory()->CreateGeometryGroup(D2D1_FILL_MODE_ALTERNATE, arr, 2, &group)))
+		return group;
 	return NULL;
 }

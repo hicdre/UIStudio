@@ -17,4 +17,5 @@ public:
 	virtual base::SizeF MeasureString(const SPtr<RenderContext>& renderer, const std::wstring& text) override;
 protected:
 	CComPtr<IDWriteFontFace> fontFace_;
+	float fontSize_;//绘制所需的px
 };

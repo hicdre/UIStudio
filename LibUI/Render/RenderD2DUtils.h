@@ -23,6 +23,9 @@ D2D1_QUADRATIC_BEZIER_SEGMENT D2DQuadBezier(const base::PointF& p0, const base::
 D2D1_CAP_STYLE D2DLineCap(AttributeStrokeLineCap v);
 D2D1_LINE_JOIN D2DLineJoin(AttributeStrokeLineJoin v);
 
+DWRITE_FONT_WEIGHT DWFontWeight(AttributeFontWeight v);
+DWRITE_FONT_STYLE DWFontStyle(AttributeFontStyle v);
+
 CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context);
 
 CComPtr<ID2D1Geometry> D2DCombineGeometry(const CComPtr<ID2D1Geometry>& a, const CComPtr<ID2D1Geometry>& b);

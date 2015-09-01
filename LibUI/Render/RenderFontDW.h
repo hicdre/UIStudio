@@ -5,7 +5,7 @@
 class RenderFontDW : public RenderFont
 {
 public:
-	RenderFontDW();
+	RenderFontDW(const CComPtr<IDWriteFont>& font);
 	~RenderFontDW();
 
 	virtual float GetSize() override;
@@ -17,5 +17,6 @@ public:
 	virtual base::SizeF MeasureString(const SPtr<RenderContext>& renderer, const std::wstring& text) override;
 protected:
 	CComPtr<IDWriteFontFace> fontFace_;
+	CComPtr<IDWriteFont> font_;
 	float fontSize_;//绘制所需的px
 };

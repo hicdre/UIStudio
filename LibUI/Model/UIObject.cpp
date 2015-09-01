@@ -5,6 +5,7 @@
 #include "Layout/LayoutContainer.h"
 #include "UIVisualObject.h"
 #include "AttributePaint.h"
+#include "Render/RenderEngine.h"
 
 UIObject::UIObject()
 // 	: isRenderObjectNeedsUpdate_(true)
@@ -240,6 +241,51 @@ void UIObject::SetFontSize(uint32 v)
 	SetPathDirty(true);
 }
 
+AttributeTextDecoration UIObject::GetTextDecoration()
+{
+	return GetAttributes()->HasAttribute("text-decoration")
+		? (AttributeTextDecoration)GetAttributes()->GetAttributeUInt("text-decoration")
+		: TextDecorationNone;
+}
+
+void UIObject::SetTextDecoration(AttributeTextDecoration v)
+{
+	GetAttributes()->SetAttributeUIntIfDifferent("text-decoration", v, [this]()
+	{
+		SetPathDirty(true);
+	});
+}
+
+AttributeFontWeight UIObject::GetFontWeight()
+{
+	return GetAttributes()->HasAttribute("font-weight")
+		? (AttributeFontWeight)GetAttributes()->GetAttributeUInt("font-weight")
+		: FontWeightNormal;
+}
+
+void UIObject::SetFontWeight(AttributeFontWeight v)
+{
+	GetAttributes()->SetAttributeUIntIfDifferent("font-weight", v, [this]()
+	{
+		SetPathDirty(true);
+	});
+}
+
+AttributeFontStyle UIObject::GetFontStyle()
+{
+	return GetAttributes()->HasAttribute("font-style")
+		? (AttributeFontStyle)GetAttributes()->GetAttributeUInt("font-style")
+		: FontStyleNormal;
+}
+
+void UIObject::SetFontStyle(AttributeFontStyle v)
+{
+	GetAttributes()->SetAttributeUIntIfDifferent("font-style", v, [this]()
+	{
+		SetPathDirty(true);
+	});
+}
+
 void UIObject::RenderChildren(const SPtr<RenderContext>& context)
 {
 	for (auto obj : *GetChildren())
@@ -405,5 +451,12 @@ float UIObject::FixOpacityValue(float v)
 	if (v > 1.0f)
 		return 1.0f;
 	return v;
+}
+
+SPtr<RenderFont> UIObject::GetFont(const SPtr<RenderContext>& context)
+{
+	float fontSize = GetFontSize();
+
+	return RenderEngine::NewRenderFont(GetFontFamily(), GetFontWeight(), GetFontStyle(), GetFontSize());
 }
 

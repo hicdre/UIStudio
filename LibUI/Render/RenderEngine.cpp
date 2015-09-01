@@ -53,3 +53,8 @@ SPtr<RenderPathBuilder> RenderEngine::NewRenderPathBuilder(const SPtr<RenderCont
 {
 	return RenderEngine::Get()->CreateRenderPathBuilder(context);
 }
+
+SPtr<RenderFont> RenderEngine::NewRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size)
+{
+	return RenderEngine::Get()->CreateRenderFont(family, weight, style, size);
+}

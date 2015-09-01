@@ -26,11 +26,17 @@ public:
 	
 	virtual SPtr<RenderPathBuilder>
 		CreateRenderPathBuilder(const SPtr<RenderContext>& context) override;
+
+	virtual SPtr<RenderFont>
+		CreateRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size) override;
 	static void Init();
 	static void Uninit();
 	static RenderD2DEngine* Get();
 	static CComPtr<ID2D1Factory> GetD2DFactory();
+	static CComPtr<IDWriteFactory> GetDWriteFactory();
 private:
+	CComPtr<IDWriteFontCollection> GetSystemFontCollection();
 	CComPtr<ID2D1Factory> factory_;
 	CComPtr<IDWriteFactory> dwrite_factory_;
+	CComPtr<IDWriteFontCollection> system_font_collection_;
 };

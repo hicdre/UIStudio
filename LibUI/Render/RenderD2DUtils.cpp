@@ -76,7 +76,10 @@ CComPtr<ID2D1Geometry> D2DCombineGeometry(const CComPtr<ID2D1Geometry>& a, const
 {
 	ID2D1Geometry* arr[] = { a, b };
 	CComPtr<ID2D1GeometryGroup> group;
-	if (SUCCEEDED(RenderD2DEngine::GetD2DFactory()->CreateGeometryGroup(D2D1_FILL_MODE_ALTERNATE, arr, 2, &group)))
-		return group;
+	if (SUCCEEDED(RenderD2DEngine::GetD2DFactory()->CreateGeometryGroup(D2D1_FILL_MODE_ALTERNATE, arr, 2, &group))) {
+		CComPtr<ID2D1Geometry> p;
+		p = group;
+		return p;
+	}	
 	return NULL;
 }

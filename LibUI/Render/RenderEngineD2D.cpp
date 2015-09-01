@@ -5,6 +5,7 @@
 #include "RenderPenD2D.h"
 #include "RenderPathD2D.h"
 #include "RenderPathBuilderD2D.h"
+#include "RenderFontDW.h"
 
 #include "RenderWindow.h"
 
@@ -33,6 +34,22 @@ RenderD2DEngine* RenderD2DEngine::Get()
 CComPtr<ID2D1Factory> RenderD2DEngine::GetD2DFactory()
 {
 	return d2dEngineInstance->factory_;
+}
+
+CComPtr<IDWriteFactory> RenderD2DEngine::GetDWriteFactory()
+{
+	return d2dEngineInstance->dwrite_factory_;
+}
+
+CComPtr<IDWriteFontCollection> RenderD2DEngine::GetSystemFontCollection()
+{
+	assert(dwrite_factory_);
+
+	if (!system_font_collection_)
+	{
+		dwrite_factory_->GetSystemFontCollection(&system_font_collection_);
+	}
+	return system_font_collection_;
 }
 
 RenderD2DEngine::RenderD2DEngine()
@@ -120,5 +137,23 @@ SPtr<RenderPath> RenderD2DEngine::CreateRenderRoundRectanglePath(const SPtr<Rend
 SPtr<RenderPathBuilder> RenderD2DEngine::CreateRenderPathBuilder(const SPtr<RenderContext>& context)
 {
 	return new RenderPathBuilderD2D(factory_);
+}
+
+SPtr<RenderFont> RenderD2DEngine::CreateRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size)
+{
+	CComPtr<IDWriteFontCollection> collection = GetSystemFontCollection();
+
+	CComPtr<IDWriteFontFamily> fontFamily;
+	CComPtr<IDWriteFont> font;
+	//split by ',' and find first;
+	UINT index = 0;
+	BOOL exists = FALSE;
+	collection->FindFamilyName(family.c_str(), &index, &exists);
+	collection->GetFontFamily(index, &fontFamily);
+
+	if (FAILED(fontFamily->GetFirstMatchingFont(DWFontWeight(weight), DWRITE_FONT_STRETCH_NORMAL, DWFontStyle(style), &font)))
+		return NULL;
+
+	return new RenderFontDW(font);
 }
 

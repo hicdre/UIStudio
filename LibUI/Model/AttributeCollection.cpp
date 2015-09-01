@@ -93,11 +93,6 @@ void AttributeCollection::SetAttributeIfDifferent(const std::string& attributeNa
 	}
 }
 
-void AttributeCollection::SetAttributeIfDifferent(const std::string& attributeName, const SPtr<AttributeValue>& value, const std::function<void(void)>& setCallback)
-{
-
-}
-
 bool AttributeCollection::GetAttributeBool(const std::string& attributeName) const
 {
 	SPtr<AttributeValue> v = GetAttribute(attributeName);

@@ -1,5 +1,6 @@
 #pragma once
 #include "base/object.h"
+#include <vector>
 
 template <class T>
 class AttributeUnitCollection : public Object
@@ -19,7 +20,7 @@ public:
 
 	bool IsEmpty() const { return vector_.empty(); }
 	uint32 GetCount() const { return vector_.size(); }
-	const T& at(uint32 index) const { return vector_.at(index) }
+	const T& at(uint32 index) const { return vector_.at(index); }
 
 	bool IsEqual(AttributeUnitCollection* other) const
 	{

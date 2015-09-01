@@ -10,6 +10,7 @@ class LayoutObject;
 class LayoutContainer;
 class UIObjectCollection;
 class UIVisualObject;
+class RenderFont;
 class UIObject : public Object
 {
 public:
@@ -78,6 +79,15 @@ public:
 	virtual uint32 GetFontSize();
 	virtual void SetFontSize(uint32 v);
 
+	virtual AttributeTextDecoration GetTextDecoration();
+	virtual void SetTextDecoration(AttributeTextDecoration v);
+
+	virtual AttributeFontWeight GetFontWeight();
+	virtual void SetFontWeight(AttributeFontWeight v);
+
+	virtual AttributeFontStyle GetFontStyle();
+	virtual void SetFontStyle(AttributeFontStyle v);
+
 public:
 // 	void SetRenderObjectNeedsUpdate(bool v);
 // 	bool IsRenderObjectNeedsUpdate() const;
@@ -108,6 +118,8 @@ protected:
 	virtual void OnChildRemoved(const SPtr<UIObject>& obj);
 
 	static float FixOpacityValue(float v);
+
+	SPtr<RenderFont> GetFont(const SPtr<RenderContext>& context);
 	
 	SPtr<UIObjectCollection> children_;
 	SPtr<AttributeCollection> attributes_;

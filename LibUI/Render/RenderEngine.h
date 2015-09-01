@@ -5,6 +5,7 @@
 #include "Render/RenderBrush.h"
 #include "Render/RenderPen.h"
 #include "Render/RenderPath.h"
+#include "Render/RenderFont.h"
 #include "Render/RenderPathBuilder.h"
 
 class RenderContext;
@@ -38,6 +39,9 @@ public:
 
 	static SPtr<RenderPathBuilder>
 		NewRenderPathBuilder(const SPtr<RenderContext>& context);
+
+	static SPtr<RenderFont>
+		NewRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size);
 public:
 	virtual SPtr<RenderContext>
 		CreateRenderContext(const SPtr<RenderWindow>& window) = 0;
@@ -56,4 +60,7 @@ public:
 
 	virtual SPtr<RenderPathBuilder>
 		CreateRenderPathBuilder(const SPtr<RenderContext>& context) = 0;
+
+	virtual SPtr<RenderFont>
+		CreateRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size) = 0;
 };

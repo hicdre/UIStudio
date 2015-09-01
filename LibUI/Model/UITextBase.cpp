@@ -173,3 +173,38 @@ void UITextBase::SetFill(const SPtr<AttributePaint>& v)
 	});
 }
 
+base::Rect UITextBase::GetBounds()
+{
+	return GetPath(NULL)->GetBounds();
+}
+
+SPtr<RenderPath> UITextBase::GetPath(const SPtr<RenderContext>& context)
+{
+	if (!renderPath_ || IsPathDirty())
+	{
+		SetPath(new TextDrawingState(context, this));
+	}
+	return renderPath_;
+}
+
+void UITextBase::SetPath(TextDrawingState* state)
+{
+	SetPath(state, true);
+}
+
+void UITextBase::SetPath(TextDrawingState* state, bool doMeasurements)
+{
+	TextDrawingState* origState = NULL;
+	bool alignOnBaseline = false;
+
+	if (doMeasurements)
+	{
+		if (GetTextLength() != 0)
+		{
+			origState = state->Clone();
+		}
+	}
+
+	state->DrawString(GetText());
+}
+

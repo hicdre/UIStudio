@@ -4,9 +4,10 @@
 #include "RenderEngineD2D.h"
 #include <vector>
 
-RenderFontDW::RenderFontDW()
+RenderFontDW::RenderFontDW(const CComPtr<IDWriteFont>& font)
+	: font_(font)
 {
-
+	font_->CreateFontFace(&fontFace_);
 }
 
 RenderFontDW::~RenderFontDW()
@@ -69,10 +70,20 @@ void RenderFontDW::AddStringToPath(const SPtr<RenderContext>& renderer, const SP
 
 float RenderFontDW::GetAscent(const SPtr<RenderContext>& renderer)
 {
-	return 0.f;
+	DWRITE_FONT_METRICS m = { 0 };
+	fontFace_->GetMetrics(&m);
+	return m.ascent;
 }
 
 base::SizeF RenderFontDW::MeasureString(const SPtr<RenderContext>& renderer, const std::wstring& text)
 {
+	CComPtr<IDWriteTextLayout> layout;
+	CComPtr<IDWriteTextFormat> format;
+	if (FAILED(RenderD2DEngine::GetDWriteFactory()->CreateTextLayout(text.c_str(), text.size(),
+		format, 10000.0f, 10000.0f, &layout)))
+		return base::SizeF();
 
+	DWRITE_TEXT_METRICS m = { 0 };
+	layout->GetMetrics(&m);
+	return base::SizeF(m.width, m.height);
 }

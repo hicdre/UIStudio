@@ -16,6 +16,12 @@ public:
 	virtual void AddLine(const base::PointF& from, const base::PointF& to) override;
 
 	virtual void AddEllipse(const base::Rect& rc) override;
+
+	virtual void AddString(const std::wstring& text,
+		const base::PointF& location, const SPtr<RenderFont>& font) override;
+
+	virtual void AddChar(uint32 codePoint,
+		const base::PointF& location, const SPtr<RenderFont>& font) override;
 protected:
 	void PepareSink();
 	CComPtr<ID2D1Factory> factory_;

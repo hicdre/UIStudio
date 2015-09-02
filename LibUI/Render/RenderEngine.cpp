@@ -58,3 +58,8 @@ SPtr<RenderFont> RenderEngine::NewRenderFont(const std::wstring& family, Attribu
 {
 	return RenderEngine::Get()->CreateRenderFont(family, weight, style, size);
 }
+
+SPtr<RenderTextLayout> RenderEngine::NewRenderTextLayout(const std::wstring& str, const std::wstring& fontFamily, AttributeFontWeight fontWeight, AttributeFontStyle fontStyle, float fonstSize, float layoutWidth, float layoutHeight)
+{
+	return RenderEngine::Get()->CreateRenderTextLayout(str, fontFamily, fontWeight, fontStyle, fonstSize, layoutWidth, layoutHeight);
+}

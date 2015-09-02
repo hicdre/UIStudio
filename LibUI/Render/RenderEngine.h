@@ -7,6 +7,7 @@
 #include "Render/RenderPath.h"
 #include "Render/RenderFont.h"
 #include "Render/RenderPathBuilder.h"
+#include "Render/RenderTextLayout.h"
 
 class RenderContext;
 class RenderWindow;
@@ -42,6 +43,11 @@ public:
 
 	static SPtr<RenderFont>
 		NewRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size);
+
+	static SPtr<RenderTextLayout>
+		NewRenderTextLayout(const std::wstring& str, 
+		const std::wstring& fontFamily, AttributeFontWeight fontWeight, AttributeFontStyle fontStyle, float fonstSize,
+		float layoutWidth, float layoutHeight);
 public:
 	virtual SPtr<RenderContext>
 		CreateRenderContext(const SPtr<RenderWindow>& window) = 0;
@@ -63,4 +69,9 @@ public:
 
 	virtual SPtr<RenderFont>
 		CreateRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size) = 0;
+
+	virtual SPtr<RenderTextLayout>
+		CreateRenderTextLayout(const std::wstring& str, 
+		const std::wstring& fontFamily, AttributeFontWeight fontWeight, AttributeFontStyle fontStyle, float fonstSize,
+		float layoutWidth, float layoutHeight) = 0;
 };

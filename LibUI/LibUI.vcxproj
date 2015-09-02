@@ -143,6 +143,8 @@
     <ClInclude Include="Render\RenderPathD2D.h" />
     <ClInclude Include="Render\RenderPen.h" />
     <ClInclude Include="Render\RenderPenD2D.h" />
+    <ClInclude Include="Render\RenderTextLayout.h" />
+    <ClInclude Include="Render\RenderTextLayoutDW.h" />
     <ClInclude Include="Render\RenderWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -198,6 +200,8 @@
     <ClCompile Include="Render\RenderPathD2D.cpp" />
     <ClCompile Include="Render\RenderPen.cpp" />
     <ClCompile Include="Render\RenderPenD2D.cpp" />
+    <ClCompile Include="Render\RenderTextLayout.cpp" />
+    <ClCompile Include="Render\RenderTextLayoutDW.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

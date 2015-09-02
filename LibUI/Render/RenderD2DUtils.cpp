@@ -64,6 +64,26 @@ D2D1_LINE_JOIN D2DLineJoin(AttributeStrokeLineJoin v)
 	}
 }
 
+DWRITE_TEXT_RANGE DWTextRange(const base::Range& r)
+{
+	return DWRITE_TEXT_RANGE{ r.start(), r.end() };
+}
+
+DWRITE_TEXT_ALIGNMENT DWTextAlignment(AttributeTextAnchor v)
+{
+	switch (v)
+	{
+	case TextAnchorStart:
+		return DWRITE_TEXT_ALIGNMENT_LEADING;
+	case TextAnchorMiddle:
+		return DWRITE_TEXT_ALIGNMENT_CENTER;
+	case TextAnchorEnd:
+		return DWRITE_TEXT_ALIGNMENT_TRAILING;
+	default:
+		return DWRITE_TEXT_ALIGNMENT_LEADING;
+	}
+}
+
 CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context)
 {
 	SPtr<RenderContextD2D> contextD2D = context;

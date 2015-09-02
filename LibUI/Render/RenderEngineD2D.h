@@ -29,6 +29,12 @@ public:
 
 	virtual SPtr<RenderFont>
 		CreateRenderFont(const std::wstring& family, AttributeFontWeight weight, AttributeFontStyle style, float size) override;
+	
+	virtual SPtr<RenderTextLayout>
+		CreateRenderTextLayout(const std::wstring& str,
+		const std::wstring& fontFamily, AttributeFontWeight fontWeight, AttributeFontStyle fontStyle, float fonstSize,
+		float layoutWidth, float layoutHeight) override;
+
 	static void Init();
 	static void Uninit();
 	static RenderD2DEngine* Get();

@@ -15,6 +15,8 @@ public:
 	virtual float GetAscent(const SPtr<RenderContext>& renderer) override;
 
 	virtual base::SizeF MeasureString(const SPtr<RenderContext>& renderer, const std::wstring& text) override;
+
+	CComPtr<IDWriteFontFace> GetFontFace() const { return fontFace_; }
 protected:
 	CComPtr<IDWriteFontFace> fontFace_;
 	CComPtr<IDWriteFont> font_;

@@ -6,6 +6,7 @@
 #include "RenderPathD2D.h"
 #include "RenderPathBuilderD2D.h"
 #include "RenderFontDW.h"
+#include "RenderTextLayoutDW.h"
 
 #include "RenderWindow.h"
 
@@ -155,5 +156,22 @@ SPtr<RenderFont> RenderD2DEngine::CreateRenderFont(const std::wstring& family, A
 		return NULL;
 
 	return new RenderFontDW(font);
+}
+
+SPtr<RenderTextLayout> RenderD2DEngine::CreateRenderTextLayout(const std::wstring& str, const std::wstring& fontFamily, AttributeFontWeight fontWeight, AttributeFontStyle fontStyle, float fontSize, float layoutWidth, float layoutHeight)
+{
+	float fontDp = fontSize / 96.0/*dpi*/ * 72/*1dp = 1/96 inch*/;
+	CComPtr<IDWriteTextFormat> format;
+	if (FAILED(dwrite_factory_->CreateTextFormat(fontFamily.c_str(), NULL, DWFontWeight(fontWeight), DWFontStyle(fontStyle), DWRITE_FONT_STRETCH_NORMAL, fontDp, L"", &format))) {
+		assert(0);
+		return NULL;
+	}
+
+	CComPtr<IDWriteTextLayout> layout;
+	if (FAILED(dwrite_factory_->CreateTextLayout(str.c_str(), str.size(), format, layoutWidth, layoutHeight, &layout))) {
+		assert(0);
+		return NULL;
+	}
+	return new RenderTextLayoutDW(str, layout);
 }
 

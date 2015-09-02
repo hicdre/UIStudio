@@ -205,6 +205,12 @@
     <ClInclude Include="Render\RenderFontDW.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
+    <ClInclude Include="Render\RenderTextLayout.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderTextLayoutDW.h">
+      <Filter>render\d2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -337,6 +343,12 @@
       <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="Render\RenderFontDW.cpp">
+      <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderTextLayout.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderTextLayoutDW.cpp">
       <Filter>render\d2d</Filter>
     </ClCompile>
   </ItemGroup>

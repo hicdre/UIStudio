@@ -19,6 +19,9 @@ public:
 
 	virtual void SetFontStyle(AttributeFontStyle v, const base::Range& range) override;
 
+	virtual base::Rect GetBounds() override;
+
+	virtual void Draw(const SPtr<RenderContext>& context, const SPtr<RenderBrush>& brush, float x, float y) override;
 private:
 	std::wstring text_;
 	CComPtr<IDWriteTextLayout> layout_;

@@ -56,6 +56,9 @@ void UIVisualObject::SetVisible(bool v)
 
 void UIVisualObject::RenderFill(const SPtr<RenderContext>& context)
 {
+	SPtr<RenderPath> path = GetPath(context);
+	if (!path)
+		return;
 	SPtr<AttributePaint> paint = GetFill();
 	if (paint)
 	{
@@ -63,22 +66,24 @@ void UIVisualObject::RenderFill(const SPtr<RenderContext>& context)
 		SPtr<RenderBrush> brush = paint->GetBrush(GetSelf<UIObject>(), context, opicaty);
 		if (brush)
 		{
-			context->FillPath(brush, GetPath(context));
+			context->FillPath(brush, path);
 		}
 	}
 }
 
 bool UIVisualObject::RenderStroke(const SPtr<RenderContext>& context)
 {
+	SPtr<RenderPath> path = GetPath(context);
+	if (!path)
+		return false;
 	SPtr<AttributePaint> stroke = GetStroke();
 	if (stroke && stroke != AttributeColorPaint::NotSet())
 	{
 		float strokeWidth = GetStrokeWidth();
 		float opicaty = FixOpacityValue(GetStrokeOpacity() * GetOpacity());
 		SPtr<RenderBrush> brush = stroke->GetBrush(GetSelf<UIObject>(), context, opicaty, true);
-		if (brush)
-		{
-			SPtr<RenderPath> path = GetPath(context);
+		if (brush)		{
+			
 			base::Rect bounds = path->GetBounds();
 			if (!bounds.IsEmpty())
 			{

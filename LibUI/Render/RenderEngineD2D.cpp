@@ -92,7 +92,9 @@ SPtr<RenderContext> RenderD2DEngine::CreateRenderContext(const SPtr<RenderWindow
 		);
 	if (SUCCEEDED(hr))
 	{
-		return new RenderContextD2D(target);
+		CComPtr<ID2D1RenderTarget> target2;
+		target2 = target;
+		return new RenderContextD2D(target2);
 	}
 	assert(0);
 	return nullptr;

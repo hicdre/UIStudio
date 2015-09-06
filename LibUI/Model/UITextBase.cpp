@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "UITextBase.h"
+#include "Render/RenderEngine.h"
 
 UITextBase::UITextBase()
 	: x_(new AttributeFloatCollection)
 	, y_(new AttributeFloatCollection)
 	, dx_(new AttributeFloatCollection)
 	, dy_(new AttributeFloatCollection)
+	, isTextLayoutDirty_(true)
 {
 
 }
@@ -39,7 +41,7 @@ AttributeTextAnchor UITextBase::GetTextAnchor()
 void UITextBase::SetTextAnchor(AttributeTextAnchor v)
 {
 	GetAttributes()->SetAttributeIntIfDifferent("text-anchor", (int)v, [this](){
-		SetPathDirty(true);
+		SetTextLayoutDirty(true);
 	});	
 }
 
@@ -175,36 +177,60 @@ void UITextBase::SetFill(const SPtr<AttributePaint>& v)
 
 base::Rect UITextBase::GetBounds()
 {
-	return GetPath(NULL)->GetBounds();
+	return GetTextLayout(NULL)->GetBounds();
 }
 
 SPtr<RenderPath> UITextBase::GetPath(const SPtr<RenderContext>& context)
 {
-	if (!renderPath_ || IsPathDirty())
-	{
-		SetPath(new TextDrawingState(context, this));
+	return NULL;
+}
+
+SPtr<RenderTextLayout> UITextBase::GetTextLayout(const SPtr<RenderContext>& context)
+{
+	if (!text_layout_ || IsPathDirty())
+	{	
+		base::SizeF sz = GetTextLayoutSize();
+		text_layout_ = RenderEngine::NewRenderTextLayout(contents_,
+			GetFontFamily(), GetFontWeight(), GetFontStyle(), GetFontSize(), sz.width(), sz.height());
+		SetPathDirty(false);
+		SetTextLayoutDirty(true);
 	}
-	return renderPath_;
-}
 
-void UITextBase::SetPath(TextDrawingState* state)
-{
-	SetPath(state, true);
-}
-
-void UITextBase::SetPath(TextDrawingState* state, bool doMeasurements)
-{
-	TextDrawingState* origState = NULL;
-	bool alignOnBaseline = false;
-
-	if (doMeasurements)
+	if (IsTextLayoutDirty())
 	{
-		if (GetTextLength() != 0)
+		AdjustTextLayout();
+		SetTextLayoutDirty(false);
+	}
+	return text_layout_;
+}
+
+bool UITextBase::RenderStroke(const SPtr<RenderContext>& context)
+{
+	SPtr<RenderTextLayout> layout = GetTextLayout(context);
+	if (!layout)
+		return false;
+
+	SPtr<AttributePaint> stroke = GetStroke();
+	if (stroke && stroke != AttributeColorPaint::NotSet())
+	{
+		float strokeWidth = GetStrokeWidth();
+		float opicaty = FixOpacityValue(GetStrokeOpacity() * GetOpacity());
+		SPtr<RenderBrush> brush = stroke->GetBrush(GetSelf<UIObject>(), context, opicaty, true);
+		if (brush)
 		{
-			origState = state->Clone();
+			layout->Draw(context, brush, 0, 0);
 		}
 	}
+	return true;
+}
 
-	state->DrawString(GetText());
+void UITextBase::SetTextLayoutDirty(bool dirty)
+{
+	isTextLayoutDirty_ = dirty;
+}
+
+void UITextBase::AdjustTextLayout()
+{
+	text_layout_->SetTextAnchor(GetTextAnchor());
 }
 

@@ -32,6 +32,19 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		rc->SetStrokeWidth(4.0f);
 		window->GetChildren()->Add(rc);
 	}
+	{
+		SPtr<UIBasicText> tt(new UIBasicText);
+		tt->SetText(L"Hello");
+		tt->SetFontFamily(L"Consolas");
+		tt->SetFontSize(22);
+		tt->SetFontStyle(FontStyleItalic);
+		tt->SetTranslateX(AttributeLength::Pixel(50));
+		tt->SetTranslateY(AttributeLength::Percent(0.3f));		
+		tt->SetFill(AttributePaint::Color(base::Color_Green));
+		tt->SetStroke(AttributePaint::Color(base::Color_Blue));
+		tt->SetStrokeWidth(4.0f);
+		window->GetChildren()->Add(tt);
+	}
 	window->SetVisible(true);
 	
 	Application::Run();

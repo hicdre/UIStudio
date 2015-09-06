@@ -8,7 +8,7 @@
 #include "RenderEngineD2D.h"
 
 
-RenderContextD2D::RenderContextD2D(const CComPtr<ID2D1HwndRenderTarget>& target)
+RenderContextD2D::RenderContextD2D(const CComPtr<ID2D1RenderTarget>& target)
 	: target_(target)
 {
 	target_->BeginDraw();

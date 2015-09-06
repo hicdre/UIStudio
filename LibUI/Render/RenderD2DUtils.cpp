@@ -64,6 +64,50 @@ D2D1_LINE_JOIN D2DLineJoin(AttributeStrokeLineJoin v)
 	}
 }
 
+DWRITE_FONT_WEIGHT DWFontWeight(AttributeFontWeight v)
+{
+	switch (v)
+	{
+	case FontWeight100:
+		return DWRITE_FONT_WEIGHT_THIN;
+	case FontWeight200:
+		return DWRITE_FONT_WEIGHT_EXTRA_LIGHT;
+	case FontWeight300:
+		return DWRITE_FONT_WEIGHT_LIGHT;
+	case FontWeight400:
+		return DWRITE_FONT_WEIGHT_NORMAL;
+	case FontWeight500:
+		return DWRITE_FONT_WEIGHT_MEDIUM;
+	case FontWeight600:
+		return DWRITE_FONT_WEIGHT_DEMI_BOLD;
+	case FontWeight700:
+		return DWRITE_FONT_WEIGHT_BOLD;
+	case FontWeight800:
+		return DWRITE_FONT_WEIGHT_EXTRA_BOLD;
+	case FontWeight900:
+		return DWRITE_FONT_WEIGHT_BLACK;
+	case FontWeightBolder:
+		return DWRITE_FONT_WEIGHT_EXTRA_BLACK;
+	case FontWeightLighter:
+		return DWRITE_FONT_WEIGHT_ULTRA_LIGHT;
+	default:
+		return DWRITE_FONT_WEIGHT_NORMAL;
+	}
+}
+
+DWRITE_FONT_STYLE DWFontStyle(AttributeFontStyle v)
+{
+	switch (v)
+	{
+	case FontStyleOblique:
+		return DWRITE_FONT_STYLE_OBLIQUE;
+	case FontStyleItalic:
+		return DWRITE_FONT_STYLE_ITALIC;
+	default:
+		return DWRITE_FONT_STYLE_NORMAL;
+	}
+}
+
 DWRITE_TEXT_RANGE DWTextRange(const base::Range& r)
 {
 	return DWRITE_TEXT_RANGE{ r.start(), r.end() };
@@ -84,7 +128,7 @@ DWRITE_TEXT_ALIGNMENT DWTextAlignment(AttributeTextAnchor v)
 	}
 }
 
-CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context)
+CComPtr<ID2D1RenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context)
 {
 	SPtr<RenderContextD2D> contextD2D = context;
 	if (contextD2D)

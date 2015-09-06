@@ -2,8 +2,10 @@
 #include "Base/object.h"
 #include "Base/Geom/point.h"
 #include "Base/Geom/rect.h"
+#include <string>
 
 class RenderPath;
+class RenderFont;
 class RenderPathBuilder : public Object
 {
 public:
@@ -18,10 +20,4 @@ public:
 	virtual void AddLine(const base::PointF& from, const base::PointF& to) = 0;
 
 	virtual void AddEllipse(const base::Rect& rc) = 0;
-
-	virtual void AddString(const std::wstring& text,
-		const base::PointF& location, const SPtr<RenderFont>& font) = 0;
-
-	virtual void AddChar(uint32 codePoint,
-		const base::PointF& location, const SPtr<RenderFont>& font) = 0;
 };

@@ -29,6 +29,6 @@ DWRITE_FONT_STYLE DWFontStyle(AttributeFontStyle v);
 DWRITE_TEXT_RANGE DWTextRange(const base::Range& r);
 DWRITE_TEXT_ALIGNMENT DWTextAlignment(AttributeTextAnchor v);
 
-CComPtr<ID2D1HwndRenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context);
+CComPtr<ID2D1RenderTarget> D2DGetTargetFromContext(const SPtr<RenderContext>& context);
 
 CComPtr<ID2D1Geometry> D2DCombineGeometry(const CComPtr<ID2D1Geometry>& a, const CComPtr<ID2D1Geometry>& b);

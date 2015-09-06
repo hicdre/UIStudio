@@ -5,6 +5,8 @@
 #include "Model/AttributeConst.h"
 #include <string>
 
+class RenderContext;
+class RenderBrush;
 class RenderTextLayout : public Object
 {
 public:
@@ -20,4 +22,8 @@ public:
 	virtual void SetTextAnchor(AttributeTextAnchor v) = 0;
 
 	virtual void SetFontStyle(AttributeFontStyle v, const base::Range& range) = 0;
+
+	virtual base::Rect GetBounds() = 0;
+
+	virtual void Draw(const SPtr<RenderContext>& context, const SPtr<RenderBrush>& brush, float x, float y) = 0;
 };

@@ -11,6 +11,7 @@ public:
 
 	CComPtr<ID2D1Brush> GetRealBrush() const { return realBrush_; }
 
+	static CComPtr<ID2D1Brush> Get(const SPtr<RenderBrush>& b);
 private:
 	CComPtr<ID2D1Brush> realBrush_;
 };

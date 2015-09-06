@@ -327,10 +327,10 @@ SPtr<UIVisualObject> UIObject::GetVisualParent()
 
 base::PointF UIObject::CalcTranslateTransform()
 {
-	SPtr<UIVisualObject> obj = GetVisualParent();
-	base::Rect bounds(obj->GetLocalBounds());
+	SPtr<UIVisualObject> obj = GetVisualParent();	
 	if (!obj)
 		return base::PointF();
+	base::Rect bounds(obj->GetLocalBounds());
 	float x, y;
 	x = AttributeLength::CalcFromBounds(GetTranslateX(), bounds.width());
 	y = AttributeLength::CalcFromBounds(GetTranslateY(), bounds.height());

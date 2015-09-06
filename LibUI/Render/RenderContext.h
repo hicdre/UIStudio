@@ -17,7 +17,7 @@ public:
 
 	virtual void FillPath(const SPtr<RenderBrush>& brush, const SPtr<RenderPath>& path) = 0;
 
-	virtual void DrawPath(const SPtr<RenderPen>& brush, const SPtr<RenderPath>& path) = 0;
+	virtual void DrawPath(const SPtr<RenderPen>& brush, const SPtr<RenderPath>& path) = 0;	
 };
 
 class ScopedRenderTransform

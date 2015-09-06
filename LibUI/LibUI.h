@@ -9,4 +9,5 @@
 #include "Model/UIObjectCollection.h"
 #include "Model/UIWindow.h"
 #include "Model/UIRectangle.h"
+#include "Model/UIBasicText.h"
 #include "Render/RenderManager.h"

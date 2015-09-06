@@ -37,6 +37,12 @@
     <Filter Include="model\text">
       <UniqueIdentifier>{2e91ec0a-43b8-4335-a5b9-dec08a3cf366}</UniqueIdentifier>
     </Filter>
+    <Filter Include="thirdParty">
+      <UniqueIdentifier>{5ea27a56-b202-48bb-92be-3cd5ddb82c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{94e0ffcc-2de0-4258-8144-68604b11a435}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -211,6 +217,24 @@
     <ClInclude Include="Render\RenderTextLayoutDW.h">
       <Filter>render\d2d</Filter>
     </ClInclude>
+    <ClInclude Include="Model\UIBasicText.h">
+      <Filter>model\text</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\stb_image.h">
+      <Filter>thirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Uri.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceProvider.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceFolderProvider.h">
+      <Filter>resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -350,6 +374,24 @@
     </ClCompile>
     <ClCompile Include="Render\RenderTextLayoutDW.cpp">
       <Filter>render\d2d</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\UIBasicText.cpp">
+      <Filter>model\text</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdParty\stb_image.cpp">
+      <Filter>thirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Uri.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceProvider.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceFolderProvider.cpp">
+      <Filter>resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

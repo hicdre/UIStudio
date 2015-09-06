@@ -9,7 +9,7 @@ class RenderWindow;
 class RenderContextD2D : public RenderContext
 {
 public:
-	RenderContextD2D(const CComPtr<ID2D1HwndRenderTarget>& target);
+	RenderContextD2D(const CComPtr<ID2D1RenderTarget>& target);
 	~RenderContextD2D();
 
 	virtual base::Matrix GetTransform() override;
@@ -21,8 +21,8 @@ public:
 
 	virtual void DrawPath(const SPtr<RenderPen>& pen, const SPtr<RenderPath>& path) override;
 
-	const CComPtr<ID2D1HwndRenderTarget> GetD2DTarget() const { return target_; }
+	const CComPtr<ID2D1RenderTarget> GetD2DTarget() const { return target_; }
 private:
-	CComPtr<ID2D1HwndRenderTarget> target_;
+	CComPtr<ID2D1RenderTarget> target_;
 	base::Matrix currentTransform_;
 };

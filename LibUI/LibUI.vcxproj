@@ -148,7 +148,10 @@
     <ClInclude Include="Render\RenderTextLayout.h" />
     <ClInclude Include="Render\RenderTextLayoutDW.h" />
     <ClInclude Include="Render\RenderWindow.h" />
+    <ClInclude Include="Resource\ResourceStream.h" />
     <ClInclude Include="Resource\ResourceFolderProvider.h" />
+    <ClInclude Include="Resource\ResourceImage.h" />
+    <ClInclude Include="Resource\ResourceImageFile.h" />
     <ClInclude Include="Resource\ResourceManager.h" />
     <ClInclude Include="Resource\ResourceProvider.h" />
     <ClInclude Include="stdafx.h" />
@@ -211,7 +214,10 @@
     <ClCompile Include="Render\RenderTextLayout.cpp" />
     <ClCompile Include="Render\RenderTextLayoutDW.cpp" />
     <ClCompile Include="Render\RenderWindow.cpp" />
+    <ClCompile Include="Resource\ResourceStream.cpp" />
     <ClCompile Include="Resource\ResourceFolderProvider.cpp" />
+    <ClCompile Include="Resource\ResourceImage.cpp" />
+    <ClCompile Include="Resource\ResourceImageFile.cpp" />
     <ClCompile Include="Resource\ResourceManager.cpp" />
     <ClCompile Include="Resource\ResourceProvider.cpp" />
     <ClCompile Include="stdafx.cpp">

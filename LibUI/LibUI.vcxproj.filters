@@ -235,6 +235,15 @@
     <ClInclude Include="Resource\ResourceFolderProvider.h">
       <Filter>resource</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\ResourceImage.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceImageFile.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceStream.h">
+      <Filter>resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -391,6 +400,15 @@
       <Filter>resource</Filter>
     </ClCompile>
     <ClCompile Include="Resource\ResourceFolderProvider.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceImage.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceImageFile.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceStream.cpp">
       <Filter>resource</Filter>
     </ClCompile>
   </ItemGroup>
